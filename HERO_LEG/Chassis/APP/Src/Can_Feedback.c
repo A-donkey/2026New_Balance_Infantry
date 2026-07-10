@@ -1,0 +1,136 @@
+#include "Can_Feedback.h"
+
+/*
+     Forward
+	  0       2    DM_8009
+            
+   0         1   DJI_3508
+
+    1       3    DM_8009
+*/
+
+//全局变量定义部分
+Chassis_Motor_t Chassis_Motor;
+Up_Cboard_Info_t Up_Cboard_Info;
+
+/*******************************************************************************************************
+接收电机的反馈值并处理(CAN1)
+********************************************************************************************************/
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+	static uint8_t Rx_Data1[8];
+	static CAN_RxHeaderTypeDef CAN1_RxHeader;
+	
+	HAL_StatusTypeDef RxState;
+	RxState = HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&CAN1_RxHeader,Rx_Data1);
+	
+	while(RxState!=HAL_OK){;}
+		
+	switch(CAN1_RxHeader.StdId)
+	{
+		//超电数据
+		case CAP_TO_CHASSIS_CAN_ID_1:
+		{
+			pm_od.p_out = (uint16_t)(Rx_Data1[0] << 8 | Rx_Data1[1]);
+			pm_od.v_out = (uint16_t)(Rx_Data1[2] << 8 | Rx_Data1[3]);
+			pm_od.i_out = (uint16_t)(Rx_Data1[4] << 8 | Rx_Data1[5]);
+			break;
+		}
+		case CAP_TO_CHASSIS_CAN_ID_2:
+		{
+			pm_od.sta_code.all = (uint16_t)(Rx_Data1[0] << 8 | Rx_Data1[1]);	
+			pm_od.err_code     = (uint16_t)(Rx_Data1[2] << 8 | Rx_Data1[3]);
+			break;
+		}
+		//DT7数据
+		case DT7_TO_CHASSIS_CAN_ID:
+		{
+			Rc_Ctrl.rc.ch[1]  = (Rx_Data1[0] << 8 | Rx_Data1[1]);
+			Rc_Ctrl.rc.ch[4]  = (Rx_Data1[2] << 8 | Rx_Data1[3]);
+			Rc_Ctrl.key.v     = (Rx_Data1[4] << 8 | Rx_Data1[5]);
+			Rc_Ctrl.rc.s[0]   =  Rx_Data1[6];
+			Rc_Ctrl.rc.s[1]   =  Rx_Data1[7];
+			break;
+		}
+		//上板数据
+		case GIMBAL_TO_CHASSIS_CAN_ID_1:
+		{
+			Up_Cboard_Info.Auto_Aim_Flag    = Rx_Data1[0];
+			Up_Cboard_Info.Friction_Status  = Rx_Data1[1];
+			Up_Cboard_Info.Friction_Speed   = Rx_Data1[2] << 8 | Rx_Data1[3];
+			VT03.key                        = Rx_Data1[4] << 8 | Rx_Data1[5];
+			break;
+		}
+		//上板数据
+		case GIMBAL_TO_CHASSIS_CAN_ID_2:
+		{
+			Up_Cboard_Info.up_err_num        = (Rx_Data1[0] << 8 | Rx_Data1[1]);
+			Up_Cboard_Info.ecd_yaw_DM4310      = (Rx_Data1[2] << 8 | Rx_Data1[3]);
+			Up_Cboard_Info.up_pitch          = (float)((int16_t)(Rx_Data1[4] << 8 | Rx_Data1[5]));
+			Up_Cboard_Info.Number_Of_Bullets =  Rx_Data1[6];
+			VT03.mode_sw                     =  Rx_Data1[7];
+			break;
+		}
+		//DM_8009数据
+		case LEFT_FRONT_MOTOR_FEEDBACK_ID:
+		{
+			Receive_Motor_Data(&Chassis_Motor.DM_8009[0],Rx_Data1,DM8009);
+			break;
+		}
+		case LEFT_BACK_MOTOR_FEEDBACK_ID:
+		{
+			Receive_Motor_Data(&Chassis_Motor.DM_8009[1],Rx_Data1,DM8009);
+			break;
+		}
+		//DJI_3508数据
+		case LEFT_WHEEL_MOTOR_FEEDBACK_ID:
+		{
+			Get_Motor_Measure(&Chassis_Motor.Dji_3508[0],Rx_Data1);
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
+}
+uint8_t Rx_Data2[8];
+/*******************************************************************************************************
+接收电机的反馈值并处理(CAN2)
+********************************************************************************************************/
+void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+	 
+  static CAN_RxHeaderTypeDef CAN2_RxHeader;
+	
+	HAL_StatusTypeDef RxState;
+	RxState=HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO1,&CAN2_RxHeader,Rx_Data2);
+
+	while(RxState!=HAL_OK){;}
+		
+	switch(CAN2_RxHeader.StdId)
+	{
+		//DM_8009数据
+		case RIGHT_FRONT_MOTOR_FEEDBACK_ID:
+		{
+			Receive_Motor_Data(&Chassis_Motor.DM_8009[2],Rx_Data2,DM8009);
+			break;
+		}
+		case RIGHT_BACK_MOTOR_FEEDBACK_ID:
+		{
+			Receive_Motor_Data(&Chassis_Motor.DM_8009[3],Rx_Data2,DM8009);
+			break;
+		}
+		//DJI_3508数据
+		case RIGHT_WHEEL_MOTOR_FEEDBACK_ID:
+		{
+			Get_Motor_Measure(&Chassis_Motor.Dji_3508[1],Rx_Data2);
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
+}
+
