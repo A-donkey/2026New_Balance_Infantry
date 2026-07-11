@@ -11,8 +11,9 @@
 #define Kt    0.232463677f //减速箱的转矩常数(Nm/A)
 #define Gear_Ratio  14.88f //减速箱的减速比
 
-#define ZERO_HEAD_YAW   -1.7574625f  //正方向零点位置
-#define ZERO_BACK_YAW  1.35958636f   //负方向零点位置
+//云台和底盘是反过来的
+#define ZERO_HEAD_YAW  0.961483002f  //正方向零点位置
+#define ZERO_BACK_YAW  -2.17543435f   //负方向零点位置
  
 //目标参数
 

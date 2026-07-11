@@ -43,16 +43,13 @@ void Gimbal_Init(void)
 	//更改云台PID以适配新电机
 //	PID_Init(&Pitch_P_Pid   ,    10,   	5, 0,    12,     0,     0,  0,0,0,0, 4,RADIAN,NONE); //云台
 //	PID_Init(&Pitch_S_Pid   , 		9, 		5, 0,  		8,     4,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
-	PID_Init(&Pitch_P_Pid   ,    10,   	5, 0,    	2,     0,     0,  0,0,0,0, 4,RADIAN,NONE); //云台
+	PID_Init(&Pitch_P_Pid   ,    10,   	5, 0,    	4,     0,     0,  0,0,0,0, 4,RADIAN,NONE); //云台
 	PID_Init(&Pitch_S_Pid   , 		9, 		5, 0,  		2,     2,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
-	PID_Init(&Yaw_P_Pid     ,    10,   	5, 0,   7.5,     0,     0,  0,0,0,0, 4,RADIAN,NONE);
-	PID_Init(&Yaw_S_Pid     , 		9, 		3, 0,  	2.5,     4,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
+	PID_Init(&Yaw_P_Pid     ,    10,   	5, 0,   	1,     0,     0,  0,0,0,0, 4,RADIAN,NONE);
+	PID_Init(&Yaw_S_Pid     , 		9, 		3, 0,  		1,     0,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
 	
-	PID_Init(&Abs_Yaw_P_Pid , 	 10, 		5, 0,  		2,     0,   	0,  0,0,0,0, 0,RADIAN,NONE);
-	PID_Init(&Abs_Yaw_S_Pid , 		9, 		5, 0,  		2,     0,   	0,  0,0,0,0, 0,RADIAN,NONE);
-//	PID_Init(&Abs_Yaw_P_Pid , 	 10, 		5, 0,  		2,     0,   	0,  0,0,0,0, 0,RADIAN,NONE);
-//	PID_Init(&Abs_Yaw_S_Pid , 		9, 		5, 0,  		2,     0,   	0,  0,0,0,0, 0,RADIAN,NONE);
-	
+	PID_Init(&Abs_Yaw_P_Pid , 	 10, 		5, 0,  		1,     0,   	0,  0,0,0,0, 0,RADIAN,NONE);
+	PID_Init(&Abs_Yaw_S_Pid , 		9, 		5, 0,  		1,     0,   	0,  0,0,0,0, 0,RADIAN,NONE);
 	
 	PID_Init(&L_Rpm_Pid     , 16000, 1000, 0,  16.8,     0,     0,  0,0,0,0,10,NO_CIRCLE,NONE); //发射机构
 	PID_Init(&R_Rpm_Pid     , 16000, 1000, 0,  16.8,     0,     0,  0,0,0,0,10,NO_CIRCLE,NONE);
@@ -650,9 +647,8 @@ void Gimbal_Controllor(Shoot_Status_t *ss,
 			if(self_re->run_flag) //启动 云台复位
 			{
 				PID_Calculate(&Abs_Yaw_P_Pid,gs->abs_yaw,gs->abs_yaw_ref);
-				gs->Yaw_Motor_Out = PID_Calculate(&Abs_Yaw_S_Pid,gs->d_yaw,-Abs_Yaw_P_Pid.Output);
-				gs->Pitch_Motor_Out = 2.3; 
-//				gs->Pitch_Motor_Out = 0; 
+				gs->Yaw_Motor_Out = PID_Calculate(&Abs_Yaw_S_Pid,gs->d_yaw,Abs_Yaw_P_Pid.Output);
+				gs->Pitch_Motor_Out = 0; 
 			}
 		}
 		else //正常

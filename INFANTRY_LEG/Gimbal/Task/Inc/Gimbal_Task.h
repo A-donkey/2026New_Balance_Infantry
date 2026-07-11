@@ -19,8 +19,8 @@
 #define PI_Ang 57.2957805f
 
 //正负方向零点位置
-#define ZERO_HEAD_YAW    1.3617034f
-#define ZERO_BACK_YAW   -1.7545886f
+#define ZERO_HEAD_YAW   -2.17543435f
+#define ZERO_BACK_YAW   0.961483002f
 
 //摩擦轮转速
 #define Friction_Speed   3120
@@ -31,7 +31,7 @@
 
 //云台电机输出极性
 #define PITCH_MOTOR_SIGN -1
-#define YAW_MOTOR_SIGN -1
+#define YAW_MOTOR_SIGN 1
 
 //控制器灵敏度以及死区设置
 #define RC_PITCH_SENSITIVITY        0.0004

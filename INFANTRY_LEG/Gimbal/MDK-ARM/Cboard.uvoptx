@@ -198,105 +198,85 @@
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>D_Spe_Pid</ItemText>
+          <ItemText>Gimbal_Motor,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Gimbal_Motor,0x0A</ItemText>
+          <ItemText>INS</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>1</WinNumber>
-          <ItemText>up_pitch,0x0A</ItemText>
+          <ItemText>aim_rx,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>10</count>
           <WinNumber>1</WinNumber>
-          <ItemText>INS</ItemText>
+          <ItemText>VT03,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>11</count>
           <WinNumber>1</WinNumber>
-          <ItemText>aim_rx,0x0A</ItemText>
+          <ItemText>Link_Sit,0x10</ItemText>
         </Ww>
         <Ww>
           <count>12</count>
           <WinNumber>1</WinNumber>
-          <ItemText>VT03,0x0A</ItemText>
+          <ItemText>Remote_Select</ItemText>
         </Ww>
         <Ww>
           <count>13</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Link_Sit,0x10</ItemText>
+          <ItemText>Controlled_State</ItemText>
         </Ww>
         <Ww>
           <count>14</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Remote_Select</ItemText>
+          <ItemText>Friction_Speed_Comp</ItemText>
         </Ww>
         <Ww>
           <count>15</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Controlled_State</ItemText>
+          <ItemText>Heat_Control.Number_Of_Bullets,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>16</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Friction_Speed_Comp</ItemText>
+          <ItemText>yaw_FD</ItemText>
         </Ww>
         <Ww>
           <count>17</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Heat_Control.Number_Of_Bullets,0x0A</ItemText>
+          <ItemText>pitch_FD</ItemText>
         </Ww>
         <Ww>
           <count>18</count>
           <WinNumber>1</WinNumber>
-          <ItemText>yaw_FD</ItemText>
+          <ItemText>Dyaw_FD</ItemText>
         </Ww>
         <Ww>
           <count>19</count>
           <WinNumber>1</WinNumber>
-          <ItemText>pitch_FD</ItemText>
+          <ItemText>Rc_Ctrl,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>20</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Dyaw_FD</ItemText>
+          <ItemText>Pitch_P_Pid</ItemText>
         </Ww>
         <Ww>
           <count>21</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Rc_Ctrl,0x0A</ItemText>
+          <ItemText>Pitch_S_Pid</ItemText>
         </Ww>
         <Ww>
           <count>22</count>
           <WinNumber>1</WinNumber>
-          <ItemText>test_TFF1</ItemText>
-        </Ww>
-        <Ww>
-          <count>23</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>test_TFF2</ItemText>
-        </Ww>
-        <Ww>
-          <count>24</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Pitch_P_Pid</ItemText>
-        </Ww>
-        <Ww>
-          <count>25</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Pitch_S_Pid</ItemText>
-        </Ww>
-        <Ww>
-          <count>26</count>
-          <WinNumber>1</WinNumber>
           <ItemText>Self_Rescue</ItemText>
         </Ww>
         <Ww>
-          <count>27</count>
+          <count>23</count>
           <WinNumber>1</WinNumber>
           <ItemText>Abs_Yaw_P_Pid</ItemText>
         </Ww>
@@ -361,6 +341,16 @@
           <count>11</count>
           <WinNumber>2</WinNumber>
           <ItemText>Shoot_Status,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>12</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>Abs_Yaw_P_Pid</ItemText>
+        </Ww>
+        <Ww>
+          <count>13</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>Abs_Yaw_S_Pid</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow1>

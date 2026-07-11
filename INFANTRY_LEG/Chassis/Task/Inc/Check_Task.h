@@ -13,8 +13,8 @@
 
 //超时时间定义
 #define rc_unlink_t            20
-#define dm_unlink_t            20//改大超时时间<*_*>
-#define dji_unlink_t           20
+#define dm_unlink_t            40//改大超时时间<*_*>
+#define dji_unlink_t           40
 #define cubermars_unlink_t     20
 
 typedef enum
