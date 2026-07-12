@@ -10,9 +10,9 @@ void Gimbal_Pitch_SysID_Run(Gimbal_Status_t *gs)
     if (gs->Pitch_SysID.sysid_done) return;
     gs->Pitch_SysID.sysid_timer += dt;
 
-    const float SAFE_MAX = 30.0f;   // 度
-    const float SAFE_MIN = -16.5f;
-    const float MARGIN = 1.0f;
+    const float SAFE_MAX = 25.0f;   // 度
+    const float SAFE_MIN = -25.0f;
+    const float MARGIN = 2.0f;
     
     static float vel_target = 120.0f * Ang_PI;  // rad/s
     static int half_cycles = 0;
@@ -21,32 +21,32 @@ void Gimbal_Pitch_SysID_Run(Gimbal_Status_t *gs)
     float pitch_deg = gs->pitch;  // 度
     if (pitch_deg > (SAFE_MAX - MARGIN) && vel_target > 0)
     {
-        vel_target = -2.0f * Ang_PI;  // 下降用低速
+        vel_target = -10.0f * Ang_PI;  // 下降用低速
         half_cycles++;
     }
     else if (pitch_deg < (SAFE_MIN + MARGIN) && vel_target < 0)
     {
-        vel_target = 120.0f * Ang_PI;  // 上升用高速
+        vel_target = 150.0f * Ang_PI;  // 上升用高速
         half_cycles++;
     }
     
     PID_Calculate(&Pitch_S_Pid, gs->d_pitch, vel_target);
-    
-    // 2. 读取数据并补偿重力
+    gs->Pitch_Motor_Out = Pitch_S_Pid.Output; 
+
+    // 2. 读取数据，构建 RLS 回归向量
+    // 模型: torque = B*omega + A*sin(θ)  + C*sign(ω)
+    //        y      = x[0]*H[0] + x[1]*H[1]  + x[2]*H[2]
     float omega = gs->d_pitch;
     float torque = PITCH_MOTOR_SIGN * Gimbal_Motor.DM_4310[1].tor;
     float pitch_rad = pitch_deg * Ang_PI;
     
-    // 重力补偿（使用已知的重力参数）
-    float G = Gravity_Param.A * sin(pitch_rad) + Gravity_Param.B * cos(pitch_rad);
-    float C_sign = Gravity_Param.C * sign(omega);
-    float T_comp = torque - G - C_sign;
-    
-    // 3. RLS 更新
-    if (fabsf(omega) > 0.5f * Ang_PI)  // 速度足够大
+    // 3. RLS 更新（同时辨识 B, A, C）
+    if (fabsf(omega) > 0.5f * Ang_PI)  // 速度足够大，避免静止噪声
     {
-        gs->Pitch_SysID.rls_sysid.H_data[0] = omega;
-        gs->Pitch_SysID.rls_sysid.y_data[0] = T_comp;
+        gs->Pitch_SysID.rls_sysid.H_data[0] = omega;               // ω  → B (阻尼)
+        gs->Pitch_SysID.rls_sysid.H_data[1] = sin(pitch_rad);      // sinθ → A (重力sin分量)
+        gs->Pitch_SysID.rls_sysid.H_data[2] = sign(omega);         // sign(ω) → C (库伦摩擦)
+        gs->Pitch_SysID.rls_sysid.y_data[0] = torque;              // 原始扭矩，不做预补偿
         RLS_Update(&gs->Pitch_SysID.rls_sysid);
     }
     
@@ -54,13 +54,24 @@ void Gimbal_Pitch_SysID_Run(Gimbal_Status_t *gs)
     if (half_cycles >= 6)  // 3 个来回
     {
         gs->Pitch_SysID.sysid_done = 1;
-        gs->Pitch_SysID.B = gs->Pitch_SysID.rls_sysid.x_data[0];
+        gs->Pitch_SysID.B = gs->Pitch_SysID.rls_sysid.x_data[0];  // 阻尼
+        gs->Pitch_SysID.C = gs->Pitch_SysID.rls_sysid.x_data[2];  // 库伦摩擦
+        Gravity_Param.A  = gs->Pitch_SysID.rls_sysid.x_data[1];  // 重力 sin 分量
+        Gravity_Param.B  = 0.0f;  // 重力 cos 分量
+        Gravity_Param.C  = gs->Pitch_SysID.rls_sysid.x_data[2];  // 库伦摩擦
     }
     
-    // 5. 紧急保护
-    if (pitch_deg < SAFE_MIN || pitch_deg > SAFE_MAX)
-    {
-        gs->Pitch_SysID.sysid_done = 1;
+    // 5. 紧急保护（启动0.5s后才生效，避免上电误触发）
+    if (gs->Pitch_SysID.sysid_timer > 0.5f){
+        if (pitch_deg < SAFE_MIN || pitch_deg > SAFE_MAX)
+        {
+            gs->Pitch_SysID.sysid_done = 1;
+            gs->Pitch_SysID.B = gs->Pitch_SysID.rls_sysid.x_data[0];
+            gs->Pitch_SysID.C = gs->Pitch_SysID.rls_sysid.x_data[2];
+            Gravity_Param.A  = gs->Pitch_SysID.rls_sysid.x_data[1];
+            Gravity_Param.B  = 0.0f;
+            Gravity_Param.C  = gs->Pitch_SysID.rls_sysid.x_data[2];
+        }
     }
 }
 
@@ -76,7 +87,7 @@ void Gimbal_Yaw_SysID_Run(Gimbal_Status_t *gs)
 
 #if GIMBAL_SYSID_STEP == GIMBAL_SYSID_STEP_BC
     // ===== Step 1: 辨识 B, C =====
-    const float vel_pts[] = {-200, -150, -100, -50, 50, 100, 150, 200};
+    const float vel_pts[] = {200, 150, 100, 50, -50, -100, -150, -200};
     const uint8_t NUM_PTS = 8;
     const float SETTLE_TIME = 0.4f;
     const float DEG_PER_REV = 360.0f;
@@ -92,7 +103,8 @@ void Gimbal_Yaw_SysID_Run(Gimbal_Status_t *gs)
     gs->yaw_ref = gs->yaw;  // 不控制位置，只控制速度
     // 直接用速度环控制 → 设置 Yaw_S_Pid 的 Ref
     PID_Calculate(&Yaw_S_Pid, gs->d_yaw, vel_pts[step_idx] * Ang_PI);
-    
+    gs->Yaw_Motor_Out = Yaw_S_Pid.Output;
+
     if (step_timer > SETTLE_TIME)
     {
         float omega = gs->d_yaw;  // rad/s
@@ -137,6 +149,14 @@ void Gimbal_Yaw_SysID_Run(Gimbal_Status_t *gs)
     const float MAX_SPEED = 250.0f * Ang_PI; // rad/s
     
     static float ramp_speed = 0;
+    static uint8_t init_done = 0;
+    if (!init_done)
+    {
+        TD_Init(&gs->Yaw_SysID.td_omega, 10000, 0.005);
+        gs->Yaw_SysID.B = Yaw_FF_Param.B;
+        gs->Yaw_SysID.C = Yaw_FF_Param.C;
+        init_done = 1;
+    }
     static float torque_sum = 0, omega_sum = 0, alpha_sum = 0;
     static uint32_t sample_count = 0;
     
@@ -144,7 +164,8 @@ void Gimbal_Yaw_SysID_Run(Gimbal_Status_t *gs)
     if (ramp_speed > MAX_SPEED) ramp_speed = MAX_SPEED;
     
     PID_Calculate(&Yaw_S_Pid, gs->d_yaw, ramp_speed);
-    
+    gs->Yaw_Motor_Out = Yaw_S_Pid.Output;
+
     if (gs->Yaw_SysID.sysid_timer > 0.1f)
     {
         float omega = gs->d_yaw;

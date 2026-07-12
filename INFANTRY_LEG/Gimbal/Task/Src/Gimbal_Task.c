@@ -24,11 +24,11 @@ TD_t Pos_Pitch_TD;
 TD_t Pos_Yaw_TD;
 
 // 前馈参数（需要实测/辨识）
-Feedforward_Param_t Yaw_FF_Param  = {0,  0,  0};//{J_yaw,  B_yaw,  C_yaw};
-Feedforward_Param_t Pitch_FF_Param = {0, 0, 0};//{J_pitch, 0, C_pitch}// Pitch用Cb代替B
+Feedforward_Param_t Yaw_FF_Param  = {0.0115128597,  0.0286347487f,  0.23262085f};//{J_yaw,  B_yaw,  C_yaw};
+Feedforward_Param_t Pitch_FF_Param = {0.0324, 2.44012785f, 0};//{J_pitch, Cb_pitch, C_pitch}// Pitch用Cb代替B
 
 // 重力补偿参数
-Gravity_Comp_Param_t Gravity_Param = {0, 0, 0};//{A, B, C}
+Gravity_Comp_Param_t Gravity_Param = {-2.4175, 3.24 , 0};//{A, B_g, C}
 
 // 前馈和重力补偿中间变量
 float Yaw_FF_Output;
@@ -50,8 +50,8 @@ void Gimbal_Init(void)
 {
 	//初始化PID
 	//更改云台PID以适配新电机
-	PID_Init(&Pitch_P_Pid   ,    10,   	5, 0,    	4,     0,     0,  0,0,0,0, 4,RADIAN,NONE); //云台
-	PID_Init(&Pitch_S_Pid   , 		9, 		5, 0,  		2,     2,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
+	PID_Init(&Pitch_P_Pid   ,    10,   	5, 0,    	6,     0,     0,  0,0,0,0, 4,RADIAN,NONE); //云台
+	PID_Init(&Pitch_S_Pid   , 		9, 		5, 0,  		4,     0,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
 	PID_Init(&Yaw_P_Pid     ,    10,   	5, 0,   	1,     0,     0,  0,0,0,0, 4,RADIAN,NONE);
 	PID_Init(&Yaw_S_Pid     , 		9, 		3, 0,  		1,     0,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
 	
@@ -66,6 +66,10 @@ void Gimbal_Init(void)
 	TD_Init(&Pos_Yaw_TD,   700, 0.005);  // r=700, h0=0.005s
 	TD_Init(&Pos_Pitch_TD, 1000, 0.005); // r=1000, h0=0.005s
 	
+	// RLS系统辨识初始化
+	RLS_Init(&Gimbal_Status.Yaw_SysID.rls_sysid,   2, 1, 0.98f);  // x=[B, C], y=[torque]
+	RLS_Init(&Gimbal_Status.Pitch_SysID.rls_sysid, 3, 1, 0.98f);  // x=[B, A, C], y=[torque]
+
 	//发射机构状态关闭
 	Shoot_Condition = Close;
 	
@@ -679,13 +683,14 @@ void Gimbal_Controllor(Shoot_Status_t *ss,
         		Yaw_FF_Param.B = gs->Yaw_SysID.B;
         		Yaw_FF_Param.C = gs->Yaw_SysID.C;
         		Yaw_FF_Param.J = gs->Yaw_SysID.J;
+				gs->Yaw_Motor_Out = 0;
     		}
 		#elif GIMBAL_SYSID == GIMBAL_PITCH_SYSID
     		Gimbal_Pitch_SysID_Run(gs);
     		if (gs->Pitch_SysID.sysid_done)
     		{
-        		Pitch_FF_Param.Cb = gs->Pitch_SysID.B;
-        		Pitch_FF_Param.J  = gs->Pitch_SysID.J;
+        		Pitch_FF_Param.Cb = gs->Pitch_SysID.B;   // 阻尼系数
+				gs->Pitch_Motor_Out = 0;
     		}
 		#else
 		    Gimbal_Pitch_Calculate(gs);

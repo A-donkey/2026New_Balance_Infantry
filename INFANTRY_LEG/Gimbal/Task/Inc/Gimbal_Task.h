@@ -27,8 +27,8 @@
 #define Friction_Speed   3120
 
 //云台俯仰角限位
-#define PITCH_UP_LIMIT_POSITION     20
-#define PITCH_DOWN_LIMIT_POSITION  -20
+#define PITCH_UP_LIMIT_POSITION     30
+#define PITCH_DOWN_LIMIT_POSITION  -30
 
 //云台电机输出极性
 #define PITCH_MOTOR_SIGN -1
@@ -160,5 +160,7 @@ extern Shoot_Condition_t Shoot_Condition;
 extern PID_t Pitch_S_Pid;
 extern PID_t Yaw_S_Pid;
 extern Gravity_Comp_Param_t Gravity_Param;
+extern Feedforward_Param_t Yaw_FF_Param;
+extern Feedforward_Param_t Pitch_FF_Param;
 
 #endif
