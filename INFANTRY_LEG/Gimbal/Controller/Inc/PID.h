@@ -266,5 +266,5 @@ typedef __packed struct
 
 void TD_Init(TD_t *td, float r, float h0);
 float TD_Calculate(TD_t *td, float input);
-
+void TD_Clear(TD_t *td, float x);
 #endif

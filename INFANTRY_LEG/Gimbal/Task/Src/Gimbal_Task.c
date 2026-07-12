@@ -5,7 +5,6 @@ Self_Rescue_t Self_Rescue; //自救
 Shoot_Status_t Shoot_Status;
 Gimbal_Status_t Gimbal_Status; 
 Shoot_Condition_t Shoot_Condition;
-Compensation_Amount_t Compensation_Amount;
 
 //建立控制器结构体
 PID_t Yaw_P_Pid; //云台
@@ -19,12 +18,21 @@ PID_t L_Rpm_Pid; //发射机构
 PID_t R_Rpm_Pid;
 PID_t D_Pos_Pid;
 
-//建立前馈控制结构体
-Feedforward_t yaw_FD;      //YAW前馈
-Feedforward_t pitch_FD;    //PITCH前馈
+// TD跟踪微分器
+TD_t Pos_Pitch_TD;
+TD_t Pos_Yaw_TD;
 
-Feedforward_t Dyaw_FD;		 //YAW轴
-Feedforward_t Shoot_FD[3]; //摩擦轮(0为左 1为右 2为速度差)
+// 前馈参数（需要实测/辨识）
+Feedforward_Param_t Yaw_FF_Param  = {0,  0,  0};//{J_yaw,  B_yaw,  C_yaw};
+Feedforward_Param_t Pitch_FF_Param = {0, 0, 0};//{J_pitch, 0, C_pitch}// Pitch用Cb代替B
+
+// 重力补偿参数
+Gravity_Comp_Param_t Gravity_Param = {0, 0, 0};//{A, B, C}
+
+// 前馈和重力补偿中间变量
+float Yaw_FF_Output;
+float Pitch_FF_Output;
+float Pitch_Gravity_Comp;
 
 float Friction_Speed_Comp = 0;
 
@@ -41,8 +49,6 @@ void Gimbal_Init(void)
 {
 	//初始化PID
 	//更改云台PID以适配新电机
-//	PID_Init(&Pitch_P_Pid   ,    10,   	5, 0,    12,     0,     0,  0,0,0,0, 4,RADIAN,NONE); //云台
-//	PID_Init(&Pitch_S_Pid   , 		9, 		5, 0,  		8,     4,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
 	PID_Init(&Pitch_P_Pid   ,    10,   	5, 0,    	4,     0,     0,  0,0,0,0, 4,RADIAN,NONE); //云台
 	PID_Init(&Pitch_S_Pid   , 		9, 		5, 0,  		2,     2,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
 	PID_Init(&Yaw_P_Pid     ,    10,   	5, 0,   	1,     0,     0,  0,0,0,0, 4,RADIAN,NONE);
@@ -54,36 +60,10 @@ void Gimbal_Init(void)
 	PID_Init(&L_Rpm_Pid     , 16000, 1000, 0,  16.8,     0,     0,  0,0,0,0,10,NO_CIRCLE,NONE); //发射机构
 	PID_Init(&R_Rpm_Pid     , 16000, 1000, 0,  16.8,     0,     0,  0,0,0,0,10,NO_CIRCLE,NONE);
 	PID_Init(&D_Pos_Pid     ,	 9500, 1000, 0,    38,     0,   	0,  0,0,0,0, 2,RADIAN,NONE);
-	
-	//初始化前馈函数(c0=静态增益 c1=速度补偿 c2=加速度补偿)
-	static float ffc_c_dyaw[3] = {   1200,             0,              0}; //YAW轴
-	static float ffc_c_yi[3]   = {   2000,       0.00001,     0.00000001};
-	
-	static float ffc_c_pi[3]   = {   2000,       0.00001,     0.00000001}; //PITCH轴
-	
-//	static float ffc_c_L[3]    = {0.00010, 0.00000000006, 0.000000000001}; //摩擦轮
-//	static float ffc_c_R[3]    = {0.00010, 0.00000000006, 0.000000000001}; 
-//	static float ffc_c_S[3]    = {     40, 0.00000000006, 0.000000000001}; 
-	
-	static float ffc_c_L[3]    = {0.00012, 0.00000000006, 0.000000000001}; //摩擦轮
-	static float ffc_c_R[3]    = {0.00012, 0.00000000006, 0.000000000001}; 
-	static float ffc_c_S[3]    = {     42, 0.00000000006, 0.000000000001}; 
-	
-	Feedforward_Init(&Dyaw_FD    ,16384,ffc_c_dyaw,0.05,1,1); //YAW轴
-	Feedforward_Init(&yaw_FD     ,16384,  ffc_c_yi,0.05,1,1);
-	
-	Feedforward_Init(&pitch_FD   ,16384,  ffc_c_pi,0.05,1,1); //PITCH轴
-	
-	Feedforward_Init(&Shoot_FD[0], 0.30,ffc_c_L   ,0.05,1,1);	//摩擦轮
-	Feedforward_Init(&Shoot_FD[1], 0.30,ffc_c_R   ,0.05,1,1); 
-	Feedforward_Init(&Shoot_FD[2],10000,ffc_c_S   ,0.05,1,1); 
-	
-	//拟合系数初始化
-	Compensation_Amount.p_pitch[0] =  7.1799e+03;
-	Compensation_Amount.p_pitch[1] = -164.7740;
-	Compensation_Amount.p_pitch[2] = -13.0607;
-	Compensation_Amount.p_pitch[3] =  0.6999;
-	Compensation_Amount.p_pitch[4] = -0.0108;
+
+	// TD初始化（跟踪微分器）
+	TD_Init(&Pos_Yaw_TD,   700, 0.005);  // r=700, h0=0.005s
+	TD_Init(&Pos_Pitch_TD, 1000, 0.005); // r=1000, h0=0.005s
 	
 	//发射机构状态关闭
 	Shoot_Condition = Close;
@@ -94,11 +74,13 @@ void Gimbal_Init(void)
 	//等待(进行目标值初始化)
 	while(!all_ready_flag) 
 	{
-		Gimbal_Status.yaw_ref   = INS.Yaw; //云台目标重置
+		Gimbal_Status.yaw_ref   = INS.YawTotalAngle; //云台目标重置
 		Gimbal_Status.pitch_ref = INS.Pitch;
 		Shoot_Status.Target_Pos = Gimbal_Motor.Dji_2006.ecd; //拨盘目标重置
 		osDelay(1);
 	}
+	TD_Clear(&Pos_Yaw_TD,   Gimbal_Status.yaw_ref);
+	TD_Clear(&Pos_Pitch_TD, PITCH_DOWN_LIMIT_POSITION);
 }
 
 /*******************************************************************************************************
@@ -111,7 +93,7 @@ void Gimbal_Task(void)
 	Auto_Aim(&aim_rx,&Gimbal_Status);
 	Gimbal_Target_Limit(&Gimbal_Status);
 	Shoot_Control(&Heat_Control,&Shoot_Status,&Shoot_Condition);
-	Gimbal_Controllor(&Shoot_Status,&Gimbal_Status,&Self_Rescue,&Controlled_State,&Compensation_Amount);
+	Gimbal_Controllor(&Shoot_Status,&Gimbal_Status,&Self_Rescue,&Controlled_State);
 	Gimbal_Can_Data_Send(&Controlled_State,&Shoot_Status,&Gimbal_Status);
 }
 
@@ -129,18 +111,12 @@ void Variable_Information_Acquisition(INS_t *ins,
 	
 	//获取拨盘POS
 	ss->D_Pos = gm->Dji_2006.ecd;
-	
-	//计算摩擦轮的转动加速度
-	ss->acc.L_A_Rpm = ((ss->L_Rpm - ss->acc.L_Last_Rpm)*((2.0f*PI)/60.0f))/DWT_GetDeltaT(&ss->acc.dwt_l);
-	ss->acc.R_A_Rpm = ((ss->R_Rpm - ss->acc.R_Last_Rpm)*((2.0f*PI)/60.0f))/DWT_GetDeltaT(&ss->acc.dwt_r);
-	ss->acc.L_Last_Rpm = ss->L_Rpm;
-	ss->acc.R_Last_Rpm = ss->R_Rpm;
-	
+
 	//计算获取云台电机绝对位置
 	gs->abs_yaw = gm->DM_4310[0].pos;
 	
 	//计算获取云台陀螺仪数据
-	gs->yaw     = ins->Yaw;
+	gs->yaw     = ins->YawTotalAngle;
 	gs->d_yaw   = ins->Gyro[2];
 	gs->pitch   = ins->Roll;
 	gs->d_pitch = ins->Gyro[1];
@@ -163,7 +139,13 @@ void Gimbal_Control_Init(Shoot_Status_t *ss,
 	
 	gs->yaw_ref   = gs->yaw; //云台目标重置
 	gs->pitch_ref = gs->pitch;
+	TD_Clear(&Pos_Yaw_TD,   gs->yaw_ref);
+	TD_Clear(&Pos_Pitch_TD, PITCH_DOWN_LIMIT_POSITION);
 	
+	Yaw_FF_Output = 0;
+	Pitch_FF_Output = 0;
+	Pitch_Gravity_Comp = 0;
+
 	ss->Target_Pos = ss->D_Pos; //拨盘目标重置
 	
 	Aim_Permission  = 0; //许可重置
@@ -490,7 +472,7 @@ void Gimbal_Control(RC_Ctrl_t *rc_ctrl,
 				
 				if(*cs == RC) //遥控器模式
 				{
-					gs->yaw_ref    = Half_Circle_ANGLE(gs->yaw_ref - RC_YAW_SENSITIVITY*gs->Rc_Yaw); //云台
+					gs->yaw_ref    = gs->yaw_ref - RC_YAW_SENSITIVITY*gs->Rc_Yaw; //云台
 					gs->pitch_ref += RC_PITCH_SENSITIVITY * gs->Rc_Pitch; 
 					
 					Pc_Init(pc_ctrl);
@@ -498,7 +480,7 @@ void Gimbal_Control(RC_Ctrl_t *rc_ctrl,
 				}
 				else if(*cs == MOUSE) //键鼠模式
 				{
-					gs->yaw_ref    =  Half_Circle_ANGLE(gs->yaw_ref - PC_YAW_SENSITIVITY*gs->Pc_Yaw); //云台
+					gs->yaw_ref    =  gs->yaw_ref - PC_YAW_SENSITIVITY*gs->Pc_Yaw; //云台
 					gs->pitch_ref +=  PC_PITCH_SENSITIVITY * gs->Pc_Pitch; 
 					
 					Pc_Mode(rc_ctrl,pc_ctrl);
@@ -524,7 +506,7 @@ void Gimbal_Control(RC_Ctrl_t *rc_ctrl,
 				
 				if(*cs == MOUSE) //键鼠模式
 				{
-					gs->yaw_ref    =  Half_Circle_ANGLE(gs->yaw_ref - PC_YAW_SENSITIVITY*gs->Pc_Yaw); //云台
+					gs->yaw_ref    = gs->yaw_ref - PC_YAW_SENSITIVITY*gs->Pc_Yaw; //云台
 					gs->pitch_ref +=  PC_PITCH_SENSITIVITY * gs->Pc_Pitch; 
 					
 					Vt03_Pc_Mode(pc_ctrl);
@@ -609,30 +591,64 @@ void Shoot_Control(Heat_Control_t *hc,
 }
 
 /*******************************************************************************************************
+Pitch轴计算逻辑
+********************************************************************************************************/
+void Gimbal_Pitch_Calculate(Gimbal_Status_t *gs){
+	// 1. TD
+	TD_Calculate(&Pos_Pitch_TD, gs->pitch_ref);
+
+	// 2. 前馈（惯量 + 阻尼）
+	float pitch_alpha = Pos_Pitch_TD.ddx * Ang_PI;
+	float pitch_omega = Pos_Pitch_TD.dx * Ang_PI;
+	Pitch_FF_Output = Pitch_FF_Param.J * pitch_alpha
+                + Pitch_FF_Param.Cb * pitch_omega;
+
+	// 3. 重力补偿
+	float pitch_rad = gs->pitch * Ang_PI;  // 度 → 弧度
+	Pitch_Gravity_Comp = Gravity_Param.A * sin(pitch_rad)
+                   + Gravity_Param.B * cos(pitch_rad)
+                   + Gravity_Param.C * sign(gs->d_pitch);
+
+	// 4. PID反馈
+	PID_Calculate(&Pitch_P_Pid, gs->pitch*Ang_PI, Pos_Pitch_TD.x * Ang_PI);
+	PID_Calculate(&Pitch_S_Pid, gs->d_pitch,      Pos_Pitch_TD.dx * Ang_PI);
+
+	// 5. 总输出
+	gs->Pitch_Motor_Out = Pitch_FF_Output + Pitch_Gravity_Comp
+                    + Pitch_P_Pid.Output + Pitch_S_Pid.Output;
+}
+
+/*******************************************************************************************************
+Yaw轴计算逻辑
+********************************************************************************************************/
+void Gimbal_Yaw_Calculate(Gimbal_Status_t *gs){
+	// 1. TD计算目标角度的平滑值、角速度、角加速度
+	TD_Calculate(&Pos_Yaw_TD, gs->yaw_ref);  // 输入：度
+
+	// 2. 物理模型前馈（单位需要统一）
+	//    TD输出是度、°/s、°/s?，需要转换为电机电流单位
+	float yaw_alpha = Pos_Yaw_TD.ddx * Ang_PI;  // °/s? → rad/s?
+	float yaw_omega = Pos_Yaw_TD.dx * Ang_PI;   // °/s → rad/s
+	Yaw_FF_Output = Yaw_FF_Param.J * yaw_alpha           // 惯量 × 角加速度
+              + Yaw_FF_Param.B * yaw_omega            // 阻尼 × 角速度
+              + Yaw_FF_Param.C * sign(yaw_omega);     // 库伦摩擦
+
+	// 3. PID反馈（TD滤波后的值作为参考）
+	PID_Calculate(&Yaw_P_Pid,   gs->yaw*Ang_PI,   Pos_Yaw_TD.x * Ang_PI);
+	PID_Calculate(&Yaw_S_Pid,   gs->d_yaw,         Pos_Yaw_TD.dx * Ang_PI);
+
+	// 4. 总输出
+	gs->Yaw_Motor_Out = Yaw_FF_Output + Yaw_P_Pid.Output + Yaw_S_Pid.Output;
+}
+
+/*******************************************************************************************************
 云台控制器
 ********************************************************************************************************/
 void Gimbal_Controllor(Shoot_Status_t *ss,
 											 Gimbal_Status_t *gs,
 											 Self_Rescue_t *self_re,
-											 Controlled_State_t *cs,
-											 Compensation_Amount_t *ca)
+											 Controlled_State_t *cs)
 {
-	//发射机构摩擦轮前馈计算
-	Feedforward_Calculate(&Shoot_FD[0],ss->acc.L_A_Rpm);
-	Feedforward_Calculate(&Shoot_FD[1],ss->acc.R_A_Rpm);
-	Feedforward_Calculate(&Shoot_FD[2],-ss->L_Rpm - ss->R_Rpm);
-	//YAW前馈计算
-	Feedforward_Calculate(&Dyaw_FD,Down_Cboard_Info.down_dyaw + gs->d_yaw);
-	Feedforward_Calculate( &yaw_FD,Yaw_P_Pid.Output);
-	//PITCH前馈计算
-	Feedforward_Calculate(&pitch_FD,Pitch_P_Pid.Output);
-	//PITCH拟合补偿计算
-	ca->Gravity_Comp_PITCH = ca->p_pitch[4]*gs->pitch*gs->pitch*gs->pitch*gs->pitch
-												 + ca->p_pitch[3]*gs->pitch*gs->pitch*gs->pitch
-												 + ca->p_pitch[2]*gs->pitch*gs->pitch											
-												 + ca->p_pitch[1]*gs->pitch
-												 + ca->p_pitch[0];
-	
 	if(*cs!=ERO && *cs!=STOP)
 	{
 		if(Down_Cboard_Info.fall_flag) //倒地
@@ -653,18 +669,30 @@ void Gimbal_Controllor(Shoot_Status_t *ss,
 		}
 		else //正常
 		{
-			PID_Calculate(&Yaw_P_Pid  ,gs->yaw*Ang_PI  ,gs->yaw_ref*Ang_PI  ); //云台
-			PID_Calculate(&Pitch_P_Pid,gs->pitch*Ang_PI,gs->pitch_ref*Ang_PI); 
-			//暂时取消前馈补偿方便调试<*_*>
-//			gs->Yaw_Motor_Out   = PID_Calculate(&Yaw_S_Pid  ,gs->d_yaw  ,Yaw_P_Pid.Output  ) - Dyaw_FD.Output + yaw_FD.Output;
-//			gs->Pitch_Motor_Out = PID_Calculate(&Pitch_S_Pid,gs->d_pitch,Pitch_P_Pid.Output) + Max_Output(ca->Gravity_Comp_PITCH,8000.0f) + pitch_FD.Output;
-			gs->Yaw_Motor_Out   = PID_Calculate(&Yaw_S_Pid  ,gs->d_yaw  ,Yaw_P_Pid.Output  );
-			gs->Pitch_Motor_Out = PID_Calculate(&Pitch_S_Pid,gs->d_pitch,Pitch_P_Pid.Output);
-			
-			ss->L_Motor_Out = PID_Calculate(&L_Rpm_Pid,ss->L_Rpm, ss->Target_Rpm) //发射机构
-											- (10.0f/3.0f)*(3591.0f/187.0f)*(16384.0f/20.0f)*Shoot_FD[0].Output + Shoot_FD[2].Output; 
-			ss->R_Motor_Out = PID_Calculate(&R_Rpm_Pid,ss->R_Rpm,-ss->Target_Rpm) 
-											- (10.0f/3.0f)*(3591.0f/187.0f)*(16384.0f/20.0f)*Shoot_FD[1].Output + Shoot_FD[2].Output;
+
+		#if GIMBAL_SYSID == GIMBAL_YAW_SYSID
+    		Gimbal_Yaw_SysID_Run(gs);
+    		if (gs->Yaw_SysID.sysid_done)
+    		{
+        		// 辨识完成，更新前馈参数
+        		Yaw_FF_Param.B = gs->Yaw_SysID.B;
+        		Yaw_FF_Param.C = gs->Yaw_SysID.C;
+        		Yaw_FF_Param.J = gs->Yaw_SysID.J;
+    		}
+		#elif GIMBAL_SYSID == GIMBAL_PITCH_SYSID
+    		Gimbal_Pitch_SysID_Run(gs);
+    		if (gs->Pitch_SysID.sysid_done)
+    		{
+        		Pitch_FF_Param.Cb = gs->Pitch_SysID.B;
+        		Pitch_FF_Param.J  = gs->Pitch_SysID.J;
+    		}
+		#else
+		    Gimbal_Pitch_Calculate(gs);
+		    Gimbal_Yaw_Calculate(gs);
+		#endif
+
+			ss->L_Motor_Out = PID_Calculate(&L_Rpm_Pid,ss->L_Rpm, ss->Target_Rpm); //发射机构
+			ss->R_Motor_Out = PID_Calculate(&R_Rpm_Pid,ss->R_Rpm,-ss->Target_Rpm);
 			ss->Toggle_Motor_Out = PID_Calculate(&D_Pos_Pid,Half_Circle_RADIAN(ss->D_Pos),ss->Target_Pos);
 		}
 	}

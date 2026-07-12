@@ -674,3 +674,11 @@ float TD_Calculate(TD_t *td, float input)
 
     return td->x;
 }
+void TD_Clear(TD_t *td, float x)
+{
+    td->x = x;
+    td->dx = 0;
+    td->ddx = 0;
+    td->last_dx = 0;
+    td->last_ddx = 0;
+}

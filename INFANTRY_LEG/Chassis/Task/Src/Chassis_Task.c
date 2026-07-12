@@ -1275,21 +1275,21 @@ void Chassis_Can_Data_Send(Chassis_Motor_t *cm,
 		}
 		else
 		{
-//			//调试暂时底盘失能<*_*>
-//			Mit_Ctrl(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID,0,0,0,0,0,DM8009); Mit_Ctrl(&hcan1,LEFT_BACK_MOTOR_CTRL_ID,0,0,0,0,0,DM8009);
-//			Mit_Ctrl(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID,0,0,0,0,0,DM8009); Mit_Ctrl(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID,0,0,0,0,0,DM8009);
-//			osDelay(1);
-//			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左边202
-//			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//右边201
-			
-			//正常控制<*_*>
-			Mit_Ctrl(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[0]->T_E,40),DM8009);
-			Mit_Ctrl(&hcan1,LEFT_BACK_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[0]->T_A,40),DM8009);
-			Mit_Ctrl(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[1]->T_A,40),DM8009);
-			Mit_Ctrl(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[1]->T_E,40),DM8009);
+			//调试暂时底盘失能<*_*>
+			Mit_Ctrl(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID,0,0,0,0,0,DM8009); Mit_Ctrl(&hcan1,LEFT_BACK_MOTOR_CTRL_ID,0,0,0,0,0,DM8009);
+			Mit_Ctrl(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID,0,0,0,0,0,DM8009); Mit_Ctrl(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID,0,0,0,0,0,DM8009);
 			osDelay(1);
-			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,Max_Output(joint_m[0]->A,16000),0,0);//左边202
-			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,Max_Output(joint_m[1]->A,16000),0,0,0);//右边201
+			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左边202
+			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//右边201
+			
+//			//正常控制<*_*>
+//			Mit_Ctrl(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[0]->T_E,40),DM8009);
+//			Mit_Ctrl(&hcan1,LEFT_BACK_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[0]->T_A,40),DM8009);
+//			Mit_Ctrl(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[1]->T_A,40),DM8009);
+//			Mit_Ctrl(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[1]->T_E,40),DM8009);
+//			osDelay(1);
+//			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,Max_Output(joint_m[0]->A,16000),0,0);//左边202
+//			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,Max_Output(joint_m[1]->A,16000),0,0,0);//右边201
 		}
 	}
 }

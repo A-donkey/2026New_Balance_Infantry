@@ -840,6 +840,16 @@
               <FileType>5</FileType>
               <FilePath>..\Math\Inc\QuaternionEKF.h</FilePath>
             </File>
+            <File>
+              <FileName>RLS_Identification.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Math\Src\RLS_Identification.c</FilePath>
+            </File>
+            <File>
+              <FileName>RLS_Identification.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Math\Inc\RLS_Identification.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -984,6 +994,16 @@
               <FileName>Some_Functions.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\APP\Inc\Some_Functions.h</FilePath>
+            </File>
+            <File>
+              <FileName>System_Identification.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\Src\System_Identification.c</FilePath>
+            </File>
+            <File>
+              <FileName>System_Identification.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\APP\Inc\System_Identification.h</FilePath>
             </File>
           </Files>
         </Group>

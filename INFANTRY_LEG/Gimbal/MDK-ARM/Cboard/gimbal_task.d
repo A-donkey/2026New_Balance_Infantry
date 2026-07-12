@@ -115,3 +115,6 @@ cboard\gimbal_task.o: ../APP/Inc/Remote_Control.h
 cboard\gimbal_task.o: ../Bsp/Inc/bsp_rc.h
 cboard\gimbal_task.o: ../APP/Inc/Some_Functions.h
 cboard\gimbal_task.o: ../Task/Inc/Board_Can_Task.h
+cboard\gimbal_task.o: ../Math/Inc/RLS_Identification.h
+cboard\gimbal_task.o: ../APP/Inc/System_Identification.h
+cboard\gimbal_task.o: ../Task/Inc/Gimbal_Task.h

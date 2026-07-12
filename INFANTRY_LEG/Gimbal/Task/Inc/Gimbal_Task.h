@@ -12,6 +12,8 @@
 #include "Check_Task.h"
 #include "Some_Functions.h"
 #include "Board_Can_Task.h"
+#include "RLS_Identification.h"
+#include "System_Identification.h"
 
 //角度转弧度
 #define Ang_PI 0.01745329f
@@ -42,6 +44,17 @@
 #define PC_YAW_SENSITIVITY          0.0016
 #define PC_DEADBAND                 1
 
+// 系统辨识模式开关
+#define GIMBAL_SYSID_OFF    0
+#define GIMBAL_YAW_SYSID    1
+#define GIMBAL_PITCH_SYSID  2
+#define GIMBAL_SYSID        GIMBAL_SYSID_OFF  // 默认关闭
+
+// 辨识步骤
+#define GIMBAL_SYSID_STEP_BC  0   // 辨识 B 和 C
+#define GIMBAL_SYSID_STEP_J   1   // 辨识 J
+#define GIMBAL_SYSID_STEP     GIMBAL_SYSID_STEP_BC
+
 typedef enum
 {
 	Close,
@@ -55,17 +68,20 @@ typedef struct
 	float Yaw_Zero_Target; //零点目标位置
 }Self_Rescue_t;
 
-typedef struct 
+// 系统辨识相关
+typedef struct
 {
-	uint32_t dwt_l; //计算DT
-	uint32_t dwt_r;
-	
-	float L_Last_Rpm; //记录上一次转速
-	float R_Last_Rpm;
-	
-	float L_A_Rpm; //摩擦轮的转动加速度
-	float R_A_Rpm;
-}Calculate_Acc;
+    // 系统辨识数据
+    TD_t    td_omega;      // 速度/加速度 TD 滤波器
+    RLS   rls_sysid;     // RLS 递推最小二乘
+    float   sysid_timer;   // 辨识计时器
+    uint8_t sysid_done;    // 辨识完成标志
+    
+    // 辨识结果
+    float J;  // 转动惯量
+    float B;  // 粘性阻尼
+    float C;  // 库伦摩擦
+} Gimbal_SysID_t;
 
 typedef struct 
 {
@@ -88,6 +104,9 @@ typedef struct
 	
 	float Yaw_Motor_Out;   //电机输出
 	float Pitch_Motor_Out; 
+
+	Gimbal_SysID_t Yaw_SysID;
+	Gimbal_SysID_t Pitch_SysID;
 }Gimbal_Status_t;
 
 typedef struct 
@@ -103,16 +122,24 @@ typedef struct
 	float L_Motor_Out; //摩擦轮电机输出
 	float R_Motor_Out;
 	float Toggle_Motor_Out;
-	
-	Calculate_Acc acc;
 }Shoot_Status_t;
 
+// 新增：前馈参数结构体
 typedef struct
 {
-	float p_pitch[5]; //项拟合系数(4:四次项系数 3:三次项系数 2:二次项系数 1:一次项系数 0:常数系数)
-	
-	float Gravity_Comp_PITCH; //重心补偿(PITCH)
-}Compensation_Amount_t;
+    float J;  // 转动惯量
+    float B;  // 粘性阻尼系数
+    float C;  // 库伦摩擦系数
+    float Cb; // PITCH轴阻尼系数（如果与B不同）
+}Feedforward_Param_t;
+
+// 新增：重力补偿参数
+typedef struct
+{
+    float A;  // sin分量系数
+    float B;  // cos分量系数
+    float C;  // 库伦摩擦
+}Gravity_Comp_Param_t;
 
 void Gimbal_Init(void);
 void Gimbal_Task(void);
@@ -121,7 +148,7 @@ void Gimbal_Target_Limit(Gimbal_Status_t *gs);
 void Gimbal_Can_Data_Send(Controlled_State_t *cs,Shoot_Status_t *ss,Gimbal_Status_t *gs);
 void Shoot_Control(Heat_Control_t *hc,Shoot_Status_t *ss,Shoot_Condition_t *sc);
 void Variable_Information_Acquisition(INS_t *ins,Gimbal_Motor_t *gm,Shoot_Status_t *ss,Gimbal_Status_t *gs);
-void Gimbal_Controllor(Shoot_Status_t *ss,Gimbal_Status_t *gs,Self_Rescue_t *self_re,Controlled_State_t *cs,Compensation_Amount_t *ca);
+void Gimbal_Controllor(Shoot_Status_t *ss,Gimbal_Status_t *gs,Self_Rescue_t *self_re,Controlled_State_t *cs);
 void Gimbal_Control(RC_Ctrl_t *rc_ctrl,PC_Ctrl_t *pc_ctrl,Shoot_Status_t *ss,Gimbal_Status_t *gs,Shoot_Condition_t *sc,Self_Rescue_t *self_re,Controlled_State_t *cs);
 
 //EXTERN部分
@@ -131,5 +158,8 @@ extern float Friction_Speed_Comp;
 extern Shoot_Status_t Shoot_Status;
 extern Gimbal_Status_t Gimbal_Status;
 extern Shoot_Condition_t Shoot_Condition; 
+extern PID_t Pitch_S_Pid;
+extern PID_t Yaw_S_Pid;
+extern Gravity_Comp_Param_t Gravity_Param;
 
 #endif

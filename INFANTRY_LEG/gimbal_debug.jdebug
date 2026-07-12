@@ -16,7 +16,7 @@ void OnProjectLoad (void) {
   Project.SetTIFSpeed ("1 MHz");
   Project.AddSvdFile ("D:/OZONE/Config/CPU/Cortex-M4.svd");
   Project.AddSvdFile ("$(InstallDir)/Config/Peripherals/STM32F407IG.svd");
-  File.Open ("D:/RM/2026BOF_balance_infantry/HERO_LEG/HERO_LEG/Gimbal/MDK-ARM/Cboard/Cboard.axf");
+  File.Open ("D:/RM/2026BOF_balance_infantry/INFANTRY_LEG/INFANTRY_LEG/Gimbal/MDK-ARM/Cboard/Cboard.axf");
 }
 
 /*********************************************************************
