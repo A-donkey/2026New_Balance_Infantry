@@ -3,7 +3,7 @@
 <title>Static Call Graph - [Cboard\Cboard.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image Cboard\Cboard.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Jul 12 15:36:02 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Jul 12 16:00:23 2026
 <BR><P>
 <H3>Maximum Stack Usage =        344 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -562,9 +562,9 @@ Global Symbols
 <P><STRONG><a name="[1fa]"></a>__aeabi_memcpy</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Recieve_Host
 <LI><a href="#[1f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RX_TO_VT03
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Packet
 <LI><a href="#[25c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCopyDataToQueue
 <LI><a href="#[25b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvCopyDataFromQueue
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Packet
 </UL>
 
 <P><STRONG><a name="[a5]"></a>__rt_memcpy</STRONG> (Thumb, 138 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text), UNUSED)
@@ -577,13 +577,13 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_memcpy4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_FREERTOS_Init
-<LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_Update
-<LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_Init
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_xhatUpdate
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_Observe
 <LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Kalman_Filter_Update
 <LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Kalman_Filter_Measure
 <LI><a href="#[1b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;H_K_R_Adjustment
+<LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_Update
+<LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_Init
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_memcpy
 </UL>
 
@@ -600,9 +600,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1d3]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLS_Init
+<BR><BR>[Called By]<UL><LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Kalman_Filter_Init
+<LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLS_Init
 <LI><a href="#[1f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLS_Derivative
-<LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Kalman_Filter_Init
 </UL>
 
 <P><STRONG><a name="[a9]"></a>__rt_memclr</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
@@ -626,12 +626,12 @@ Global Symbols
 <LI><a href="#[1a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_MspPostInit
 <LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_MspInit
 <LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_I2C_MspInit
-<LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLS_Init
-<LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_Init
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_SetH
 <LI><a href="#[1d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Kalman_Filter_Measure
 <LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Kalman_Filter_Init
 <LI><a href="#[1b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;H_K_R_Adjustment
+<LI><a href="#[1f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OLS_Init
+<LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_Init
 </UL>
 
 <P><STRONG><a name="[2c0]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
@@ -1114,10 +1114,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DWT_CNT_Update
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;INS_Task
+<LI><a href="#[1b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Heat_Limit_Control
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TD_Calculate
 <LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Clear
 <LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
-<LI><a href="#[1b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Heat_Limit_Control
 </UL>
 
 <P><STRONG><a name="[de]"></a>DWT_GetTimeline_s</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, bsp_dwt.o(i.DWT_GetTimeline_s))
@@ -1284,10 +1284,10 @@ Global Symbols
 <P><STRONG><a name="[10d]"></a>Gimbal_Controllor</STRONG> (Thumb, 218 bytes, Stack size 24 bytes, gimbal_task.o(i.Gimbal_Controllor))
 <BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = Gimbal_Controllor &rArr; Gimbal_Pitch_Calculate &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
-<LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Half_Circle_RADIAN
+<BR>[Calls]<UL><LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Half_Circle_RADIAN
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Yaw_Calculate
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Pitch_Calculate
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PID_Calculate
 </UL>
 <BR>[Called By]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Task
 </UL>
@@ -1594,12 +1594,12 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_Init
 <LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_OscConfig
 <LI><a href="#[18c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
+<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_Start
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Init
 <LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Abort
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_TransmitReceive
 <LI><a href="#[200]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_WaitFlagStateUntilTimeout
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_Start
 <LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Vt03_Pc_Mode
 <LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pc_Mode
 </UL>
@@ -1629,9 +1629,9 @@ Global Symbols
 <P><STRONG><a name="[142]"></a>HAL_Init</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, stm32f4xx_hal.o(i.HAL_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = HAL_Init &rArr; HAL_InitTick &rArr; HAL_TIM_Base_Init &rArr; HAL_TIM_Base_MspInit &rArr; HAL_NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<BR>[Calls]<UL><LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriorityGrouping
+<LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 <LI><a href="#[145]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
-<LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriorityGrouping
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -2219,8 +2219,8 @@ Global Symbols
 <P><STRONG><a name="[1b8]"></a>Heat_Limit_Control</STRONG> (Thumb, 230 bytes, Stack size 16 bytes, limit_task.o(i.Heat_Limit_Control))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = Heat_Limit_Control &rArr; DWT_GetDeltaT &rArr; DWT_CNT_Update
 </UL>
-<BR>[Calls]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DWT_GetDeltaT
-<LI><a href="#[1b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Positive_Number_Out
+<BR>[Calls]<UL><LI><a href="#[1b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Positive_Number_Out
+<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DWT_GetDeltaT
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Limit_Task
 </UL>
@@ -2239,9 +2239,9 @@ Global Symbols
 <P><STRONG><a name="[1c1]"></a>IMU_QuaternionEKF_Update</STRONG> (Thumb, 990 bytes, Stack size 48 bytes, quaternionekf.o(i.IMU_QuaternionEKF_Update))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = IMU_QuaternionEKF_Update &rArr; IMU_QuaternionEKF_Init &rArr; Kalman_Filter_Init &rArr; malloc &rArr; __Heap_Full &rArr; __Heap_ProvideMemory &rArr; free
 </UL>
-<BR>[Calls]<UL><LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_Init
-<LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;invSqrt
+<BR>[Calls]<UL><LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;invSqrt
 <LI><a href="#[1c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Kalman_Filter_Update
+<LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_Init
 <LI><a href="#[1c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2f
 <LI><a href="#[1c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asinf
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
@@ -2605,10 +2605,10 @@ Global Symbols
 <LI><a href="#[1f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_Derivative_On_Measurement
 <LI><a href="#[1f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_Changing_Integration_Rate
 </UL>
-<BR>[Called By]<UL><LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_Temperature_Ctrl
-<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Yaw_Calculate
+<BR>[Called By]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Yaw_Calculate
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Pitch_Calculate
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Controllor
+<LI><a href="#[1cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_Temperature_Ctrl
 </UL>
 
 <P><STRONG><a name="[10b]"></a>PID_Clear</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, pid.o(i.PID_Clear))
@@ -3765,8 +3765,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1c0]"></a>arm_mat_init_f32</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, matrixfunctions.o(i.arm_mat_init_f32))
-<BR><BR>[Called By]<UL><LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_Init
-<LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Kalman_Filter_Init
+<BR><BR>[Called By]<UL><LI><a href="#[1bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Kalman_Filter_Init
+<LI><a href="#[1be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_Init
 </UL>
 
 <P><STRONG><a name="[1c8]"></a>arm_mat_inverse_f32</STRONG> (Thumb, 692 bytes, Stack size 36 bytes, matrixfunctions.o(i.arm_mat_inverse_f32))
@@ -3941,9 +3941,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[116]"></a>sign</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, user_lib.o(i.sign))
-<BR><BR>[Called By]<UL><LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TD_Calculate
-<LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Yaw_Calculate
+<BR><BR>[Called By]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Yaw_Calculate
 <LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Pitch_Calculate
+<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TD_Calculate
 </UL>
 
 <P><STRONG><a name="[232]"></a>sqrtf</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, sqrtf.o(i.sqrtf))
@@ -4144,9 +4144,9 @@ Global Symbols
 <P><STRONG><a name="[27c]"></a>xPortStartScheduler</STRONG> (Thumb, 224 bytes, Stack size 16 bytes, port.o(i.xPortStartScheduler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = xPortStartScheduler
 </UL>
-<BR>[Calls]<UL><LI><a href="#[27e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__asm___6_port_c_39a90d8d__prvEnableVFP
+<BR>[Calls]<UL><LI><a href="#[27d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortSetupTimerInterrupt
+<LI><a href="#[27e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__asm___6_port_c_39a90d8d__prvEnableVFP
 <LI><a href="#[27f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__asm___6_port_c_39a90d8d__prvStartFirstTask
-<LI><a href="#[27d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vPortSetupTimerInterrupt
 </UL>
 <BR>[Called By]<UL><LI><a href="#[24c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler
 </UL>
@@ -4355,9 +4355,9 @@ Global Symbols
 <P><STRONG><a name="[106]"></a>__aeabi_d2f</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, d2f.o(x$fpl$d2f))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_d2f
 </UL>
-<BR>[Called By]<UL><LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TD_Calculate
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Pitch_Calculate
+<BR>[Called By]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Pitch_Calculate
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Control
+<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TD_Calculate
 </UL>
 
 <P><STRONG><a name="[287]"></a>_d2f</STRONG> (Thumb, 98 bytes, Stack size 32 bytes, d2f.o(x$fpl$d2f), UNUSED)
@@ -4491,9 +4491,9 @@ Global Symbols
 <P><STRONG><a name="[104]"></a>__aeabi_f2d</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, f2d.o(x$fpl$f2d))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_f2d
 </UL>
-<BR>[Called By]<UL><LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TD_Calculate
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Pitch_Calculate
+<BR>[Called By]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Pitch_Calculate
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Control
+<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TD_Calculate
 </UL>
 
 <P><STRONG><a name="[293]"></a>_f2d</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, f2d.o(x$fpl$f2d), UNUSED)
@@ -5117,15 +5117,15 @@ Local Symbols
 <BR>[Address Reference Count : 1]<UL><LI> quaternionekf.o(i.IMU_QuaternionEKF_Init)
 </UL>
 <P><STRONG><a name="[1bd]"></a>invSqrt</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, quaternionekf.o(i.invSqrt))
-<BR><BR>[Called By]<UL><LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_Update
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_F_Linearization_P_Fading
+<BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_F_Linearization_P_Fading
+<LI><a href="#[1c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IMU_QuaternionEKF_Update
 </UL>
 
 <P><STRONG><a name="[f2]"></a>DWT_CNT_Update</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, bsp_dwt.o(i.DWT_CNT_Update))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = DWT_CNT_Update
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DWT_GetDeltaT
-<LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DWT_SysTimeUpdate
+<BR>[Called By]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DWT_SysTimeUpdate
+<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DWT_GetDeltaT
 </UL>
 
 <P><STRONG><a name="[1ff]"></a>sbus_to_rc</STRONG> (Thumb, 196 bytes, Stack size 20 bytes, remote_control.o(i.sbus_to_rc))

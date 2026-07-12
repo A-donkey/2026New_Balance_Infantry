@@ -117,5 +117,3 @@ cboard\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_o
 cboard\freertos.o: ../APP/Inc/VT03.h
 cboard\freertos.o: ../Task/Inc/Board_Can_Task.h
 cboard\freertos.o: ../Math/Inc/RLS_Identification.h
-cboard\freertos.o: ../APP/Inc/System_Identification.h
-cboard\freertos.o: ../Task/Inc/Gimbal_Task.h

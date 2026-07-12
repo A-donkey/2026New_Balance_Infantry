@@ -13,7 +13,6 @@
 #include "Some_Functions.h"
 #include "Board_Can_Task.h"
 #include "RLS_Identification.h"
-#include "System_Identification.h"
 
 //½Ç¶È×ª»¡¶È
 #define Ang_PI 0.01745329f

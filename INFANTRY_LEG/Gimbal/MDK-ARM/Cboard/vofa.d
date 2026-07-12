@@ -116,5 +116,3 @@ cboard\vofa.o: ../Bsp/Inc/bsp_rc.h
 cboard\vofa.o: ../APP/Inc/Some_Functions.h
 cboard\vofa.o: ../Task/Inc/Board_Can_Task.h
 cboard\vofa.o: ../Math/Inc/RLS_Identification.h
-cboard\vofa.o: ../APP/Inc/System_Identification.h
-cboard\vofa.o: ../Task/Inc/Gimbal_Task.h

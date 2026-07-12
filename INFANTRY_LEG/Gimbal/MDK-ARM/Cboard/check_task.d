@@ -119,5 +119,3 @@ cboard\check_task.o: ../Math/Inc/QuaternionEKF.h
 cboard\check_task.o: ../Math/Inc/kalman_filter.h
 cboard\check_task.o: ../Task/Inc/Board_Can_Task.h
 cboard\check_task.o: ../Math/Inc/RLS_Identification.h
-cboard\check_task.o: ../APP/Inc/System_Identification.h
-cboard\check_task.o: ../Task/Inc/Gimbal_Task.h

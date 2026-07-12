@@ -1,4 +1,5 @@
 #include "Gimbal_Task.h"
+#include "System_Identification.h"
 
 //全局变量定义部分
 Self_Rescue_t Self_Rescue; //自救
