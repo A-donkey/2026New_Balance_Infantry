@@ -13,6 +13,7 @@
 #include "Some_Functions.h"
 #include "Board_Can_Task.h"
 #include "RLS_Identification.h"
+#include "ZeroCheck.h"
 
 //角度转弧度
 #define Ang_PI 0.01745329f
@@ -23,8 +24,11 @@
 #define ZERO_HEAD_YAW   -2.17543435f
 #define ZERO_BACK_YAW   0.961483002f
 
+//拨盘电机减速比
+#define DIAL_REDUCTION_RATIO 36.0f
+
 //摩擦轮转速
-#define Friction_Speed   3120
+#define Friction_Speed   6240
 
 //云台俯仰角限位
 #define PITCH_UP_LIMIT_POSITION     30
@@ -114,6 +118,7 @@ typedef struct
 	int16_t R_Rpm;
 	
 	float D_Pos; //拨盘位置
+	float D_Spd; //拨盘转速
 	
 	float Target_Rpm; //设定摩擦轮电机目标转速
 	float Target_Pos; //设定拨盘电机目标位置

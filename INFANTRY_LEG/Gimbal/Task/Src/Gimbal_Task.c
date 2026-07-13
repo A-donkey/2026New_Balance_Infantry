@@ -18,6 +18,7 @@ PID_t Abs_Yaw_S_Pid;
 PID_t L_Rpm_Pid; //发射机构
 PID_t R_Rpm_Pid;
 PID_t D_Pos_Pid;
+PID_t D_Spd_Pid;
 
 // TD跟踪微分器
 TD_t Pos_Pitch_TD;
@@ -28,12 +29,15 @@ Feedforward_Param_t Yaw_FF_Param  = {0.0115128597,  0.0286347487f,  0.23262085f}
 Feedforward_Param_t Pitch_FF_Param = {0.0324, 2.44012785f, 0};//{J_pitch, Cb_pitch, C_pitch}// Pitch用Cb代替B
 
 // 重力补偿参数
-Gravity_Comp_Param_t Gravity_Param = {-2.4175, 3.24 , 0};//{A, B_g, C}
+Gravity_Comp_Param_t Gravity_Param = {-2.4175, 3.24 , 0};//{A, B_g, C}//C用不上
 
 // 前馈和重力补偿中间变量
 float Yaw_FF_Output;
 float Pitch_FF_Output;
 float Pitch_Gravity_Comp;
+
+//过零检测初始化
+ZeroCheck_Typedef dial_zero_check;
 
 float Friction_Speed_Comp = 0;
 
@@ -42,6 +46,7 @@ bool Fire_Permission   = 0;  //开火许可
 bool Aim_Converge_Flag = 0;  //自瞄收敛标志位
 
 bool gimbal_ready_flag; //当前线程初始化完成标志 
+
 
 /*******************************************************************************************************
 Gimbal任务初始化
@@ -60,7 +65,8 @@ void Gimbal_Init(void)
 	
 	PID_Init(&L_Rpm_Pid     , 16000, 1000, 0,  16.8,     0,     0,  0,0,0,0,10,NO_CIRCLE,NONE); //发射机构
 	PID_Init(&R_Rpm_Pid     , 16000, 1000, 0,  16.8,     0,     0,  0,0,0,0,10,NO_CIRCLE,NONE);
-	PID_Init(&D_Pos_Pid     ,	 9500, 1000, 0,    38,     0,   	0,  0,0,0,0, 2,RADIAN,NONE);
+	PID_Init(&D_Pos_Pid     ,	 	800, 	100, 0,   250,     0,   	0,  0,0,0,0, 2,RADIAN,NONE);
+	PID_Init(&D_Spd_Pid     ,	 9500, 1000, 0,  	  5,     0,   	0,  0,0,0,0, 2,RADIAN,NONE);
 
 	// TD初始化（跟踪微分器）
 	TD_Init(&Pos_Yaw_TD,   700, 0.005);  // r=700, h0=0.005s
@@ -73,6 +79,10 @@ void Gimbal_Init(void)
 	//发射机构状态关闭
 	Shoot_Condition = Close;
 	
+	//过零检测初始化
+	dial_zero_check.Circle = 0;
+	dial_zero_check.LastValue = 0;
+
 	//初始化完成
 	gimbal_ready_flag  = 1;
 	
@@ -81,7 +91,7 @@ void Gimbal_Init(void)
 	{
 		Gimbal_Status.yaw_ref   = INS.YawTotalAngle; //云台目标重置
 		Gimbal_Status.pitch_ref = INS.Pitch;
-		Shoot_Status.Target_Pos = Gimbal_Motor.Dji_2006.ecd; //拨盘目标重置
+		Shoot_Status.Target_Pos = ZeroCheck(&dial_zero_check, Gimbal_Motor.Dji_2006.ecd / 8191.0f * 2 * PI , 2*PI);  // 累计后的绝对角度
 		osDelay(1);
 	}
 	TD_Clear(&Pos_Yaw_TD,   Gimbal_Status.yaw_ref);
@@ -115,8 +125,9 @@ void Variable_Information_Acquisition(INS_t *ins,
 	ss->R_Rpm = gm->Dji_3508[1].speed_rpm;
 	
 	//获取拨盘POS
-	ss->D_Pos = gm->Dji_2006.ecd;
-
+	ss->D_Pos = ZeroCheck(&dial_zero_check, Gimbal_Motor.Dji_2006.ecd / 8191.0f * 2 * PI , 2*PI);  // 累计后的绝对角度
+	ss->D_Spd = gm->Dji_2006.speed_rpm*2*PI/60.0f;
+	
 	//计算获取云台电机绝对位置
 	gs->abs_yaw = gm->DM_4310[0].pos;
 	
@@ -141,6 +152,12 @@ void Gimbal_Control_Init(Shoot_Status_t *ss,
 	PID_Clear(&Pitch_S_Pid);
 	PID_Clear(&Yaw_P_Pid);
 	PID_Clear(&Yaw_S_Pid);
+	PID_Clear(&Abs_Yaw_P_Pid);
+	PID_Clear(&Abs_Yaw_S_Pid);
+	PID_Clear(&L_Rpm_Pid);
+	PID_Clear(&R_Rpm_Pid);
+	PID_Clear(&D_Pos_Pid);
+	PID_Clear(&D_Spd_Pid);
 	
 	gs->yaw_ref   = gs->yaw; //云台目标重置
 	gs->pitch_ref = gs->pitch;
@@ -150,6 +167,8 @@ void Gimbal_Control_Init(Shoot_Status_t *ss,
 	Yaw_FF_Output = 0;
 	Pitch_FF_Output = 0;
 	Pitch_Gravity_Comp = 0;
+	gs->Yaw_Motor_Out = 0;
+	gs->Pitch_Motor_Out = 0;
 
 	ss->Target_Pos = ss->D_Pos; //拨盘目标重置
 	
@@ -163,14 +182,11 @@ void Gimbal_Control_Init(Shoot_Status_t *ss,
 void Rc_Mode(RC_Ctrl_t *rc_ctrl,
 						 Shoot_Condition_t *sc)
 {	
-	static bool single_flag = 1; //单发标志位
-	
 	if     (switch_is_down(rc_ctrl->rc.s[1])){*sc = Close;} //关闭发射机构
-	else if(switch_is_mid (rc_ctrl->rc.s[1])){*sc = Open ;single_flag = 1;} //开启摩擦轮
+	else if(switch_is_mid (rc_ctrl->rc.s[1])){*sc = Open;} //开启摩擦轮
 	
-	if(switch_is_up(rc_ctrl->rc.s[1]) && single_flag) 
+	if(switch_is_up(rc_ctrl->rc.s[1]) && abs(rc_ctrl->rc.ch[0]) == 660) //左中右上开启连发开火
 	{
-		single_flag = 0;
 		Fire_Permission = 1; //允许开火
 	}
 	else Fire_Permission = 0;
@@ -178,7 +194,7 @@ void Rc_Mode(RC_Ctrl_t *rc_ctrl,
 //	*sc = Close; //关火
 //	Fire_Permission = 0;
 	
-	if(rc_ctrl->rc.ch[0] == 660) Aim_Permission = 1; //开启自瞄
+	if(switch_is_mid (rc_ctrl->rc.s[1]) && abs(rc_ctrl->rc.ch[0]) == 660) Aim_Permission = 1; //左中右上开启自瞄
 	else Aim_Permission = 0;
 }
 
@@ -561,7 +577,7 @@ void Shoot_Control(Heat_Control_t *hc,
 									 Shoot_Status_t *ss,
 									 Shoot_Condition_t *sc)
 {
-	if(fabs(Find_Min_RADIAN(ss->D_Pos,ss->Target_Pos))<=0.1f && !Dial_Status && !hc->dial_flag) //判断拨盘是否就绪
+	if(fabs(Find_Min_RADIAN(ss->D_Pos,ss->Target_Pos))<=2.0f && !Dial_Status && !hc->dial_flag) //判断拨盘是否就绪
 	{
 		Dial_Status = 1;
 		hc->dial_flag = 1;
@@ -581,7 +597,7 @@ void Shoot_Control(Heat_Control_t *hc,
 			if(aim_rx.mode==2 && Dial_Status && !hc->dial_flag && hc->Perm_Bullets_Num >= 1.05f) //允许开火
 			{
 				Dial_Status = 0; //拨盘运行
-				ss->Target_Pos = Half_Circle_RADIAN(ss->Target_Pos - PI/3.0f);
+				ss->Target_Pos = ss->Target_Pos + PI/4.0f*DIAL_REDUCTION_RATIO;
 			}
 		}
 		else //手动控制下判断开火
@@ -589,7 +605,7 @@ void Shoot_Control(Heat_Control_t *hc,
 			if(Fire_Permission && Dial_Status && !hc->dial_flag && hc->Perm_Bullets_Num >= 1.05f) //允许开火
 			{
 				Dial_Status = 0; //拨盘运行
-				ss->Target_Pos = Half_Circle_RADIAN(ss->Target_Pos - PI/3.0f);
+				ss->Target_Pos = ss->Target_Pos + PI/4.0f*DIAL_REDUCTION_RATIO;
 			}
 		}
 	}
@@ -683,14 +699,14 @@ void Gimbal_Controllor(Shoot_Status_t *ss,
         		Yaw_FF_Param.B = gs->Yaw_SysID.B;
         		Yaw_FF_Param.C = gs->Yaw_SysID.C;
         		Yaw_FF_Param.J = gs->Yaw_SysID.J;
-				gs->Yaw_Motor_Out = 0;
+						gs->Yaw_Motor_Out = 0;
     		}
 		#elif GIMBAL_SYSID == GIMBAL_PITCH_SYSID
     		Gimbal_Pitch_SysID_Run(gs);
     		if (gs->Pitch_SysID.sysid_done)
     		{
         		Pitch_FF_Param.Cb = gs->Pitch_SysID.B;   // 阻尼系数
-				gs->Pitch_Motor_Out = 0;
+						gs->Pitch_Motor_Out = 0;
     		}
 		#else
 		    Gimbal_Pitch_Calculate(gs);
@@ -699,7 +715,8 @@ void Gimbal_Controllor(Shoot_Status_t *ss,
 
 			ss->L_Motor_Out = PID_Calculate(&L_Rpm_Pid,ss->L_Rpm, ss->Target_Rpm); //发射机构
 			ss->R_Motor_Out = PID_Calculate(&R_Rpm_Pid,ss->R_Rpm,-ss->Target_Rpm);
-			ss->Toggle_Motor_Out = PID_Calculate(&D_Pos_Pid,Half_Circle_RADIAN(ss->D_Pos),ss->Target_Pos);
+			PID_Calculate(&D_Pos_Pid,ss->D_Pos,ss->Target_Pos);
+			ss->Toggle_Motor_Out = PID_Calculate(&D_Spd_Pid,ss->D_Spd,D_Pos_Pid.Output);
 		}
 	}
 	else

@@ -69,6 +69,7 @@
 "cboard\kalman_filter.o"
 "cboard\quaternionekf.o"
 "cboard\rls_identification.o"
+"cboard\zerocheck.o"
 "cboard\dji_motor.o"
 "cboard\damiao_motor.o"
 "cboard\bsp_rc.o"

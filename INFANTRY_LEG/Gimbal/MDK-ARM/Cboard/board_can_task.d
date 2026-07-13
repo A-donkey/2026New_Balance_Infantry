@@ -116,3 +116,4 @@ cboard\board_can_task.o: ../Task/Inc/Aim_Task.h
 cboard\board_can_task.o: ../Judge/Inc/CRCs.h
 cboard\board_can_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 cboard\board_can_task.o: ../Math/Inc/RLS_Identification.h
+cboard\board_can_task.o: ../Math/Inc/ZeroCheck.h

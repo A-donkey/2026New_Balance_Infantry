@@ -6,7 +6,7 @@
 //INCLUDE部分
 #include "stdbool.h"
 
-#define HEAT_42MM 100.0f //42mm弹丸热量
+#define HEAT_17MM 10.0f //17mm弹丸热量
 
 typedef struct //Q0:射击热量上限 Q1:当前射击热量
 {	

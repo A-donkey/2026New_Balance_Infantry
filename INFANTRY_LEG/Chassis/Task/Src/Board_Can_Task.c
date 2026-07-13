@@ -48,8 +48,8 @@ void Send_Message(void)
 	
 	Data[1] = Robot_Status.shooter_barrel_heat_limit >> 8;
 	Data[2] = Robot_Status.shooter_barrel_heat_limit & 0x00FF;
-	Data[3] = Power_Heat_Data.shooter_42mm_barrel_heat >> 8;
-	Data[4] = Power_Heat_Data.shooter_42mm_barrel_heat & 0x00FF;
+	Data[3] = Power_Heat_Data.shooter_17mm_barrel_heat >> 8;
+	Data[4] = Power_Heat_Data.shooter_17mm_barrel_heat & 0x00FF;
 	Data[5] = Robot_Status.shooter_barrel_cooling_value;
   Data[6] = down_dyaw >> 8;
 	Data[7] = down_dyaw & 0x00FF;

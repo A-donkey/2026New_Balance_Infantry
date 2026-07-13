@@ -45,17 +45,17 @@ void Heat_Limit_Control(Heat_Control_t *hc)
 	hc->Air_Q1 = Down_Cboard_Info.barrel_heat;
 	hc->cooling_value = Down_Cboard_Info.cooling_value;
 	
-	if((hc->Air_Q1 - hc->Last_Air_Q1) >= 70) //起来受1
+	if((hc->Air_Q1 - hc->Last_Air_Q1) >= 7) //起来受1
 	{
 		hc->Number_Of_Bullets = Positive_Number_Out(hc->Number_Of_Bullets - 1);
 	}
 	hc->Last_Air_Q1 = hc->Air_Q1;
 	
-	hc->Perm_Bullets_Num = ((float)(hc->Air_Q0 - hc->Air_Q1))/HEAT_42MM;
+	hc->Perm_Bullets_Num = ((float)(hc->Air_Q0 - hc->Air_Q1))/HEAT_17MM;
 	
-	if     (hc->Perm_Bullets_Num >= 3.0f)                                con_dt = 0.1f;
-	else if(hc->Perm_Bullets_Num >= 2.0f && hc->Perm_Bullets_Num < 3.0f) con_dt = 0.4f;
-	else if(hc->Perm_Bullets_Num <  2.0f)                                con_dt = 0.8f;
+	if     (hc->Perm_Bullets_Num >= 10.0f)                                con_dt = 0.02f;
+	else if(hc->Perm_Bullets_Num >= 3.0f && hc->Perm_Bullets_Num < 10.0f) con_dt = 0.05f;
+	else if(hc->Perm_Bullets_Num <  3.0f)                                con_dt = 0.1f;
 	
 	hc->pin_dt[0] = DWT_GetDeltaT(&hc->dwt_pin);
 	

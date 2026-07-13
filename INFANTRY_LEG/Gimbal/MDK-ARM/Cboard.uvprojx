@@ -850,6 +850,16 @@
               <FileType>5</FileType>
               <FilePath>..\Math\Inc\RLS_Identification.h</FilePath>
             </File>
+            <File>
+              <FileName>ZeroCheck.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Math\Src\ZeroCheck.c</FilePath>
+            </File>
+            <File>
+              <FileName>ZeroCheck.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Math\Inc\ZeroCheck.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

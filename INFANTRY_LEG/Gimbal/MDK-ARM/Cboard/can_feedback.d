@@ -116,3 +116,4 @@ cboard\can_feedback.o: ../Bsp/Inc/bsp_rc.h
 cboard\can_feedback.o: ../APP/Inc/Some_Functions.h
 cboard\can_feedback.o: ../Task/Inc/Board_Can_Task.h
 cboard\can_feedback.o: ../Math/Inc/RLS_Identification.h
+cboard\can_feedback.o: ../Math/Inc/ZeroCheck.h

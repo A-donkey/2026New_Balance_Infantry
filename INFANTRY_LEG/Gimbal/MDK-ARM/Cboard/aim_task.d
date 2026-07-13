@@ -116,3 +116,4 @@ cboard\aim_task.o: ../APP/Inc/VT03.h
 cboard\aim_task.o: ../Task/Inc/Limit_Task.h
 cboard\aim_task.o: ../Task/Inc/Board_Can_Task.h
 cboard\aim_task.o: ../Math/Inc/RLS_Identification.h
+cboard\aim_task.o: ../Math/Inc/ZeroCheck.h

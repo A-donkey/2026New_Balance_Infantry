@@ -33,7 +33,7 @@ void Vofa_Send_Message(void)
 // 	Send_Array[4].v_f =	joint_m_ptr[0]->T_Wheel;
 //	Send_Array[5].v_f = joint_m_ptr[1]->T_Wheel;
 	
-	Send_Array[0].v_f = Body.x;        
+	Send_Array[0].v_f = Goal_Setting.d_x_t;        
 	Send_Array[1].v_f = Body.d_x;
 	Send_Array[2].v_f = Body.abs_yaw;
 	Send_Array[3].v_f = Body.d_yaw;
