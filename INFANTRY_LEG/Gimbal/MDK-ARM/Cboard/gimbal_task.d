@@ -98,11 +98,9 @@ cboard\gimbal_task.o: D:\keil\ARM\ARMCC\Bin\..\include\stdio.h
 cboard\gimbal_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
 cboard\gimbal_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
 cboard\gimbal_task.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
-cboard\gimbal_task.o: ../Task/Inc/Ins_Task.h
-cboard\gimbal_task.o: ../External_Device/BMI088/Inc/BMI088driver.h
-cboard\gimbal_task.o: ../Math/Inc/QuaternionEKF.h
-cboard\gimbal_task.o: ../Math/Inc/kalman_filter.h
-cboard\gimbal_task.o: ../Task/Inc/Limit_Task.h
+cboard\gimbal_task.o: ../Bsp/Inc/bsp_buzzer.h
+cboard\gimbal_task.o: ../Inc/tim.h
+cboard\gimbal_task.o: ../APP/Inc/Buzzer_Run.h
 cboard\gimbal_task.o: ../Task/Inc/Check_Task.h
 cboard\gimbal_task.o: ../APP/Inc/vofa.h
 cboard\gimbal_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
@@ -114,6 +112,11 @@ cboard\gimbal_task.o: ../Motor/Inc/Damiao_Motor.h
 cboard\gimbal_task.o: ../APP/Inc/Remote_Control.h
 cboard\gimbal_task.o: ../Bsp/Inc/bsp_rc.h
 cboard\gimbal_task.o: ../APP/Inc/Some_Functions.h
+cboard\gimbal_task.o: ../Task/Inc/Ins_Task.h
+cboard\gimbal_task.o: ../External_Device/BMI088/Inc/BMI088driver.h
+cboard\gimbal_task.o: ../Math/Inc/QuaternionEKF.h
+cboard\gimbal_task.o: ../Math/Inc/kalman_filter.h
+cboard\gimbal_task.o: ../Task/Inc/Limit_Task.h
 cboard\gimbal_task.o: ../Task/Inc/Board_Can_Task.h
 cboard\gimbal_task.o: ../Math/Inc/RLS_Identification.h
 cboard\gimbal_task.o: ../Math/Inc/ZeroCheck.h

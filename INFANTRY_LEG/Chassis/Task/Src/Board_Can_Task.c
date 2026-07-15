@@ -21,13 +21,14 @@ Board_Can任务
 ********************************************************************************************************/
 void Board_Can_Task(void)
 {
-	Send_Message();
+	Send_Message_1();
+	Send_Message_2();
 }
 
 /*******************************************************************************************************
 向上板发送消息
 ********************************************************************************************************/
-void Send_Message(void)
+void Send_Message_1(void)
 {
 	uint8_t Data[8];
 	
@@ -37,8 +38,8 @@ void Send_Message(void)
 	
 	down_dyaw = INS.Gyro[2]*1000;
 	
-	if(Robot_Status.robot_id>=100) enem_color = 0;
-	else                           enem_color = 1;
+	if(Robot_Status.robot_id>=100) enem_color = 1;
+	else                           enem_color = 0;
 	
 	if_chassis_out_down = Link_Sit.wheel[0] + Link_Sit.wheel[1] + Link_Sit.joint[0]
 	                    + Link_Sit.joint[1] + Link_Sit.joint[2] + Link_Sit.joint[3];
@@ -54,5 +55,10 @@ void Send_Message(void)
   Data[6] = down_dyaw >> 8;
 	Data[7] = down_dyaw & 0x00FF;
 
-	Can_TxMessage(&hcan1,CHASSIS_TO_GIMBAL_CAN_ID,8,Data);
+	Can_TxMessage(&hcan1,CHASSIS_TO_GIMBAL_CAN_ID_1,8,Data);
+}
+
+void Send_Message_2(){
+	uint8_t Data[8];
+	Can_TxMessage(&hcan1,CHASSIS_TO_GIMBAL_CAN_ID_2,8,Data);
 }

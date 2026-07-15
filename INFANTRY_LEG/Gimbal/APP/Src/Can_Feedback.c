@@ -30,8 +30,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	{
 		case 0x105:
 		{
-//			Down_Cboard_Info.fall_flag  = 0;
-			Down_Cboard_Info.fall_flag  = Rx_Data1[0]&0x01;
+			Down_Cboard_Info.fall_flag  = 0;//暂时取消倒地标志位便于调试<*_*>
+//			Down_Cboard_Info.fall_flag  = Rx_Data1[0]&0x01;
 			Down_Cboard_Info.enem_color = Rx_Data1[0]&0x02;
 			
 			Down_Cboard_Info.heat_limit    = (int16_t)(Rx_Data1[1] << 8 | Rx_Data1[2]);

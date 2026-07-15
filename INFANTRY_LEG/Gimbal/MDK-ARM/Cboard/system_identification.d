@@ -99,11 +99,9 @@ cboard\system_identification.o: D:\keil\ARM\ARMCC\Bin\..\include\stdio.h
 cboard\system_identification.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
 cboard\system_identification.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
 cboard\system_identification.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
-cboard\system_identification.o: ../Task/Inc/Ins_Task.h
-cboard\system_identification.o: ../External_Device/BMI088/Inc/BMI088driver.h
-cboard\system_identification.o: ../Math/Inc/QuaternionEKF.h
-cboard\system_identification.o: ../Math/Inc/kalman_filter.h
-cboard\system_identification.o: ../Task/Inc/Limit_Task.h
+cboard\system_identification.o: ../Bsp/Inc/bsp_buzzer.h
+cboard\system_identification.o: ../Inc/tim.h
+cboard\system_identification.o: ../APP/Inc/Buzzer_Run.h
 cboard\system_identification.o: ../Task/Inc/Check_Task.h
 cboard\system_identification.o: ../APP/Inc/vofa.h
 cboard\system_identification.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
@@ -115,6 +113,11 @@ cboard\system_identification.o: ../Motor/Inc/Damiao_Motor.h
 cboard\system_identification.o: ../APP/Inc/Remote_Control.h
 cboard\system_identification.o: ../Bsp/Inc/bsp_rc.h
 cboard\system_identification.o: ../APP/Inc/Some_Functions.h
+cboard\system_identification.o: ../Task/Inc/Ins_Task.h
+cboard\system_identification.o: ../External_Device/BMI088/Inc/BMI088driver.h
+cboard\system_identification.o: ../Math/Inc/QuaternionEKF.h
+cboard\system_identification.o: ../Math/Inc/kalman_filter.h
+cboard\system_identification.o: ../Task/Inc/Limit_Task.h
 cboard\system_identification.o: ../Task/Inc/Board_Can_Task.h
 cboard\system_identification.o: ../Math/Inc/RLS_Identification.h
 cboard\system_identification.o: ../Math/Inc/ZeroCheck.h

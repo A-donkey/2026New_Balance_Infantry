@@ -152,8 +152,8 @@ void Gimbal_Target_Limit(Gimbal_Status_t *gs);
 void Gimbal_Can_Data_Send(Controlled_State_t *cs,Shoot_Status_t *ss,Gimbal_Status_t *gs);
 void Shoot_Control(Heat_Control_t *hc,Shoot_Status_t *ss,Shoot_Condition_t *sc);
 void Variable_Information_Acquisition(INS_t *ins,Gimbal_Motor_t *gm,Shoot_Status_t *ss,Gimbal_Status_t *gs);
-void Gimbal_Controllor(Shoot_Status_t *ss,Gimbal_Status_t *gs,Self_Rescue_t *self_re,Controlled_State_t *cs);
-void Gimbal_Control(RC_Ctrl_t *rc_ctrl,PC_Ctrl_t *pc_ctrl,Shoot_Status_t *ss,Gimbal_Status_t *gs,Shoot_Condition_t *sc,Self_Rescue_t *self_re,Controlled_State_t *cs);
+void Gimbal_Controllor(Shoot_Status_t *ss,Gimbal_Status_t *gs,Self_Rescue_t *self_re,Controlled_State_t *cs,Aim_Rx *aim);
+void Gimbal_Control(RC_Ctrl_t *rc_ctrl,PC_Ctrl_t *pc_ctrl,Shoot_Status_t *ss,Gimbal_Status_t *gs,Shoot_Condition_t *sc,Self_Rescue_t *self_re,Controlled_State_t *cs,Aim_Tx* aim_tx);
 
 //EXTERN²¿·Ö
 extern bool gimbal_ready_flag;
@@ -167,5 +167,8 @@ extern PID_t Yaw_S_Pid;
 extern Gravity_Comp_Param_t Gravity_Param;
 extern Feedforward_Param_t Yaw_FF_Param;
 extern Feedforward_Param_t Pitch_FF_Param;
+extern TD_t Pos_Pitch_TD;
+extern TD_t Pos_Yaw_TD;
+extern bool Aim_Permission;
 
 #endif

@@ -97,11 +97,17 @@ void LQR_Calc(Flag_Bit_t *flag,
 {
 	//bz:|0,T_br|1,T_bl|2,T_wr|3,T_wl|
 	static float T[4];
+//	u[0] = Max_Output(										   	 0  -        body->x,      X_MAX); u[1] = 	goal->d_x_t -       body->d_x;
+//	u[2] = Max_Output(	Find_Min_RADIAN(body->abs_yaw,goal->yaw_t),    Yaw_MAX); u[3] = goal->d_yaw_t -     body->d_yaw;
+//	u[4] = Max_Output(comp->Gravity_Comp_Theta_l  -  leg[0]->theta,Theta_L_MAX); u[5] =             0 - leg[0]->d_theta;
+//	u[6] = Max_Output(comp->Gravity_Comp_Theta_r  -  leg[1]->theta,Theta_R_MAX); u[7] =             0 - leg[1]->d_theta;
+//	u[8] = Max_Output(comp->Gravity_Comp_Theta_b  -  	 body->theta,Theta_B_MAX); u[9] =             0 -   body->d_theta;
+	
 	u[0] = Max_Output(										   	 0  -        body->x,      X_MAX); u[1] = 	goal->d_x_t -       body->d_x;
 	u[2] = Max_Output(	Find_Min_RADIAN(body->abs_yaw,goal->yaw_t),    Yaw_MAX); u[3] = goal->d_yaw_t -     body->d_yaw;
 	u[4] = Max_Output(comp->Gravity_Comp_Theta_l  -  leg[0]->theta,Theta_L_MAX); u[5] =             0 - leg[0]->d_theta;
 	u[6] = Max_Output(comp->Gravity_Comp_Theta_r  -  leg[1]->theta,Theta_R_MAX); u[7] =             0 - leg[1]->d_theta;
-	u[8] = Max_Output(comp->Gravity_Comp_Theta_b  -  	 body->theta,Theta_B_MAX); u[9] =             0 -   body->d_theta;
+	u[8] = Max_Output(												 0  -  	 body->theta,Theta_B_MAX); u[9] =             0 -   body->d_theta;
 	
 	//腿杆异常取消YAW增益提高腿杆THETA增益
 	if(flag->theta_flag[0]||flag->theta_flag[1])

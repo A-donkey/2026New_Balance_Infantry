@@ -37,34 +37,31 @@ void Aim_Task(void)
 ********************************************************************************************************/
 void Send_Packet(void)
 {
-	aim_tx.head = FH_TX;
-	
-	//设置自瞄模式
-	aim_tx.mode = 1;
-	
-	aim_tx.enem_color = Down_Cboard_Info.enem_color;
-	
-	//上传陀螺仪q矩阵
-	aim_tx.q[0] = INS.q[0];
-	aim_tx.q[1] = INS.q[1];
-	aim_tx.q[2] = INS.q[2];
-	aim_tx.q[3] = INS.q[3];
-	
-	//上传云台状态
-	aim_tx.yaw = INS.Yaw*Ang_PI;
-	aim_tx.yaw_vel = 0;
-	aim_tx.pitch = INS.Pitch*Ang_PI;
-	aim_tx.pitch_vel = 0;
-	
-	//上传子弹参数
-	aim_tx.bullet_count = 1;
-	aim_tx.bullet_speed = 11.6;
-	
-	aim_tx.checksum = CRC16_Calculate((uint8_t *)(&aim_tx),sizeof(Aim_Tx) - 2);
+	aim_tx.frame_header1 = TX_HEADER1;
+	aim_tx.frame_header2 = TX_HEADER2;
+
+  aim_tx.pitch_now 						= Gimbal_Status.pitch;
+  aim_tx.yaw_now 							= Gimbal_Status.yaw;
+  aim_tx.pitch_omega 					= Pos_Pitch_TD.dx;
+  aim_tx.yaw_omega 						= Pos_Yaw_TD.dx;
+  aim_tx.pitch_tff 						= Gimbal_Motor.DM_4310[1].tor;
+  aim_tx.yaw_tff 							= Gimbal_Motor.DM_4310[0].tor;
+  aim_tx.actual_bullet_speed 	= 23.0f; //暂时写为硬编码,后期更改
+  aim_tx.shoot_avaiable 			= Heat_Control.Perm_Bullets_Num;
+  aim_tx.aim_request 					= Aim_Permission;
+  // mode_want在其他地方处理
+  if (aim_tx.mode_want == NOT_USE_AIM)
+  {
+     aim_tx.mode_want = STD_AUTO_AIM;//算法要求，默认发1
+  }
+  aim_tx.number_want = 0;
+  aim_tx.enemy_color = Down_Cboard_Info.enem_color;
+  aim_tx.crc16 = CRC16_Calculate((uint8_t *)(&aim_tx),PC_SENDBUF_SIZE - 3);// 不包含frame_tail
+  aim_tx.frame_tail = 0x0D;
 	
 	//发送
-  memcpy(usb_tx_buf,&aim_tx,sizeof(Aim_Tx));
-  CDC_Transmit_FS(usb_tx_buf,sizeof(Aim_Tx));
+  memcpy(usb_tx_buf,&aim_tx,PC_SENDBUF_SIZE);
+  CDC_Transmit_FS(usb_tx_buf,PC_SENDBUF_SIZE);
 }
 
 /*******************************************************************************************************
@@ -72,10 +69,15 @@ void Send_Packet(void)
 ********************************************************************************************************/
 void Recieve_Host(uint8_t* buff) 
 {
-	if(buff[0] == FH_RX) //与接收到的帧头一致
+	if(buff[0] == RX_HEADER1 && buff[1] == RX_HEADER2 
+	&& buff[PC_RECVBUF_SIZE - 1] == FRAME_TAIL) //与接收到的帧头一致
 	{
 		//如果CRC校验通过则保留数据,否则只保留上一帧数据
-		if(CRC16_Verify((uint8_t *)(buff), sizeof(Aim_Rx))) memcpy(&aim_rx,buff,sizeof(Aim_Rx));
+		if(CRC16_Verify((uint8_t *)(buff), PC_RECVBUF_SIZE-1)) {
+			if(!pc_first_connected && pc_beep_timer > 0){
+				pc_first_connected = true;
+			}
+			memcpy(&aim_rx,buff,PC_RECVBUF_SIZE);
+		}
 	}	
 }
-

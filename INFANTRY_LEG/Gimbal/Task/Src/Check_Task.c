@@ -8,6 +8,7 @@
 #include "Board_Can_Task.h"
 //EXTERN部分
 extern void Error_Buzzer(Link_Sit_t *link);
+void Recieve_PC_Success_Buzzer(void);
 //全局变量定义部分
 Link_Sit_t Link_Sit;
 Remote_Select_t Remote_Select;
@@ -43,6 +44,7 @@ void Check_Task(void)
 	Check_Peripheral_Link(&Link_Sit,&Gimbal_Motor);
 	Check_Control(&Link_Sit,&Controlled_State);
 	Error_Buzzer(&Link_Sit);
+	Recieve_PC_Success_Buzzer();
 	Vofa_Send_Message();
 }
 

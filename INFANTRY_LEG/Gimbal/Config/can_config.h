@@ -2,7 +2,8 @@
 #define __CAN_CONFIG_H
 
 /********************CHASSIS_CAN1&GIMBAL_CAN1*************************/
-#define CHASSIS_TO_GIMBAL_CAN_ID          0x105
+#define CHASSIS_TO_GIMBAL_CAN_ID_1        0x105
+#define CHASSIS_TO_GIMBAL_CAN_ID_2        0x115
 #define GIMBAL_TO_CHASSIS_CAN_ID_1        0x100
 #define GIMBAL_TO_CHASSIS_CAN_ID_2        0x120
 #define CAP_TO_CHASSIS_CAN_ID_1           0x612

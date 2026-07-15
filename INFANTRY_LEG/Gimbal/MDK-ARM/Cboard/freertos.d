@@ -97,7 +97,9 @@ cboard\freertos.o: D:\keil\ARM\ARMCC\Bin\..\include\stdio.h
 cboard\freertos.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
 cboard\freertos.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
 cboard\freertos.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
-cboard\freertos.o: ../Task/Inc/Limit_Task.h
+cboard\freertos.o: ../Bsp/Inc/bsp_buzzer.h
+cboard\freertos.o: ../Inc/tim.h
+cboard\freertos.o: ../APP/Inc/Buzzer_Run.h
 cboard\freertos.o: ../Task/Inc/Check_Task.h
 cboard\freertos.o: ../APP/Inc/vofa.h
 cboard\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
@@ -109,6 +111,7 @@ cboard\freertos.o: ../Motor/Inc/Damiao_Motor.h
 cboard\freertos.o: ../APP/Inc/Remote_Control.h
 cboard\freertos.o: ../Bsp/Inc/bsp_rc.h
 cboard\freertos.o: ../APP/Inc/Some_Functions.h
+cboard\freertos.o: ../Task/Inc/Limit_Task.h
 cboard\freertos.o: ../Task/Inc/Gimbal_Task.h
 cboard\freertos.o: ../Controller/Inc/PID.h
 cboard\freertos.o: ../Bsp/Inc/bsp_dwt.h

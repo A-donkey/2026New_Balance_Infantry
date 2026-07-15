@@ -61,6 +61,7 @@ typedef struct
 	} key;
 	
 	int rc_link[3];//遥控器连接检测数组
+	
 }RC_Ctrl_t;
 
 /* ----------------------- Internal Data ----------------------------------- */
@@ -70,10 +71,16 @@ typedef struct
 	bool G;
 	bool B;
 	bool Q;
+	bool KEY_Z;
+	bool KEY_X;
+	bool KEY_V;
 	
 	int g_t;
 	int b_t;
 	int q_t;
+	int z_t;
+	int x_t;
+	int v_t;
 }PC_Ctrl_t;
 
 void SBUS_TO_RC(void);

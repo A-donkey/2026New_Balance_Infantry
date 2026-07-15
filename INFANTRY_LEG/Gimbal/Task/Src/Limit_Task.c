@@ -53,8 +53,8 @@ void Heat_Limit_Control(Heat_Control_t *hc)
 	
 	hc->Perm_Bullets_Num = ((float)(hc->Air_Q0 - hc->Air_Q1))/HEAT_17MM;
 	
-	if     (hc->Perm_Bullets_Num >= 10.0f)                                con_dt = 0.02f;
-	else if(hc->Perm_Bullets_Num >= 3.0f && hc->Perm_Bullets_Num < 10.0f) con_dt = 0.05f;
+	if     (hc->Perm_Bullets_Num >= 10.0f)                                con_dt = 0.05f;
+	else if(hc->Perm_Bullets_Num >= 3.0f && hc->Perm_Bullets_Num < 10.0f) con_dt = 0.07f;
 	else if(hc->Perm_Bullets_Num <  3.0f)                                con_dt = 0.1f;
 	
 	hc->pin_dt[0] = DWT_GetDeltaT(&hc->dwt_pin);

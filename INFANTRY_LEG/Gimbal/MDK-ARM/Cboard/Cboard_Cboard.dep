@@ -41,7 +41,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x6A22BC6C)
 I (../Inc/FreeRTOSConfig.h)(0x6A22BC6A)
@@ -76,7 +76,7 @@ I (../Bsp/Inc/bsp_dwt.h)(0x6A22BC62)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
 I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
 I (../External_Device/BMI088/Inc/BMI088driver.h)(0x6A22BC68)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
 I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
 F (../Src/gpio.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\gpio.o --omf_browse cboard\gpio.crf --depend cboard\gpio.d)
 I (../Inc/gpio.h)(0x6A22BC6A)
@@ -119,7 +119,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (../Src/freertos.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\freertos.o --omf_browse cboard\freertos.crf --depend cboard\freertos.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x6A22BC6C)
 I (D:\keil\ARM\ARMCC\include\stddef.h)(0x6025237E)
@@ -169,7 +169,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x6A22BC6C)
@@ -205,7 +205,7 @@ I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\filte
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\quaternion_math_functions.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\window_functions.h)(0x66A6B132)
 I (D:\keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (../Task/Inc/Aim_Task.h)(0x6A22BC6C)
+I (../Task/Inc/Aim_Task.h)(0x6A5647B6)
 I (../Judge/Inc/CRCs.h)(0x6A22BC6A)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Inc/usbd_cdc_if.h)(0x6A22BC6A)
@@ -216,7 +216,9 @@ I (../Inc/usbd_conf.h)(0x6A22BC6A)
 I (D:\keil\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
-I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
+I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
+I (../Inc/tim.h)(0x6A22BC6A)
+I (../APP/Inc/Buzzer_Run.h)(0x6A564783)
 I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
 I (../APP/Inc/vofa.h)(0x6A22BC62)
 I (../APP/Inc/Can_Feedback.h)(0x6A302966)
@@ -224,17 +226,18 @@ I (../Inc/can.h)(0x6A22BC6A)
 I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
 I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
 I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
 I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
-I (../Task/Inc/Gimbal_Task.h)(0x6A54E99E)
+I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
+I (../Task/Inc/Gimbal_Task.h)(0x6A5734B5)
 I (../Controller/Inc/PID.h)(0x6A5338EB)
 I (../Bsp/Inc/bsp_dwt.h)(0x6A22BC62)
 I (../Math/Inc/user_lib.h)(0x6A22BC6A)
 I (../APP/Inc/VT03.h)(0x6A22BC62)
 I (../Task/Inc/Board_Can_Task.h)(0x6A22BC6C)
 I (../Math/Inc/RLS_Identification.h)(0x6A528429)
-I (../Math/Inc/ZeroCheck.h)(0x6A526B64)
+I (../Math/Inc/ZeroCheck.h)(0x6A56304A)
 F (../Src/can.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\can.o --omf_browse cboard\can.crf --depend cboard\can.d)
 I (../Inc/can.h)(0x6A22BC6A)
 I (../Inc/main.h)(0x6A3016F6)
@@ -276,7 +279,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (../Src/crc.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\crc.o --omf_browse cboard\crc.crf --depend cboard\crc.d)
 I (../Inc/crc.h)(0x6A22BC6A)
 I (../Inc/main.h)(0x6A3016F6)
@@ -318,7 +321,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (../Src/dma.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\dma.o --omf_browse cboard\dma.crf --depend cboard\dma.d)
 I (../Inc/dma.h)(0x6A22BC6A)
 I (../Inc/main.h)(0x6A3016F6)
@@ -360,7 +363,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (../Src/i2c.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\i2c.o --omf_browse cboard\i2c.crf --depend cboard\i2c.d)
 I (../Inc/i2c.h)(0x6A22BC6A)
 I (../Inc/main.h)(0x6A3016F6)
@@ -402,7 +405,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (../Src/spi.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\spi.o --omf_browse cboard\spi.crf --depend cboard\spi.d)
 I (../Inc/spi.h)(0x6A22BC6A)
 I (../Inc/main.h)(0x6A3016F6)
@@ -444,7 +447,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (../Src/tim.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\tim.o --omf_browse cboard\tim.crf --depend cboard\tim.d)
 I (../Inc/tim.h)(0x6A22BC6A)
 I (../Inc/main.h)(0x6A3016F6)
@@ -486,7 +489,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (../Src/usart.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\usart.o --omf_browse cboard\usart.crf --depend cboard\usart.d)
 I (../Inc/usart.h)(0x6A22BC6A)
 I (../Inc/main.h)(0x6A3016F6)
@@ -528,7 +531,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (../Src/usb_device.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\usb_device.o --omf_browse cboard\usb_device.crf --depend cboard\usb_device.d)
 I (../Inc/usb_device.h)(0x6A22BC6A)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x6A22BC64)
@@ -575,7 +578,7 @@ I (D:\keil\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (D:\keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (D:\keil\ARM\ARMCC\include\string.h)(0x6025237E)
 I (../Inc/main.h)(0x6A3016F6)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
@@ -627,7 +630,7 @@ I (D:\keil\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (D:\keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (D:\keil\ARM\ARMCC\include\string.h)(0x6025237E)
 I (../Inc/main.h)(0x6A3016F6)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
@@ -677,7 +680,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
@@ -730,10 +733,10 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
-I (../Task/Inc/Aim_Task.h)(0x6A22BC6C)
+I (../Task/Inc/Aim_Task.h)(0x6A5647B6)
 I (../Judge/Inc/CRCs.h)(0x6A22BC6A)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6A22BC6C)
@@ -750,6 +753,43 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x6A22BC6C)
+I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
+I (../Inc/tim.h)(0x6A22BC6A)
+I (../APP/Inc/Buzzer_Run.h)(0x6A564783)
+I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
+I (../APP/Inc/vofa.h)(0x6A22BC62)
+I (../APP/Inc/Can_Feedback.h)(0x6A302966)
+I (../Inc/can.h)(0x6A22BC6A)
+I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
+I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
+I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
+I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
+I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math_types.h)(0x66A6B132)
+I (D:\keil\ARM\ARMCC\include\math.h)(0x60252378)
+I (D:\keil\ARM\ARMCC\include\float.h)(0x6025237E)
+I (D:\keil\ARM\ARMCC\include\limits.h)(0x60252376)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math_memory.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\none.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\utils.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\basic_math_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\interpolation_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\bayes_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\statistics_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\fast_math_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\matrix_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\complex_math_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\controller_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\support_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\distance_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\svm_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\svm_defines.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\transform_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\filtering_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\quaternion_math_functions.h)(0x66A6B132)
+I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\window_functions.h)(0x66A6B132)
 F (../Src/stm32f4xx_it.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\stm32f4xx_it.o --omf_browse cboard\stm32f4xx_it.crf --depend cboard\stm32f4xx_it.d)
 I (../Inc/main.h)(0x6A3016F6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6A22BC68)
@@ -790,11 +830,11 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Inc/stm32f4xx_it.h)(0x6A22BC6A)
 I (../APP/Inc/VT03.h)(0x6A22BC62)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
 I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
 F (../Src/stm32f4xx_hal_msp.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\stm32f4xx_hal_msp.o --omf_browse cboard\stm32f4xx_hal_msp.crf --depend cboard\stm32f4xx_hal_msp.d)
 I (../Inc/main.h)(0x6A3016F6)
@@ -836,7 +876,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (../Src/stm32f4xx_hal_timebase_tim.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\stm32f4xx_hal_timebase_tim.o --omf_browse cboard\stm32f4xx_hal_timebase_tim.crf --depend cboard\stm32f4xx_hal_timebase_tim.d)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6A22BC68)
 I (../Inc/stm32f4xx_hal_conf.h)(0x6A22BC6A)
@@ -2040,7 +2080,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
@@ -2090,7 +2130,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 F (../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\usbd_ioreq.o --omf_browse cboard\usbd_ioreq.crf --depend cboard\usbd_ioreq.d)
@@ -2139,7 +2179,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
 F (../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\usbd_cdc.o --omf_browse cboard\usbd_cdc.crf --depend cboard\usbd_cdc.d)
@@ -2189,7 +2229,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
 F (..\External_Device\BMI088\Src\BMI088driver.c)(0x6A22BC68)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\bmi088driver.o --omf_browse cboard\bmi088driver.crf --depend cboard\bmi088driver.d)
@@ -2233,7 +2273,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../External_Device/BMI088/Inc/BMI088reg.h)(0x6A22BC68)
 I (../External_Device/BMI088/Inc/BMI088Middleware.h)(0x6A22BC68)
 I (../Bsp/Inc/bsp_dwt.h)(0x6A22BC62)
@@ -2279,7 +2319,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (..\External_Device\BMI088\Inc\BMI088driver.h)(0x6A22BC68)()
 F (..\External_Device\BMI088\Inc\BMI088Middleware.h)(0x6A22BC68)()
 F (..\External_Device\BMI088\Inc\BMI088reg.h)(0x6A22BC68)()
@@ -2324,7 +2364,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (D:\keil\ARM\ARMCC\include\string.h)(0x6025237E)
 I (D:\keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (../Bsp/Inc/bsp_dwt.h)(0x6A22BC62)
@@ -2410,7 +2450,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Math/Inc/QuaternionEKF.h)(0x6A22BC6A)
 I (../Math/Inc/kalman_filter.h)(0x6A22BC6A)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math.h)(0x66A6B132)
@@ -2459,8 +2499,8 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x6A22BC6C)
 F (..\Task\Inc\Ins_Task.h)(0x6A22BC6C)()
-F (..\Task\Src\Aim_Task.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\aim_task.o --omf_browse cboard\aim_task.crf --depend cboard\aim_task.d)
-I (../Task/Inc/Aim_Task.h)(0x6A22BC6C)
+F (..\Task\Src\Aim_Task.c)(0x6A5669C5)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\aim_task.o --omf_browse cboard\aim_task.crf --depend cboard\aim_task.d)
+I (../Task/Inc/Aim_Task.h)(0x6A5647B6)
 I (../Inc/main.h)(0x6A3016F6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6A22BC68)
 I (../Inc/stm32f4xx_hal_conf.h)(0x6A22BC6A)
@@ -2500,7 +2540,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Judge/Inc/CRCs.h)(0x6A22BC6A)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6A22BC6C)
@@ -2527,10 +2567,19 @@ I (D:\keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (D:\keil\ARM\ARMCC\include\string.h)(0x6025237E)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
-I (../Task/Inc/Ins_Task.h)(0x6A22BC6C)
-I (../External_Device/BMI088/Inc/BMI088driver.h)(0x6A22BC68)
-I (../Math/Inc/QuaternionEKF.h)(0x6A22BC6A)
-I (../Math/Inc/kalman_filter.h)(0x6A22BC6A)
+I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
+I (../Inc/tim.h)(0x6A22BC6A)
+I (../APP/Inc/Buzzer_Run.h)(0x6A564783)
+I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
+I (../APP/Inc/vofa.h)(0x6A22BC62)
+I (../APP/Inc/Can_Feedback.h)(0x6A302966)
+I (../Inc/can.h)(0x6A22BC6A)
+I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
+I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
+I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
+I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
+I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math_types.h)(0x66A6B132)
 I (D:\keil\ARM\ARMCC\include\math.h)(0x60252378)
@@ -2555,17 +2604,11 @@ I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\trans
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\filtering_functions.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\quaternion_math_functions.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\window_functions.h)(0x66A6B132)
-I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
-I (../APP/Inc/vofa.h)(0x6A22BC62)
-I (../APP/Inc/Can_Feedback.h)(0x6A302966)
-I (../Inc/can.h)(0x6A22BC6A)
-I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
-I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
-I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
-I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
-I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
-I (../Task/Inc/Gimbal_Task.h)(0x6A54E99E)
+I (../Task/Inc/Ins_Task.h)(0x6A22BC6C)
+I (../External_Device/BMI088/Inc/BMI088driver.h)(0x6A22BC68)
+I (../Math/Inc/QuaternionEKF.h)(0x6A22BC6A)
+I (../Math/Inc/kalman_filter.h)(0x6A22BC6A)
+I (../Task/Inc/Gimbal_Task.h)(0x6A5734B5)
 I (../Controller/Inc/PID.h)(0x6A5338EB)
 I (../Bsp/Inc/bsp_dwt.h)(0x6A22BC62)
 I (../Math/Inc/user_lib.h)(0x6A22BC6A)
@@ -2573,9 +2616,9 @@ I (../APP/Inc/VT03.h)(0x6A22BC62)
 I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
 I (../Task/Inc/Board_Can_Task.h)(0x6A22BC6C)
 I (../Math/Inc/RLS_Identification.h)(0x6A528429)
-I (../Math/Inc/ZeroCheck.h)(0x6A526B64)
-F (..\Task\Inc\Aim_Task.h)(0x6A22BC6C)()
-F (..\Task\Src\Limit_Task.c)(0x6A54E343)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\limit_task.o --omf_browse cboard\limit_task.crf --depend cboard\limit_task.d)
+I (../Math/Inc/ZeroCheck.h)(0x6A56304A)
+F (..\Task\Inc\Aim_Task.h)(0x6A5647B6)()
+F (..\Task\Src\Limit_Task.c)(0x6A562DF5)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\limit_task.o --omf_browse cboard\limit_task.crf --depend cboard\limit_task.d)
 I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
 I (../Inc/main.h)(0x6A3016F6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6A22BC68)
@@ -2616,7 +2659,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Bsp/Inc/bsp_dwt.h)(0x6A22BC62)
 I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
@@ -2650,7 +2693,7 @@ I (../Inc/can.h)(0x6A22BC6A)
 I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
 I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
 I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
 I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math.h)(0x66A6B132)
@@ -2678,7 +2721,7 @@ I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\filte
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\quaternion_math_functions.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\window_functions.h)(0x66A6B132)
 F (..\Task\Inc\Limit_Task.h)(0x6A54C0EB)()
-F (..\Task\Src\Check_Task.c)(0x6A302B8A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\check_task.o --omf_browse cboard\check_task.crf --depend cboard\check_task.d)
+F (..\Task\Src\Check_Task.c)(0x6A564A24)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\check_task.o --omf_browse cboard\check_task.crf --depend cboard\check_task.d)
 I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
 I (../Inc/main.h)(0x6A3016F6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6A22BC68)
@@ -2719,7 +2762,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../APP/Inc/vofa.h)(0x6A22BC62)
 I (../Inc/usbd_cdc_if.h)(0x6A22BC6A)
 I (../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h)(0x6A22BC6C)
@@ -2751,7 +2794,7 @@ I (../Inc/can.h)(0x6A22BC6A)
 I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
 I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
 I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
 I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math.h)(0x66A6B132)
@@ -2780,14 +2823,14 @@ I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\quate
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\window_functions.h)(0x66A6B132)
 I (../APP/Inc/VT03.h)(0x6A22BC62)
 I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
-I (../APP/Inc/Buzzer_Run.h)(0x6A22BC62)
+I (../APP/Inc/Buzzer_Run.h)(0x6A564783)
 I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
 I (../Inc/tim.h)(0x6A22BC6A)
-I (../Task/Inc/Gimbal_Task.h)(0x6A54E99E)
+I (../Task/Inc/Gimbal_Task.h)(0x6A5734B5)
 I (../Controller/Inc/PID.h)(0x6A5338EB)
 I (../Bsp/Inc/bsp_dwt.h)(0x6A22BC62)
 I (../Math/Inc/user_lib.h)(0x6A22BC6A)
-I (../Task/Inc/Aim_Task.h)(0x6A22BC6C)
+I (../Task/Inc/Aim_Task.h)(0x6A5647B6)
 I (../Judge/Inc/CRCs.h)(0x6A22BC6A)
 I (../Task/Inc/Ins_Task.h)(0x6A22BC6C)
 I (../External_Device/BMI088/Inc/BMI088driver.h)(0x6A22BC68)
@@ -2795,10 +2838,10 @@ I (../Math/Inc/QuaternionEKF.h)(0x6A22BC6A)
 I (../Math/Inc/kalman_filter.h)(0x6A22BC6A)
 I (../Task/Inc/Board_Can_Task.h)(0x6A22BC6C)
 I (../Math/Inc/RLS_Identification.h)(0x6A528429)
-I (../Math/Inc/ZeroCheck.h)(0x6A526B64)
+I (../Math/Inc/ZeroCheck.h)(0x6A56304A)
 F (..\Task\Inc\Check_Task.h)(0x6A22BC6C)()
-F (..\Task\Src\Gimbal_Task.c)(0x6A54F9DF)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\gimbal_task.o --omf_browse cboard\gimbal_task.crf --depend cboard\gimbal_task.d)
-I (../Task/Inc/Gimbal_Task.h)(0x6A54E99E)
+F (..\Task\Src\Gimbal_Task.c)(0x6A574743)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\gimbal_task.o --omf_browse cboard\gimbal_task.crf --depend cboard\gimbal_task.d)
+I (../Task/Inc/Gimbal_Task.h)(0x6A5734B5)
 I (../Inc/main.h)(0x6A3016F6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6A22BC68)
 I (../Inc/stm32f4xx_hal_conf.h)(0x6A22BC6A)
@@ -2838,7 +2881,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Controller/Inc/PID.h)(0x6A5338EB)
 I (D:\keil\ARM\ARMCC\include\string.h)(0x6025237E)
 I (D:\keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
@@ -2884,7 +2927,7 @@ I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\quate
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\window_functions.h)(0x66A6B132)
 I (../APP/Inc/VT03.h)(0x6A22BC62)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (../Task/Inc/Aim_Task.h)(0x6A22BC6C)
+I (../Task/Inc/Aim_Task.h)(0x6A5647B6)
 I (../Judge/Inc/CRCs.h)(0x6A22BC6A)
 I (../Inc/usbd_cdc_if.h)(0x6A22BC6A)
 I (../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h)(0x6A22BC6C)
@@ -2894,11 +2937,9 @@ I (../Inc/usbd_conf.h)(0x6A22BC6A)
 I (D:\keil\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
-I (../Task/Inc/Ins_Task.h)(0x6A22BC6C)
-I (../External_Device/BMI088/Inc/BMI088driver.h)(0x6A22BC68)
-I (../Math/Inc/QuaternionEKF.h)(0x6A22BC6A)
-I (../Math/Inc/kalman_filter.h)(0x6A22BC6A)
-I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
+I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
+I (../Inc/tim.h)(0x6A22BC6A)
+I (../APP/Inc/Buzzer_Run.h)(0x6A564783)
 I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
 I (../APP/Inc/vofa.h)(0x6A22BC62)
 I (../APP/Inc/Can_Feedback.h)(0x6A302966)
@@ -2906,15 +2947,20 @@ I (../Inc/can.h)(0x6A22BC6A)
 I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
 I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
 I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
 I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
+I (../Task/Inc/Ins_Task.h)(0x6A22BC6C)
+I (../External_Device/BMI088/Inc/BMI088driver.h)(0x6A22BC68)
+I (../Math/Inc/QuaternionEKF.h)(0x6A22BC6A)
+I (../Math/Inc/kalman_filter.h)(0x6A22BC6A)
+I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
 I (../Task/Inc/Board_Can_Task.h)(0x6A22BC6C)
 I (../Math/Inc/RLS_Identification.h)(0x6A528429)
-I (../Math/Inc/ZeroCheck.h)(0x6A526B64)
+I (../Math/Inc/ZeroCheck.h)(0x6A56304A)
 I (../APP/Inc/System_Identification.h)(0x6A53489A)
-F (..\Task\Inc\Gimbal_Task.h)(0x6A54E99E)()
-F (..\Task\Src\Board_Can_Task.c)(0x6A302E8A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\board_can_task.o --omf_browse cboard\board_can_task.crf --depend cboard\board_can_task.d)
+F (..\Task\Inc\Gimbal_Task.h)(0x6A5734B5)()
+F (..\Task\Src\Board_Can_Task.c)(0x6A55F457)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\board_can_task.o --omf_browse cboard\board_can_task.crf --depend cboard\board_can_task.d)
 I (../Task/Inc/Board_Can_Task.h)(0x6A22BC6C)
 I (../Inc/main.h)(0x6A3016F6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6A22BC68)
@@ -2955,7 +3001,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
 I (../APP/Inc/vofa.h)(0x6A22BC62)
 I (../Inc/usbd_cdc_if.h)(0x6A22BC6A)
@@ -2988,7 +3034,7 @@ I (../Inc/can.h)(0x6A22BC6A)
 I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
 I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
 I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
 I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math.h)(0x66A6B132)
@@ -3021,14 +3067,17 @@ I (../External_Device/BMI088/Inc/BMI088driver.h)(0x6A22BC68)
 I (../Math/Inc/QuaternionEKF.h)(0x6A22BC6A)
 I (../Math/Inc/kalman_filter.h)(0x6A22BC6A)
 I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
-I (../Task/Inc/Gimbal_Task.h)(0x6A54E99E)
+I (../Task/Inc/Gimbal_Task.h)(0x6A5734B5)
 I (../Controller/Inc/PID.h)(0x6A5338EB)
 I (../Bsp/Inc/bsp_dwt.h)(0x6A22BC62)
 I (../Math/Inc/user_lib.h)(0x6A22BC6A)
-I (../Task/Inc/Aim_Task.h)(0x6A22BC6C)
+I (../Task/Inc/Aim_Task.h)(0x6A5647B6)
 I (../Judge/Inc/CRCs.h)(0x6A22BC6A)
+I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
+I (../Inc/tim.h)(0x6A22BC6A)
+I (../APP/Inc/Buzzer_Run.h)(0x6A564783)
 I (../Math/Inc/RLS_Identification.h)(0x6A528429)
-I (../Math/Inc/ZeroCheck.h)(0x6A526B64)
+I (../Math/Inc/ZeroCheck.h)(0x6A56304A)
 F (..\Task\Inc\Board_Can_Task.h)(0x6A22BC6C)()
 F (..\Math\Src\user_lib.c)(0x6A22BC6A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\user_lib.o --omf_browse cboard\user_lib.crf --depend cboard\user_lib.d)
 I (D:\keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
@@ -3073,7 +3122,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x6A22BC6C)
 I (../Inc/FreeRTOSConfig.h)(0x6A22BC6A)
@@ -3232,7 +3281,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x6A22BC6C)
 I (../Inc/FreeRTOSConfig.h)(0x6A22BC6A)
@@ -3248,9 +3297,9 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x6A22BC6C)
 F (..\Math\Inc\RLS_Identification.h)(0x6A528429)()
-F (..\Math\Src\ZeroCheck.c)(0x6A526B64)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\zerocheck.o --omf_browse cboard\zerocheck.crf --depend cboard\zerocheck.d)
-I (../Math/Inc/ZeroCheck.h)(0x6A526B64)
-F (..\Math\Inc\ZeroCheck.h)(0x6A526B64)()
+F (..\Math\Src\ZeroCheck.c)(0x6A56311D)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\zerocheck.o --omf_browse cboard\zerocheck.crf --depend cboard\zerocheck.d)
+I (../Math/Inc/ZeroCheck.h)(0x6A56304A)
+F (..\Math\Inc\ZeroCheck.h)(0x6A56304A)()
 F (..\Motor\Src\Dji_Motor.c)(0x6A22BC6C)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\dji_motor.o --omf_browse cboard\dji_motor.crf --depend cboard\dji_motor.d)
 I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
 I (../Inc/main.h)(0x6A3016F6)
@@ -3292,7 +3341,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
 I (../Inc/can.h)(0x6A22BC6A)
 F (..\Motor\Inc\Dji_Motor.h)(0x6A22BC6C)()
@@ -3337,7 +3386,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
 I (../Inc/can.h)(0x6A22BC6A)
 F (..\Motor\Inc\Damiao_Motor.h)(0x6A22BC6C)()
@@ -3382,7 +3431,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (..\Bsp\Inc\bsp_rc.h)(0x6A22BC62)()
 F (..\Bsp\Src\bsp_dwt.c)(0x6A22BC62)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\bsp_dwt.o --omf_browse cboard\bsp_dwt.crf --depend cboard\bsp_dwt.d)
 I (../Bsp/Inc/bsp_dwt.h)(0x6A22BC62)
@@ -3425,7 +3474,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (..\Bsp\Inc\bsp_dwt.h)(0x6A22BC62)()
 F (..\Bsp\Src\bsp_can.c)(0x6A22BC62)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\bsp_can.o --omf_browse cboard\bsp_can.crf --depend cboard\bsp_can.d)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
@@ -3468,7 +3517,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Inc/can.h)(0x6A22BC6A)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x6A22BC6C)
@@ -3527,7 +3576,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 F (..\Bsp\Inc\bsp_PWM.h)(0x6A22BC62)()
 F (..\Bsp\Src\bsp_buzzer.c)(0x6A22BC62)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\bsp_buzzer.o --omf_browse cboard\bsp_buzzer.crf --depend cboard\bsp_buzzer.d)
 I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
@@ -3570,7 +3619,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Inc/tim.h)(0x6A22BC6A)
 F (..\Bsp\Inc\bsp_buzzer.h)(0x6A22BC62)()
 F (..\APP\Src\VT03.c)(0x6A22BC62)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\vt03.o --omf_browse cboard\vt03.crf --depend cboard\vt03.d)
@@ -3614,7 +3663,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Judge/Inc/CRCs.h)(0x6A22BC6A)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6A22BC6C)
@@ -3683,7 +3732,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Inc/usbd_cdc_if.h)(0x6A22BC6A)
 I (../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h)(0x6A22BC6C)
@@ -3694,7 +3743,7 @@ I (D:\keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (D:\keil\ARM\ARMCC\include\string.h)(0x6025237E)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
-I (../Task/Inc/Aim_Task.h)(0x6A22BC6C)
+I (../Task/Inc/Aim_Task.h)(0x6A5647B6)
 I (../Judge/Inc/CRCs.h)(0x6A22BC6A)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6A22BC6C)
@@ -3711,11 +3760,18 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x6A22BC6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x6A22BC6C)
-I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
-I (../Task/Inc/Gimbal_Task.h)(0x6A54E99E)
-I (../Controller/Inc/PID.h)(0x6A5338EB)
-I (../Bsp/Inc/bsp_dwt.h)(0x6A22BC62)
-I (../Math/Inc/user_lib.h)(0x6A22BC6A)
+I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
+I (../Inc/tim.h)(0x6A22BC6A)
+I (../APP/Inc/Buzzer_Run.h)(0x6A564783)
+I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
+I (../APP/Inc/Can_Feedback.h)(0x6A302966)
+I (../Inc/can.h)(0x6A22BC6A)
+I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
+I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
+I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
+I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
+I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math_types.h)(0x66A6B132)
 I (D:\keil\ARM\ARMCC\include\math.h)(0x60252378)
@@ -3740,26 +3796,22 @@ I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\trans
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\filtering_functions.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\quaternion_math_functions.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\window_functions.h)(0x66A6B132)
+I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
+I (../Task/Inc/Gimbal_Task.h)(0x6A5734B5)
+I (../Controller/Inc/PID.h)(0x6A5338EB)
+I (../Bsp/Inc/bsp_dwt.h)(0x6A22BC62)
+I (../Math/Inc/user_lib.h)(0x6A22BC6A)
 I (../APP/Inc/VT03.h)(0x6A22BC62)
 I (../Task/Inc/Ins_Task.h)(0x6A22BC6C)
 I (../External_Device/BMI088/Inc/BMI088driver.h)(0x6A22BC68)
 I (../Math/Inc/QuaternionEKF.h)(0x6A22BC6A)
 I (../Math/Inc/kalman_filter.h)(0x6A22BC6A)
-I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
-I (../APP/Inc/Can_Feedback.h)(0x6A302966)
-I (../Inc/can.h)(0x6A22BC6A)
-I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
-I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
-I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
-I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
-I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
 I (../Task/Inc/Board_Can_Task.h)(0x6A22BC6C)
 I (../Math/Inc/RLS_Identification.h)(0x6A528429)
-I (../Math/Inc/ZeroCheck.h)(0x6A526B64)
+I (../Math/Inc/ZeroCheck.h)(0x6A56304A)
 F (..\APP\Inc\Vofa.h)(0x6A22BC62)()
-F (..\APP\Src\Buzzer_Run.c)(0x6A22BC62)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\buzzer_run.o --omf_browse cboard\buzzer_run.crf --depend cboard\buzzer_run.d)
-I (../APP/Inc/Buzzer_Run.h)(0x6A22BC62)
+F (..\APP\Src\Buzzer_Run.c)(0x6A56511E)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\buzzer_run.o --omf_browse cboard\buzzer_run.crf --depend cboard\buzzer_run.d)
+I (../APP/Inc/Buzzer_Run.h)(0x6A564783)
 I (../Inc/main.h)(0x6A3016F6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6A22BC68)
 I (../Inc/stm32f4xx_hal_conf.h)(0x6A22BC6A)
@@ -3799,7 +3851,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
 I (../Inc/tim.h)(0x6A22BC6A)
@@ -3834,7 +3886,7 @@ I (../Inc/can.h)(0x6A22BC6A)
 I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
 I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
 I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
 I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math.h)(0x66A6B132)
@@ -3861,8 +3913,8 @@ I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\trans
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\filtering_functions.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\quaternion_math_functions.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\window_functions.h)(0x66A6B132)
-F (..\APP\Inc\Buzzer_Run.h)(0x6A22BC62)()
-F (..\APP\Src\Can_Feedback.c)(0x6A43884A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\can_feedback.o --omf_browse cboard\can_feedback.crf --depend cboard\can_feedback.d)
+F (..\APP\Inc\Buzzer_Run.h)(0x6A564783)()
+F (..\APP\Src\Can_Feedback.c)(0x6A567D4B)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\can_feedback.o --omf_browse cboard\can_feedback.crf --depend cboard\can_feedback.d)
 I (../APP/Inc/Can_Feedback.h)(0x6A302966)
 I (../Inc/main.h)(0x6A3016F6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6A22BC68)
@@ -3903,13 +3955,13 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Inc/can.h)(0x6A22BC6A)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
 I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
-I (../Task/Inc/Gimbal_Task.h)(0x6A54E99E)
+I (../Task/Inc/Gimbal_Task.h)(0x6A5734B5)
 I (../Controller/Inc/PID.h)(0x6A5338EB)
 I (D:\keil\ARM\ARMCC\include\string.h)(0x6025237E)
 I (D:\keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
@@ -3954,7 +4006,7 @@ I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\filte
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\quaternion_math_functions.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\window_functions.h)(0x66A6B132)
 I (../APP/Inc/VT03.h)(0x6A22BC62)
-I (../Task/Inc/Aim_Task.h)(0x6A22BC6C)
+I (../Task/Inc/Aim_Task.h)(0x6A5647B6)
 I (../Judge/Inc/CRCs.h)(0x6A22BC6A)
 I (../Inc/usbd_cdc_if.h)(0x6A22BC6A)
 I (../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h)(0x6A22BC6C)
@@ -3964,22 +4016,25 @@ I (../Inc/usbd_conf.h)(0x6A22BC6A)
 I (D:\keil\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
+I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
+I (../Inc/tim.h)(0x6A22BC6A)
+I (../APP/Inc/Buzzer_Run.h)(0x6A564783)
+I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
+I (../APP/Inc/vofa.h)(0x6A22BC62)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
+I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
+I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
 I (../Task/Inc/Ins_Task.h)(0x6A22BC6C)
 I (../External_Device/BMI088/Inc/BMI088driver.h)(0x6A22BC68)
 I (../Math/Inc/QuaternionEKF.h)(0x6A22BC6A)
 I (../Math/Inc/kalman_filter.h)(0x6A22BC6A)
 I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
-I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
-I (../APP/Inc/vofa.h)(0x6A22BC62)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
-I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
-I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
 I (../Task/Inc/Board_Can_Task.h)(0x6A22BC6C)
 I (../Math/Inc/RLS_Identification.h)(0x6A528429)
-I (../Math/Inc/ZeroCheck.h)(0x6A526B64)
+I (../Math/Inc/ZeroCheck.h)(0x6A56304A)
 F (..\APP\Inc\Can_Feedback.h)(0x6A302966)()
 F (..\APP\Src\Remote_Control.c)(0x6A30DFF2)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\remote_control.o --omf_browse cboard\remote_control.crf --depend cboard\remote_control.d)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
 I (../Inc/main.h)(0x6A3016F6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6A22BC68)
 I (../Inc/stm32f4xx_hal_conf.h)(0x6A22BC6A)
@@ -4019,10 +4074,10 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-F (..\APP\Inc\Remote_Control.h)(0x6A22BC62)()
+F (..\APP\Inc\Remote_Control.h)(0x6A573579)()
 F (..\APP\Src\Some_Functions.c)(0x6A22BC62)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\some_functions.o --omf_browse cboard\some_functions.crf --depend cboard\some_functions.d)
 I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
 I (../Inc/main.h)(0x6A3016F6)
@@ -4064,7 +4119,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math.h)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\arm_math_types.h)(0x66A6B132)
@@ -4094,7 +4149,7 @@ I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\windo
 F (..\APP\Inc\Some_Functions.h)(0x6A22BC62)()
 F (..\APP\Src\System_Identification.c)(0x6A53A678)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\system_identification.o --omf_browse cboard\system_identification.crf --depend cboard\system_identification.d)
 I (../APP/Inc/System_Identification.h)(0x6A53489A)
-I (../Task/Inc/Gimbal_Task.h)(0x6A54E99E)
+I (../Task/Inc/Gimbal_Task.h)(0x6A5734B5)
 I (../Inc/main.h)(0x6A3016F6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x6A22BC68)
 I (../Inc/stm32f4xx_hal_conf.h)(0x6A22BC6A)
@@ -4134,7 +4189,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Controller/Inc/PID.h)(0x6A5338EB)
 I (D:\keil\ARM\ARMCC\include\string.h)(0x6025237E)
 I (D:\keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
@@ -4180,7 +4235,7 @@ I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\quate
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\window_functions.h)(0x66A6B132)
 I (../APP/Inc/VT03.h)(0x6A22BC62)
 I (D:\keil\ARM\ARMCC\include\stdbool.h)(0x6025237C)
-I (../Task/Inc/Aim_Task.h)(0x6A22BC6C)
+I (../Task/Inc/Aim_Task.h)(0x6A5647B6)
 I (../Judge/Inc/CRCs.h)(0x6A22BC6A)
 I (../Inc/usbd_cdc_if.h)(0x6A22BC6A)
 I (../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h)(0x6A22BC6C)
@@ -4190,11 +4245,9 @@ I (../Inc/usbd_conf.h)(0x6A22BC6A)
 I (D:\keil\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h)(0x6A22BC6C)
 I (../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h)(0x6A22BC6C)
-I (../Task/Inc/Ins_Task.h)(0x6A22BC6C)
-I (../External_Device/BMI088/Inc/BMI088driver.h)(0x6A22BC68)
-I (../Math/Inc/QuaternionEKF.h)(0x6A22BC6A)
-I (../Math/Inc/kalman_filter.h)(0x6A22BC6A)
-I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
+I (../Bsp/Inc/bsp_buzzer.h)(0x6A22BC62)
+I (../Inc/tim.h)(0x6A22BC6A)
+I (../APP/Inc/Buzzer_Run.h)(0x6A564783)
 I (../Task/Inc/Check_Task.h)(0x6A22BC6C)
 I (../APP/Inc/vofa.h)(0x6A22BC62)
 I (../APP/Inc/Can_Feedback.h)(0x6A302966)
@@ -4202,12 +4255,17 @@ I (../Inc/can.h)(0x6A22BC6A)
 I (../Motor/Inc/Dji_Motor.h)(0x6A22BC6C)
 I (../Bsp/Inc/bsp_can.h)(0x6A22BC62)
 I (../Motor/Inc/Damiao_Motor.h)(0x6A22BC6C)
-I (../APP/Inc/Remote_Control.h)(0x6A22BC62)
+I (../APP/Inc/Remote_Control.h)(0x6A573579)
 I (../Bsp/Inc/bsp_rc.h)(0x6A22BC62)
 I (../APP/Inc/Some_Functions.h)(0x6A22BC62)
+I (../Task/Inc/Ins_Task.h)(0x6A22BC6C)
+I (../External_Device/BMI088/Inc/BMI088driver.h)(0x6A22BC68)
+I (../Math/Inc/QuaternionEKF.h)(0x6A22BC6A)
+I (../Math/Inc/kalman_filter.h)(0x6A22BC6A)
+I (../Task/Inc/Limit_Task.h)(0x6A54C0EB)
 I (../Task/Inc/Board_Can_Task.h)(0x6A22BC6C)
 I (../Math/Inc/RLS_Identification.h)(0x6A528429)
-I (../Math/Inc/ZeroCheck.h)(0x6A526B64)
+I (../Math/Inc/ZeroCheck.h)(0x6A56304A)
 F (..\APP\Inc\System_Identification.h)(0x6A53489A)()
 F (..\Judge\Src\fifo.c)(0x6A22BC6A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\fifo.o --omf_browse cboard\fifo.crf --depend cboard\fifo.d)
 I (../Judge/Inc/fifo.h)(0x6A22BC6A)
@@ -4293,7 +4351,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Judge/Inc/CRCs.h)(0x6A22BC6A)
 F (..\Judge\Src\Referee.c)(0x6A22BC6A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\referee.o --omf_browse cboard\referee.crf --depend cboard\referee.d)
 I (../Judge/Inc/referee.h)(0x6A22BC6A)
@@ -4342,9 +4400,9 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x6A22BC68)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x6A22BC68)
 I (../Inc/usart.h)(0x6A22BC6A)
 I (../Inc/main.h)(0x6A3016F6)
-I (..\Config\can_config.h)(0x6A438949)
+I (..\Config\can_config.h)(0x6A55EF67)
 I (../Judge/Inc/crcs.h)(0x6A22BC6A)
-F (..\Config\can_config.h)(0x6A438949)()
+F (..\Config\can_config.h)(0x6A55EF67)()
 F (C:/Users/13805/AppData/Local/Arm/Packs/ARM/CMSIS-DSP/1.16.2/Source/BasicMathFunctions/BasicMathFunctions.c)(0x66A6B132)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Bsp/Inc -I ../External_Device/BMI088/Inc -I ../Task/Inc -I ../Math/Inc -I ../External_Device/BMI088/Controller/Inc -I ../Controller/Inc -I ../Motor/Inc -I ../APP/Inc -I ../Judge/Src -I ../Judge/Inc -I ..\Config-I.\RTE\_Cboard-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\PrivateInclude-IC:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__CC_ARM-o cboard\basicmathfunctions.o --omf_browse cboard\basicmathfunctions.crf --depend cboard\basicmathfunctions.d)
 I (C:/Users/13805/AppData/Local/Arm/Packs/ARM/CMSIS-DSP/1.16.2/Source/BasicMathFunctions/arm_abs_f32.c)(0x66A6B132)
 I (C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp\basic_math_functions.h)(0x66A6B132)

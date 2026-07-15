@@ -79,7 +79,7 @@ void Send_Message_2(void)
 	
 	friction_speed = Friction_Speed + Friction_Speed_Comp;
 	
-	Data[0] = aim_rx.mode;       //自瞄标志位
+	Data[0] = aim_rx.detect_number;       //自瞄标志位
 	Data[1] = Shoot_Condition;   //摩擦轮状态
 	Data[2] = friction_speed>>8; //当前弹速
 	Data[3] = friction_speed&0x00FF;

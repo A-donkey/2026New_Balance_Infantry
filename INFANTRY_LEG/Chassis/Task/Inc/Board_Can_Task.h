@@ -8,7 +8,8 @@
 #include "Check_Task.h"
 #include "Chassis_Task.h"
 
-void Send_Message(void);
+void Send_Message_1(void);
+void Send_Message_2(void);
 void Board_Can_Init(void);
 void Board_Can_Task(void);
 
