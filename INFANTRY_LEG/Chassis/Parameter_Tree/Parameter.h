@@ -26,7 +26,7 @@
 #define DYAW_DOWN_MAX  11.0f     //低腿杆最大YAW速度  
 
 //为了克服静态误差把腿长调小
-#define UP_LEG_LENGTH   0.32f    //高腿杆腿长(m)
+#define UP_LEG_LENGTH   0.34f    //高腿杆腿长(m)
 #define MID_LEG_LENGTH  0.27f    //中腿杆腿长
 #define DOWN_LEG_LENGTH 0.22f    //低腿杆腿长
 
@@ -62,7 +62,7 @@
 #define BACK_LEG_TP         6.0f //磕上台阶腿杆往回摆的力
 #define FRONT_LEG_TP      -15.0f //磕上台阶腿杆归正的力
 
-#define RETRACT_LEG_LENGTH 0.20f //磕上台阶后收腿腿长
+#define RETRACT_LEG_LENGTH 0.22f //磕上台阶后收腿腿长
 
 //判断打滑的各项参数
 

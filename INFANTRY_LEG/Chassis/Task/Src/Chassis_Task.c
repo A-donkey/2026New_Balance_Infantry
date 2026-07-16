@@ -41,13 +41,13 @@ void Chassis_Init(void)
 	V_Kf_Init(&V_kf);
 	
 	//初始化PID                MAXP MAXI        P     I      D           dt
-	PID_Init(&Leg_L_Pid[0]   ,  180,  30, 0, 1500,    0,   130,  0,0,0,0, 0,NO_CIRCLE,NONE); //左右腿腿长串级PID
-	PID_Init(&Leg_L_Pid[1]   ,  180,  30, 0, 1500,    0,   130,  0,0,0,0, 0,NO_CIRCLE,NONE);
+	PID_Init(&Leg_L_Pid[0]   ,  180,  30, 0, 6000,    0,   130,  0,0,0,0, 0,NO_CIRCLE,NONE); //左右腿腿长串级PID
+	PID_Init(&Leg_L_Pid[1]   ,  180,  30, 0, 6000,    0,   130,  0,0,0,0, 0,NO_CIRCLE,NONE);
 	
 	PID_Init(&Leg_P_Pid[0]   ,   80,  60, 0,  140,    0,     7,  0,0,0,0, 0,RADIAN,NONE);    //左右腿腿杆绝对位置串级PID
 	PID_Init(&Leg_P_Pid[1]   ,   80,  60, 0,  140,    0,     7,  0,0,0,0, 0,RADIAN,NONE);
 	
-	PID_Init(&Roll_Pid       , 0.10, 0.1, 0,  0.2,    0, 0.002,  0,0,0,0, 2,NO_CIRCLE,NONE); //ROLL轴补偿PID
+	PID_Init(&Roll_Pid       , 0.10, 0.1, 0,  0.8,    0, 0.002,  0,0,0,0, 2,NO_CIRCLE,NONE); //ROLL轴补偿PID
 //	//暂时去掉roll轴补偿<*_*>
 //	PID_Init(&Roll_Pid       , 0.10, 0.1, 0,  0,    0, 0.002,  0,0,0,0, 2,NO_CIRCLE,NONE); //ROLL轴补偿PID
 	
@@ -823,18 +823,18 @@ void Fast_Processing(Flag_Bit_t *flag,
 		 !flag->theta_flag[2] &&
 	   !flag->spinning_flag   )
 	{
-		if(fabs(goal->d_x_t)>=0.05f)
+		if(fabs(goal->d_x_t)>=0.1f)
 		{
 			start_situate_flag = 0;
 			
 			body->x = 0;
 		}
-		else if((fabs(goal->d_x_t)<=0.05f && fabs(body->d_x)<=0.2f) || start_situate_flag) //开启机体定位
+		else if((fabs(goal->d_x_t)<=0.1f && fabs(body->d_x)<=0.2f) || start_situate_flag) //开启机体定位
 		{
 			start_situate_flag = 1;
-			
-//			body->x = 0;
-			body->x += body->d_x*0.01f;
+			if(fabs(body->d_x)>0.03f){
+				body->x += body->d_x*0.005f;
+			}
 		}
 
 	}
@@ -1137,12 +1137,12 @@ void Leg_Control(INS_t *ins,
 				//目标值给小,强制收腿<*_*>
 				if(self_re->col_flag[0] == 1)
 				{
-					PID_Calculate(&Leg_L_Pid[0],five_link[0]->L0,0.13f);
+					PID_Calculate(&Leg_L_Pid[0],five_link[0]->L0,0.16f);
 					joint_m[0]->F0 = -Leg_L_Pid[0].Output - G_Comp[0].Output + SELF_RESCUE_FN_COMP;
 				}
 				if(self_re->col_flag[1] == 1)
 				{
-					PID_Calculate(&Leg_L_Pid[1],five_link[1]->L0,0.13f);
+					PID_Calculate(&Leg_L_Pid[1],five_link[1]->L0,0.16f);
 					joint_m[1]->F0 = -Leg_L_Pid[1].Output - G_Comp[1].Output + SELF_RESCUE_FN_COMP;
 				}
 			}
@@ -1216,6 +1216,7 @@ void Vmc(Flag_Bit_t *flag,
 	}
 }
 
+int test_cmp_I = 500;
 /*******************************************************************************************************
 向电机发送消息
 ********************************************************************************************************/
@@ -1281,6 +1282,8 @@ void Chassis_Can_Data_Send(Chassis_Motor_t *cm,
 //			osDelay(1);
 //			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左边202
 //			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//右边201
+//			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,Max_Output(2000,16000),0,0);//左边202
+//			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,Max_Output(1700,16000),0,0,0);//右边201
 			
 			//正常控制<*_*>
 			Mit_Ctrl(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[0]->T_E,40),DM8009);

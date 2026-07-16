@@ -216,10 +216,16 @@ void Pc_Init(PC_Ctrl_t *pc_ctrl)
 	pc_ctrl->G = 0;
 	pc_ctrl->B = 0;
 	pc_ctrl->Q = 0;
+	pc_ctrl->KEY_Z = 0;
+	pc_ctrl->KEY_X = 0;
+	pc_ctrl->KEY_V = 0;
 	
 	pc_ctrl->g_t = 0;
 	pc_ctrl->b_t = 0;
 	pc_ctrl->q_t = 0;
+	pc_ctrl->z_t = 0;
+	pc_ctrl->x_t = 0;
+	pc_ctrl->v_t = 0;
 }
 
 /*******************************************************************************************************
@@ -723,7 +729,7 @@ void Gimbal_Pitch_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
 	TD_Calculate(&Pos_Pitch_TD, gs->pitch_ref);
 
 	// 2. 前馈（惯量 + 阻尼）自瞄模式下使用上位机目标值
-	if(Aim_Permission){
+	if(Aim_Permission && aim->detect_number != 0 && aim->pitch_setpoint != 0 && aim->pitch_omega_setpoint != 0){
 		pitch_alpha = aim->pitch_acc_setpoint * Ang_PI;
 		pitch_omega = aim->pitch_omega_setpoint * Ang_PI;
 	}
@@ -740,7 +746,7 @@ void Gimbal_Pitch_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
                    + Gravity_Param.C * sign(gs->d_pitch);
 
 	// 4. PID反馈
-	if(Aim_Permission){
+	if(Aim_Permission && aim->detect_number != 0 && aim->pitch_setpoint != 0 && aim->pitch_omega_setpoint != 0){
 		PID_Calculate(&Pitch_P_Pid, gs->pitch * Ang_PI, aim->pitch_setpoint * Ang_PI);
 		PID_Calculate(&Pitch_S_Pid, gs->d_pitch, aim->pitch_omega_setpoint * Ang_PI);
 	}
@@ -764,7 +770,7 @@ void Gimbal_Yaw_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
 
 	// 2. 物理模型前馈（单位需要统一）
 	//    TD输出是度、°/s、°/s?，需要转换为电机电流单位
-	if(Aim_Permission){
+	if(Aim_Permission && aim->detect_number != 0 && aim->yaw_setpoint != 0 && aim->yaw_omega_setpoint != 0){
 		yaw_alpha = aim->yaw_acc_setpoint * Ang_PI;  // °/s? → rad/s?
 		yaw_omega = aim->yaw_omega_setpoint * Ang_PI;   // °/s → rad/s
 	}
@@ -777,7 +783,7 @@ void Gimbal_Yaw_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
               + Yaw_FF_Param.C * sign(yaw_omega);     // 库伦摩擦
 
 	// 3. PID反馈（TD滤波后的值作为参考）
-	if(Aim_Permission){
+	if(Aim_Permission && aim->detect_number != 0 && aim->yaw_setpoint != 0 && aim->yaw_omega_setpoint != 0){
 		PID_Calculate(&Yaw_P_Pid,   gs->yaw*Ang_PI,   aim->yaw_setpoint * Ang_PI);
 		PID_Calculate(&Yaw_S_Pid,   gs->d_yaw,         aim->yaw_omega_setpoint * Ang_PI);
 	}
