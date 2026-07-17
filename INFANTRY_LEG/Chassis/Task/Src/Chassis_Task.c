@@ -832,7 +832,7 @@ void Fast_Processing(Flag_Bit_t *flag,
 		else if((fabs(goal->d_x_t)<=0.1f && fabs(body->d_x)<=0.2f) || start_situate_flag) //开启机体定位
 		{
 			start_situate_flag = 1;
-			if(fabs(body->d_x)>0.03f){
+			if(fabs(body->d_x)>0.02f){
 				body->x += body->d_x*0.005f;
 			}
 		}
@@ -1163,7 +1163,7 @@ void LQR(Flag_Bit_t *flag,
 				 Vmc_Five_Link_Parameter_t *five_link[2])
 {
 	//计算平衡点偏置
-	Offset_Calc(comp,Offset_Fit_Coefficients,five_link[0]->L0,five_link[1]->L0);
+	Offset_Calc(comp,Offset_Fit_Coefficients,goal->Target_L0);
 	
 	//计算拟合K增益
 	Fitting_K_Calc(Fitting_K,P,five_link[0]->L0,five_link[1]->L0);	

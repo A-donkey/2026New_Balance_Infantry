@@ -1015,6 +1015,26 @@
               <FileType>5</FileType>
               <FilePath>..\APP\Inc\System_Identification.h</FilePath>
             </File>
+            <File>
+              <FileName>GimbalSystemID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\Src\GimbalSystemID.c</FilePath>
+            </File>
+            <File>
+              <FileName>GimbalSystemIDConfig.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\Src\GimbalSystemIDConfig.c</FilePath>
+            </File>
+            <File>
+              <FileName>GimbalSystemID.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\APP\Inc\GimbalSystemID.h</FilePath>
+            </File>
+            <File>
+              <FileName>GimbalSystemIDConfig.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\APP\Inc\GimbalSystemIDConfig.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

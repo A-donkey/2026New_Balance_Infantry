@@ -475,7 +475,7 @@
         <Ww>
           <count>35</count>
           <WinNumber>2</WinNumber>
-          <ItemText>test_cmp_I,0x0A</ItemText>
+          <ItemText>test_leg</ItemText>
         </Ww>
       </WatchWindow2>
       <MemoryWindow1>

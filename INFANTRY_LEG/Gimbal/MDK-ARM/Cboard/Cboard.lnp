@@ -84,6 +84,8 @@
 "cboard\remote_control.o"
 "cboard\some_functions.o"
 "cboard\system_identification.o"
+"cboard\gimbalsystemid.o"
+"cboard\gimbalsystemidconfig.o"
 "cboard\fifo.o"
 "cboard\crcs.o"
 "cboard\referee.o"

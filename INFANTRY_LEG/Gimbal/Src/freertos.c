@@ -32,6 +32,7 @@
 #include "Check_Task.h"
 #include "Gimbal_Task.h"
 #include "Board_Can_Task.h"
+#include "GimbalSystemID.h"
 
 /* USER CODE END Includes */
 
@@ -235,6 +236,8 @@ void Start_Gimbal_Task(void const * argument)
   /* USER CODE BEGIN Start_Gimbal_Task */
 	
 	Gimbal_Init();
+	
+	GimbalSystemID_Init(&Gimbal_Status);
 	
   /* Infinite loop */
   for(;;)

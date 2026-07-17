@@ -47,17 +47,6 @@
 #define PC_YAW_SENSITIVITY          0.0016
 #define PC_DEADBAND                 1
 
-// 系统辨识模式开关
-#define GIMBAL_SYSID_OFF    0
-#define GIMBAL_YAW_SYSID    1
-#define GIMBAL_PITCH_SYSID  2
-#define GIMBAL_SYSID        GIMBAL_SYSID_OFF  // 默认关闭
-
-// 辨识步骤
-#define GIMBAL_SYSID_STEP_BC  0   // 辨识 B 和 C
-#define GIMBAL_SYSID_STEP_J   1   // 辨识 J
-#define GIMBAL_SYSID_STEP     GIMBAL_SYSID_STEP_BC
-
 typedef enum
 {
 	Close,
@@ -107,7 +96,12 @@ typedef struct
 	
 	float Yaw_Motor_Out;   //电机输出
 	float Pitch_Motor_Out; 
-
+	
+	/*系统辨识*/
+	uint32_t sys_cnt;
+  float sys_delta_t; // 两帧计算之间的时间差
+	float sys_yaw_speed_ref;
+	float sys_pitch_speed_ref;
 	Gimbal_SysID_t Yaw_SysID;
 	Gimbal_SysID_t Pitch_SysID;
 }Gimbal_Status_t;

@@ -1,5 +1,7 @@
 #include "Gimbal_Task.h"
 #include "System_Identification.h"
+#include "GimbalSystemIDConfig.h"
+#include "GimbalSystemID.h"
 
 //全局变量定义部分
 Self_Rescue_t Self_Rescue; //自救
@@ -26,10 +28,10 @@ TD_t Pos_Yaw_TD;
 
 // 前馈参数（需要实测/辨识）
 Feedforward_Param_t Yaw_FF_Param  = {0.0115128597,  0.0286347487f,  0.23262085f};//{J_yaw,  B_yaw,  C_yaw};
-Feedforward_Param_t Pitch_FF_Param = {0.0324, 2.44012785f, 0};//{J_pitch, Cb_pitch, C_pitch}// Pitch用Cb代替B
+Feedforward_Param_t Pitch_FF_Param = {0.0324, 0, 0};//{J_pitch, Cb_pitch, C_pitch}// Pitch用Cb代替B
 
 // 重力补偿参数
-Gravity_Comp_Param_t Gravity_Param = {-2.4175, 3.24 , 0};//{A, B_g, C}//C用不上
+Gravity_Comp_Param_t Gravity_Param = {-0.2899f, 3.00 , 1.543f};//{A, B_g, C}//C用不上
 
 // 前馈和重力补偿中间变量
 float Yaw_FF_Output;
@@ -55,8 +57,8 @@ void Gimbal_Init(void)
 {
 	//初始化PID
 	//更改云台PID以适配新电机
-	PID_Init(&Pitch_P_Pid   ,    10,   	5, 0,    	6,     0,     0,  0,0,0,0, 4,RADIAN,NONE); //云台
-	PID_Init(&Pitch_S_Pid   , 		9, 		5, 0,  		4,     0,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
+	PID_Init(&Pitch_P_Pid   ,    10,   	5, 0,    70,    10,     0,  0,0,0,0, 4,RADIAN,NONE); //云台
+	PID_Init(&Pitch_S_Pid   , 		9, 		5, 0,  		8,     0,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
 	PID_Init(&Yaw_P_Pid     ,    10,   	5, 0,   	1,     0,     0,  0,0,0,0, 4,RADIAN,NONE);
 	PID_Init(&Yaw_S_Pid     , 		9, 		3, 0,  		1,     0,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
 	
@@ -103,6 +105,7 @@ Gimbal任务
 ********************************************************************************************************/
 void Gimbal_Task(void)
 {
+	Gimbal_Status.sys_delta_t = DWT_GetDeltaT(&Gimbal_Status.sys_cnt);
 	Variable_Information_Acquisition(&INS,&Gimbal_Motor,&Shoot_Status,&Gimbal_Status);
 	Gimbal_Control(&Rc_Ctrl,&Pc_Ctrl,&Shoot_Status,&Gimbal_Status,&Shoot_Condition,&Self_Rescue,&Controlled_State,&aim_tx);
 	Auto_Aim(&aim_rx,&Gimbal_Status);
@@ -238,17 +241,30 @@ void Pc_Mode(RC_Ctrl_t *rc_ctrl,
 	static bool single_flag = 1; //单发标志位
 	
 	/******左键检测,允许开火******/
-	if(rc_ctrl->mouse.press_l && single_flag) 
-	{
-		single_flag = 0;
-		Fire_Permission = 1;
+	if(aim_tx->mode_want == STD_AUTO_AIM){
+		if(rc_ctrl->mouse.press_l) 
+		{
+			Fire_Permission = 1;
+		}
+		else if(!rc_ctrl->mouse.press_l)
+		{
+			Fire_Permission = 0;
+		}
+		else Fire_Permission = 0;
 	}
-	else if(!rc_ctrl->mouse.press_l && !single_flag)
-	{
-		single_flag = 1;
-		Fire_Permission = 0;
+	else{
+		if(rc_ctrl->mouse.press_l && single_flag) 
+		{
+			single_flag = 0;
+			Fire_Permission = 1;
+		}
+		else if(!rc_ctrl->mouse.press_l && !single_flag)
+		{
+			single_flag = 1;
+			Fire_Permission = 0;
+		}
+		else Fire_Permission = 0;
 	}
-	else Fire_Permission = 0;
 	
 	/******右键检测,开启自瞄******/
 	if(rc_ctrl->mouse.press_r) Aim_Permission = 1;
@@ -384,17 +400,30 @@ void Vt03_Pc_Mode(PC_Ctrl_t *pc_ctrl,Aim_Tx *aim_tx)
 	static bool single_flag = 1; //单发标志位
 	
 	/******左键检测,允许开火******/
-	if(VT03.mouse_left && single_flag) 
-	{
-		single_flag = 0;
-		Fire_Permission = 1;
+	if(aim_tx->mode_want == STD_AUTO_AIM){
+		if(VT03.mouse_left) 
+		{
+			Fire_Permission = 1;
+		}
+		else if(!VT03.mouse_left)
+		{
+			Fire_Permission = 0;
+		}
+		else Fire_Permission = 0;
 	}
-	else if(!VT03.mouse_left && !single_flag)
-	{
-		single_flag = 1;
-		Fire_Permission = 0;
+	else{
+		if(VT03.mouse_left && single_flag) 
+		{
+			single_flag = 0;
+			Fire_Permission = 1;
+		}
+		else if(!VT03.mouse_left && !single_flag)
+		{
+			single_flag = 1;
+			Fire_Permission = 0;
+		}
+		else Fire_Permission = 0;
 	}
-	else Fire_Permission = 0;
 	
 	/******右键检测,开启自瞄******/
 	if(VT03.mouse_right) Aim_Permission = 1;
@@ -724,7 +753,7 @@ void Shoot_Control(Heat_Control_t *hc,
 Pitch轴计算逻辑
 ********************************************************************************************************/
 void Gimbal_Pitch_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
-	float pitch_alpha;float pitch_omega;
+	float pitch_alpha;float pitch_omega;float sign_dpitch=0;
 	// 1. TD
 	TD_Calculate(&Pos_Pitch_TD, gs->pitch_ref);
 
@@ -741,9 +770,13 @@ void Gimbal_Pitch_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
                 + Pitch_FF_Param.Cb * pitch_omega;
 	// 3. 重力补偿
 	float pitch_rad = gs->pitch * Ang_PI;  // 度 → 弧度
+	if(fabs(gs->d_pitch)>5.0f*Ang_PI)
+	{
+		sign_dpitch = sign(gs->d_pitch);
+	}
 	Pitch_Gravity_Comp = Gravity_Param.A * sin(pitch_rad)
                    + Gravity_Param.B * cos(pitch_rad)
-                   + Gravity_Param.C * sign(gs->d_pitch);
+                   + Gravity_Param.C * sign_dpitch;
 
 	// 4. PID反馈
 	if(Aim_Permission && aim->detect_number != 0 && aim->pitch_setpoint != 0 && aim->pitch_omega_setpoint != 0){
@@ -818,7 +851,7 @@ void Gimbal_Controllor(Shoot_Status_t *ss,
 			
 			if(self_re->run_flag) //启动 云台复位
 			{
-				PID_Calculate(&Abs_Yaw_P_Pid,gs->abs_yaw,gs->abs_yaw_ref);
+				PID_Calculate(&Abs_Yaw_P_Pid,gs->abs_yaw,gs->abs_yaw_ref);//先清零再计算,纯P控制器
 				gs->Yaw_Motor_Out = PID_Calculate(&Abs_Yaw_S_Pid,gs->d_yaw,Abs_Yaw_P_Pid.Output);
 				gs->Pitch_Motor_Out = 0; 
 			}
@@ -827,22 +860,17 @@ void Gimbal_Controllor(Shoot_Status_t *ss,
 		{
 
 		#if GIMBAL_SYSID == GIMBAL_YAW_SYSID
-    		Gimbal_Yaw_SysID_Run(gs);
-    		if (gs->Yaw_SysID.sysid_done)
-    		{
-        		// 辨识完成，更新前馈参数
-        		Yaw_FF_Param.B = gs->Yaw_SysID.B;
-        		Yaw_FF_Param.C = gs->Yaw_SysID.C;
-        		Yaw_FF_Param.J = gs->Yaw_SysID.J;
-						gs->Yaw_Motor_Out = 0;
-    		}
+			if (!gimbal_sysid.yaw.sysid_done)
+			{
+				GimbalSystemID_Run();
+			 }
+			gs->Yaw_Motor_Out = PID_Calculate(&Yaw_S_Pid,gs->d_yaw,gs->sys_yaw_speed_ref* Ang_PI);
 		#elif GIMBAL_SYSID == GIMBAL_PITCH_SYSID
-    		Gimbal_Pitch_SysID_Run(gs);
-    		if (gs->Pitch_SysID.sysid_done)
-    		{
-        		Pitch_FF_Param.Cb = gs->Pitch_SysID.B;   // 阻尼系数
-						gs->Pitch_Motor_Out = 0;
-    		}
+			if(!gimbal_sysid.pitch.sysid_done)	
+			{
+				GimbalSystemID_Run();
+			 } 		
+			gs->Pitch_Motor_Out = PID_Calculate(&Pitch_S_Pid,   gs->d_pitch,  gs->sys_pitch_speed_ref * Ang_PI);
 		#else
 		    Gimbal_Pitch_Calculate(gs,aim);
 		    Gimbal_Yaw_Calculate(gs,aim);

@@ -121,3 +121,5 @@ cboard\freertos.o: ../APP/Inc/VT03.h
 cboard\freertos.o: ../Task/Inc/Board_Can_Task.h
 cboard\freertos.o: ../Math/Inc/RLS_Identification.h
 cboard\freertos.o: ../Math/Inc/ZeroCheck.h
+cboard\freertos.o: ../APP/Inc/GimbalSystemID.h
+cboard\freertos.o: ../APP/Inc/GimbalSystemIDConfig.h

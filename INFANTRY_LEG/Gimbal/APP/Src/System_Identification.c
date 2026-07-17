@@ -168,7 +168,7 @@ void Gimbal_Yaw_SysID_Run(Gimbal_Status_t *gs)
 
     if (gs->Yaw_SysID.sysid_timer > 0.1f)
     {
-        float omega = gs->d_yaw;
+        float omega = gs->d_yaw*PI_Ang;
         float omega_smooth = TD_Calculate(&gs->Yaw_SysID.td_omega, omega);
         float alpha_smooth = gs->Yaw_SysID.td_omega.dx;
         float torque = YAW_MOTOR_SIGN * Gimbal_Motor.DM_4310[0].tor;

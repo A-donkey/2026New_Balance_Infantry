@@ -75,7 +75,6 @@ typedef struct
 
 typedef struct
 {
-	float Gravity_Comp_Theta_b;     //机体倾角重心补偿
 	float Gravity_Comp_Theta_l; 		//左腿摆角重心补偿
 	float Gravity_Comp_Theta_r;			//右腿摆角重心补偿
 }Compensation_Amount_t;

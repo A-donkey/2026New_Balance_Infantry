@@ -121,3 +121,5 @@ cboard\gimbal_task.o: ../Task/Inc/Board_Can_Task.h
 cboard\gimbal_task.o: ../Math/Inc/RLS_Identification.h
 cboard\gimbal_task.o: ../Math/Inc/ZeroCheck.h
 cboard\gimbal_task.o: ../APP/Inc/System_Identification.h
+cboard\gimbal_task.o: ../APP/Inc/GimbalSystemIDConfig.h
+cboard\gimbal_task.o: ../APP/Inc/GimbalSystemID.h
