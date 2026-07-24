@@ -28,17 +28,24 @@ void Vofa_Send_Message(void)
 {
 //	Send_Array[0].v_f = joint_m_ptr[0]->Tp;        
 //	Send_Array[1].v_f = joint_m_ptr[1]->Tp;
-//	Send_Array[2].v_f = u[2];
-//	Send_Array[3].v_f = Goal_Setting.d_x_t;
+//	Send_Array[2].v_f = Joint_Motor_Status[0].T_Wheel;
+//	Send_Array[3].v_f = Joint_Motor_Status[1].T_Wheel;
 // 	Send_Array[4].v_f =	joint_m_ptr[0]->T_Wheel;
 //	Send_Array[5].v_f = joint_m_ptr[1]->T_Wheel;
 	
-	Send_Array[0].v_f = u[4];        
-	Send_Array[1].v_f = u[6];
-	Send_Array[2].v_f = u[8];
-	Send_Array[3].v_f = Goal_Setting.d_x_t;
- 	Send_Array[4].v_f =	Body.d_x;
-	Send_Array[5].v_f = u[2];
+	Send_Array[0].v_f = pm_od.chassis_power/100.0;
+	Send_Array[1].v_f = joint_m_ptr[0]->T_Wheel;
+	Send_Array[2].v_f = joint_m_ptr[1]->T_Wheel;
+	Send_Array[3].v_f = joint_m_ptr[0]->Tp;
+ 	Send_Array[4].v_f =	joint_m_ptr[1]->Tp;
+	Send_Array[5].v_f = pm_od.referee_power/100.0;
+	
+//	Send_Array[0].v_f = INS.Roll;        
+//	Send_Array[1].v_f = INS.Pitch;
+//	Send_Array[2].v_f = INS.Yaw;
+//	Send_Array[3].v_f = Roll_Pid.Output;
+// 	Send_Array[4].v_f =	Leg[0].abs_leg_theta;
+//	Send_Array[5].v_f = Leg[1].abs_leg_theta;
 
 //  CDC_Transmit_FS(&Send_Array[0].v_u8[0],4*7);
 	HAL_UART_Transmit_DMA(&huart1, &Send_Array[0].v_u8[0], 4*7);

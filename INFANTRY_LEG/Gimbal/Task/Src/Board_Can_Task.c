@@ -62,11 +62,11 @@ void Send_Message_1(void)
 	Data[0] = Link_Sit.err_num>>8;
 	Data[1] = Link_Sit.err_num&0x00FF;
 	Data[2] = Gimbal_Motor.DM_4310[0].p_int>>8;
-	Data[3] = Gimbal_Motor.DM_4310[1].p_int&0x00FF;
+	Data[3] = Gimbal_Motor.DM_4310[0].p_int&0x00FF;
 	Data[4] = up_pitch>>8; 
 	Data[5] = up_pitch&0x00FF; 
-	Data[6] = Heat_Control.Number_Of_Bullets; //弹舱内弹丸数量
-	Data[7] = VT03.mode_sw; 
+	Data[6] = Heat_Control.Number_Of_Bullets>>8; //弹舱内弹丸数量
+	Data[7] = Heat_Control.Number_Of_Bullets&0x00FF; 
 
 	Can_TxMessage(&hcan1,0x120,8,Data);
 }
@@ -85,7 +85,7 @@ void Send_Message_2(void)
 	Data[3] = friction_speed&0x00FF;
 	Data[4] = VT03.key>>8;
 	Data[5] = VT03.key&0x00FF; 
-	Data[6] = 0; 
+	Data[6] = VT03.mode_sw; 
 	Data[7] = 0;  
 
 	Can_TxMessage(&hcan1,0x100,8,Data);

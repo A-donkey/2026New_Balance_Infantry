@@ -9,6 +9,7 @@
 #include "Referee.h"
 #include "Super_Cap.h"
 #include "Check_Task.h"
+#include "Power_Limit.h"
 
 void Super_Cap_Init(void);
 void Super_Cap_Task(void);

@@ -114,3 +114,4 @@ cboard\wheel_kalman.o: ../Motor/Inc/Damiao_Motor.h
 cboard\wheel_kalman.o: ../APP/Inc/Remote_Control.h
 cboard\wheel_kalman.o: ../Bsp/Inc/bsp_rc.h
 cboard\wheel_kalman.o: ../APP/Inc/Self_Rescue.h
+cboard\wheel_kalman.o: ../APP/Inc/Power_Limit.h

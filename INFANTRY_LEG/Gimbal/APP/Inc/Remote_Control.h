@@ -68,16 +68,14 @@ typedef struct
 
 typedef struct
 {
-	bool G;
-	bool B;
-	bool Q;
+	bool KEY_F;
+	bool KEY_G;
 	bool KEY_Z;
 	bool KEY_X;
 	bool KEY_V;
 	
+	int f_t;
 	int g_t;
-	int b_t;
-	int q_t;
 	int z_t;
 	int x_t;
 	int v_t;

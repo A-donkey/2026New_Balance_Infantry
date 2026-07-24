@@ -11,6 +11,7 @@
 #include "Check_Task.h"
 #include "Self_Rescue.h"
 #include "wheel_kalman.h"
+#include "Power_Limit.h"
 
 //角度转弧度
 #define Ang_PI 0.01745329f
@@ -34,6 +35,7 @@ typedef struct
 	bool fall_flag;     //倒地标志位
 	bool slip_flag[2];  //打滑标志位
 	bool theta_flag[3]; //theta角度异常标志位[0左腿杆 1右腿杆 2车身(倒台阶了)]
+	bool super_flag;		//超级加速标志位(飞坡)
 }Flag_Bit_t;
 
 typedef struct
@@ -77,6 +79,7 @@ typedef struct
 {
 	float Gravity_Comp_Theta_l; 		//左腿摆角重心补偿
 	float Gravity_Comp_Theta_r;			//右腿摆角重心补偿
+	float Spin_Comp_Theta_b;				//机身摆角自旋补偿
 }Compensation_Amount_t;
 
 typedef struct
@@ -126,7 +129,7 @@ void Chassis_Task(void);
 void Vmc(Flag_Bit_t *flag,Joint_Motor_Status_t *joint_m[2],Vmc_Five_Link_Parameter_t *five_link[2]);
 void Chassis_Can_Data_Send(Chassis_Motor_t *cm,Controlled_State_t *cs,Joint_Motor_Status_t *joint_m[2]);
 void All_Theta_Err_Check(INS_t *ins,Flag_Bit_t *flag,Leg_Current_Situation_t *leg[2],Joint_Motor_Status_t *joint_m[2]);
-void Slip_Check_Calc(Flag_Bit_t *flag,Slip_Check_t *slip,Body_Current_Situation_t *body,Leg_Current_Situation_t *leg[2]);
+void Slip_Check_Calc(Flag_Bit_t *flag,Slip_Check_t *slip,Body_Current_Situation_t *body,Leg_Current_Situation_t *leg[2],Goal_Setting_t *goal);
 void Bump_Control(Flag_Bit_t *flag,Goal_Setting_t *goal,Leg_Current_Situation_t *leg[2],Joint_Motor_Status_t *joint_m[2]);
 void YAW_Parameter_Processing(Flag_Bit_t *flag,Goal_Setting_t *goal,Controlled_State_t *cs,Body_Current_Situation_t *body);
 void Check_Stuck_Leg(Flag_Bit_t *flag,Bring_Legs_t *bring,Controlled_State_t *cs,Leg_Current_Situation_t *leg[2],Joint_Motor_Status_t *joint_m[2]);
@@ -134,6 +137,7 @@ void Fast_Processing(Flag_Bit_t *flag,Goal_Setting_t *goal,Controlled_State_t *c
 void Variable_Information_Acquisition(INS_t *ins,Chassis_Motor_t *cm,Body_Current_Situation_t *body,Leg_Current_Situation_t *leg[2],Vmc_Five_Link_Parameter_t *five_link[2]);
 void Chassis_Control(INS_t *ins,Flag_Bit_t *flag,RC_Ctrl_t *rc_ctrl,PC_Ctrl_t *pc_ctrl,Goal_Setting_t *goal,Self_Rescue_t *self_re,Controlled_State_t *cs,Body_Current_Situation_t *body,Leg_Current_Situation_t *leg[2]);
 void Leg_Control(INS_t *ins,Flag_Bit_t *flag,Bring_Legs_t *bring,Goal_Setting_t *goal,Self_Rescue_t *self_re,Controlled_State_t *cs,Leg_Current_Situation_t *leg[2],Joint_Motor_Status_t *joint_m[2],Vmc_Five_Link_Parameter_t *five_link[2]);
+void Power_Control(Flag_Bit_t *flag,Controlled_State_t *cs,Joint_Motor_Status_t *joint_m[2],Body_Current_Situation_t *body);
 
 //EXTERN部分
 extern PID_t Roll_Pid;

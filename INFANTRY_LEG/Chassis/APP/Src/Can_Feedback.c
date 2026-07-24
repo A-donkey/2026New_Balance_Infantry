@@ -28,20 +28,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		
 	switch(CAN1_RxHeader.StdId)
 	{
-		//超电数据
-		case CAP_TO_CHASSIS_CAN_ID_1:
-		{
-			pm_od.p_out = (uint16_t)(Rx_Data1[0] << 8 | Rx_Data1[1]);
-			pm_od.v_out = (uint16_t)(Rx_Data1[2] << 8 | Rx_Data1[3]);
-			pm_od.i_out = (uint16_t)(Rx_Data1[4] << 8 | Rx_Data1[5]);
-			break;
-		}
-		case CAP_TO_CHASSIS_CAN_ID_2:
-		{
-			pm_od.sta_code.all = (uint16_t)(Rx_Data1[0] << 8 | Rx_Data1[1]);	
-			pm_od.err_code     = (uint16_t)(Rx_Data1[2] << 8 | Rx_Data1[3]);
-			break;
-		}
 		//DT7数据
 		case DT7_TO_CHASSIS_CAN_ID:
 		{
@@ -59,6 +45,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 			Up_Cboard_Info.Friction_Status  = Rx_Data1[1];
 			Up_Cboard_Info.Friction_Speed   = Rx_Data1[2] << 8 | Rx_Data1[3];
 			VT03.key                        = Rx_Data1[4] << 8 | Rx_Data1[5];
+			VT03.mode_sw                    = Rx_Data1[6];
 			break;
 		}
 		//上板数据
@@ -67,8 +54,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 			Up_Cboard_Info.up_err_num        = (Rx_Data1[0] << 8 | Rx_Data1[1]);
 			Up_Cboard_Info.ecd_yaw_DM4310      = (Rx_Data1[2] << 8 | Rx_Data1[3]);
 			Up_Cboard_Info.up_pitch          = (float)((int16_t)(Rx_Data1[4] << 8 | Rx_Data1[5]));
-			Up_Cboard_Info.Number_Of_Bullets =  Rx_Data1[6];
-			VT03.mode_sw                     =  Rx_Data1[7];
+			Up_Cboard_Info.Number_Of_Bullets =  (Rx_Data1[6] << 8 | Rx_Data1[7]);
 			break;
 		}
 		//DM_8009数据
@@ -110,6 +96,15 @@ void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		
 	switch(CAN2_RxHeader.StdId)
 	{
+		//超电数据
+		case CAP_TO_CHASSIS_CAN_ID:
+		{
+			pm_od.voltage 			= (uint16_t)(Rx_Data2[1] << 8 | Rx_Data2[0]);
+			pm_od.chassis_power = ( int16_t)(Rx_Data2[3] << 8 | Rx_Data2[2]);
+			pm_od.referee_power = (uint16_t)(Rx_Data2[5] << 8 | Rx_Data2[4]);
+			pm_od.reserve				=	(uint16_t)(Rx_Data2[7] << 8 | Rx_Data2[6]);
+			break;
+		}
 		//DM_8009数据
 		case RIGHT_FRONT_MOTOR_FEEDBACK_ID:
 		{

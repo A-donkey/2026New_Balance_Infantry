@@ -115,3 +115,4 @@ cboard\self_rescue.o: ../Motor/Inc/Damiao_Motor.h
 cboard\self_rescue.o: ../APP/Inc/Remote_Control.h
 cboard\self_rescue.o: ../Bsp/Inc/bsp_rc.h
 cboard\self_rescue.o: ../Math/Inc/wheel_kalman.h
+cboard\self_rescue.o: ../APP/Inc/Power_Limit.h

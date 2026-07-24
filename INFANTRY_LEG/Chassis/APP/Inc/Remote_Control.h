@@ -67,15 +67,21 @@ typedef struct
 
 typedef struct
 {
-	bool E;
-	bool F;
-	bool R;	
-	bool CTRL;
+	bool KEY_Q;
+	bool KEY_E;
+	bool KEY_R;
+	bool KEY_B;
+	bool KEY_C;
+	bool KEY_CTRL;
+	bool KEY_SHIFT;
 	
+	int q_t;
 	int e_t;
-	int f_t;
 	int r_t;
+	int b_t;
+	int c_t;
 	int ctrl_t;
+	int shift_t;
 }PC_Ctrl_t;
 
 void SBUS_TO_RC(void);

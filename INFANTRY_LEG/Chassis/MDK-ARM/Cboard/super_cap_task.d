@@ -110,3 +110,4 @@ cboard\super_cap_task.o: ../Motor/Inc/Damiao_Motor.h
 cboard\super_cap_task.o: ../APP/Inc/Remote_Control.h
 cboard\super_cap_task.o: ../Bsp/Inc/bsp_rc.h
 cboard\super_cap_task.o: ../APP/Inc/Some_Functions.h
+cboard\super_cap_task.o: ../APP/Inc/Power_Limit.h

@@ -121,3 +121,4 @@ cboard\ref_task.o: ../Math/Inc/QuaternionEKF.h
 cboard\ref_task.o: ../Math/Inc/kalman_filter.h
 cboard\ref_task.o: ../APP/Inc/Self_Rescue.h
 cboard\ref_task.o: ../Math/Inc/wheel_kalman.h
+cboard\ref_task.o: ../APP/Inc/Power_Limit.h

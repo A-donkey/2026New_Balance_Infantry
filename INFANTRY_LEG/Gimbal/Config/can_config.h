@@ -6,8 +6,6 @@
 #define CHASSIS_TO_GIMBAL_CAN_ID_2        0x115
 #define GIMBAL_TO_CHASSIS_CAN_ID_1        0x100
 #define GIMBAL_TO_CHASSIS_CAN_ID_2        0x120
-#define CAP_TO_CHASSIS_CAN_ID_1           0x612
-#define CAP_TO_CHASSIS_CAN_ID_2           0x610
 #define LEFT_FRONT_MOTOR_CTRL_ID        	0x03
 #define LEFT_BACK_MOTOR_CTRL_ID        		0x04
 #define LEFT_FRONT_MOTOR_FEEDBACK_ID    	0x10
@@ -26,6 +24,8 @@
 #define RIGHT_BACK_MOTOR_FEEDBACK_ID   		0x13
 #define RIGHT_WHEEL_MOTOR_CTRL_ID         0x200
 #define RIGHT_WHEEL_MOTOR_FEEDBACK_ID     0x201
+#define CHASSIS_TO_CAP_CAN_ID             0x50
+#define CAP_TO_CHASSIS_CAN_ID              0x51
 
 /*********************GIMBAL_CAN2************************/
 #define PITCH_MOTOR_CTRL_ID               0x0C

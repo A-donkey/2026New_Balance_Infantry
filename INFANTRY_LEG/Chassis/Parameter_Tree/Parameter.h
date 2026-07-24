@@ -9,7 +9,8 @@
 #define L_wheel  0.4662f //两个驱动轮之间距离(m)
 
 #define Kt    0.232463677f //减速箱的转矩常数(Nm/A)
-#define Gear_Ratio  14.88f //减速箱的减速比
+// #define Gear_Ratio  14.88f //自制减速箱的减速比
+#define Gear_Ratio  15.7647f //XROLL减速箱的减速比
 
 //云台和底盘是反过来的
 #define ZERO_HEAD_YAW  0.961483002f  //正方向零点位置
@@ -18,12 +19,14 @@
 //目标参数
 
 #define DX_UP_MAX       1.00f     //高腿杆最大X速度(m/s)
-#define DX_MID_MAX      1.7f     //中腿杆最大X速度  
-#define DX_DOWN_MAX     2.30f     //低腿杆最大X速度  
+#define DX_MID_MAX      1.7f     //中腿杆最大X速度
+#define DX_DOWN_MAX     2.10f     //低腿杆最大X速度  
+#define DX_MAX_PRO 			2.00f     //最大X速度(m/s)(中腿超电)
 
 #define DYAW_UP_MAX     6.0f     //高腿杆最大YAW速度(rad/s)
 #define DYAW_MID_MAX    9.0f     //中腿杆最大YAW速度  
-#define DYAW_DOWN_MAX  11.0f     //低腿杆最大YAW速度  
+#define DYAW_DOWN_MAX   11.0f     //低腿杆最大YAW速度  
+#define DYAW_MAX_PRO 		12.0f   //最大YAW速度(rad/s)(中腿超电)
 
 //为了克服静态误差把腿长调小
 #define UP_LEG_LENGTH   0.34f    //高腿杆腿长(m)
@@ -32,11 +35,12 @@
 
 #define PC_DX_RAMP_SENS    0.018f   //键鼠DX阶跃灵敏度
 #define RC_DX_RAMP_SENS    0.020f   //遥控器DX阶跃灵敏度
-#define PC_DYAW_RAMP_SENS  0.005f   //键鼠DYAW阶跃灵敏度
+#define PC_DYAW_RAMP_SENS  0.010f   //键鼠DYAW阶跃灵敏度
 #define RC_DYAW_RAMP_SENS  0.005f   //遥控器DYAW阶跃灵敏度
+#define LEG_RAMP_SENS      0.010f   //腿杆阶跃灵敏度
 
 //离地参数
-#define OFF_GROUND_FN_MAX    110.0f  //地面对车体最大支持力(离地判断阈值)
+#define OFF_GROUND_FN_MAX    100.0f  //地面对车体最大支持力(离地判断阈值)
 //暂时修改离地检测参数<*_*>
 //#define OFF_GROUND_FN_MAX    135.0f  //地面对车体最大支持力(离地判断阈值)
 #define OFF_GROUND_FN_COMP    40.0f  //离地后向下补偿的推力
@@ -59,10 +63,10 @@
 #define BUMP_TWHEEL_MAX     5.2f //触发磕台阶判断的最大轮力矩值
 #define BUMP_LEG_THETA_MAX  0.3f //触发磕台阶判断的最大腿杆摆角
 
-#define BACK_LEG_TP         6.0f //磕上台阶腿杆往回摆的力
-#define FRONT_LEG_TP      -15.0f //磕上台阶腿杆归正的力
+#define BACK_LEG_TP         5.0f //磕上台阶腿杆往回摆的力
+#define FRONT_LEG_TP      -17.0f //磕上台阶腿杆归正的力
 
-#define RETRACT_LEG_LENGTH 0.22f //磕上台阶后收腿腿长
+#define RETRACT_LEG_LENGTH 0.18f //磕上台阶后收腿腿长
 
 //判断打滑的各项参数
 
@@ -70,6 +74,7 @@
 #define DVB_THRESHOLD 1.2f   //轮速与车体估计速度差值阈值
 #define DBY_THRESHOLD 0.9f   //轮估计YAW速度与陀螺仪YAW速度差值阈值
 #define DVW_THRESHOLD 0.06f  //加速度估计的瞬时速度与轮部速度估计的瞬时速度的差值阈值
+#define DYAW_EXIT_THRESHOLD 1.0f //YAW速度退出阈值
 
 //判断卡腿的各项参数
 

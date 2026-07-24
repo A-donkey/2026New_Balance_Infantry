@@ -44,12 +44,10 @@ void Chassis_Init(void)
 	PID_Init(&Leg_L_Pid[0]   ,  180,  30, 0, 6000,    0,   130,  0,0,0,0, 0,NO_CIRCLE,NONE); //左右腿腿长串级PID
 	PID_Init(&Leg_L_Pid[1]   ,  180,  30, 0, 6000,    0,   130,  0,0,0,0, 0,NO_CIRCLE,NONE);
 	
-	PID_Init(&Leg_P_Pid[0]   ,   80,  60, 0,  140,    0,     7,  0,0,0,0, 0,RADIAN,NONE);    //左右腿腿杆绝对位置串级PID
-	PID_Init(&Leg_P_Pid[1]   ,   80,  60, 0,  140,    0,     7,  0,0,0,0, 0,RADIAN,NONE);
+	PID_Init(&Leg_P_Pid[0]   ,   80,  60, 0,  180,    0,     7,  0,0,0,0, 0,RADIAN,NONE);    //左右腿腿杆绝对位置串级PID
+	PID_Init(&Leg_P_Pid[1]   ,   80,  60, 0,  180,    0,     7,  0,0,0,0, 0,RADIAN,NONE);
 	
-	PID_Init(&Roll_Pid       , 0.10, 0.1, 0,  0.8,    0, 0.002,  0,0,0,0, 2,NO_CIRCLE,NONE); //ROLL轴补偿PID
-//	//暂时去掉roll轴补偿<*_*>
-//	PID_Init(&Roll_Pid       , 0.10, 0.1, 0,  0,    0, 0.002,  0,0,0,0, 2,NO_CIRCLE,NONE); //ROLL轴补偿PID
+	PID_Init(&Roll_Pid       , 0.10, 0.1, 0,  1.0,    0, 0.002,  0,0,0,0, 2,NO_CIRCLE,NONE); //ROLL轴补偿内环PID
 	
 	//初始化前馈(c0=静态增益 c1=速度补偿 c2=加速度补偿)
 	static float ffc_g_L[3] = {1.62f, 0.0004f, 0.0001f};
@@ -70,7 +68,7 @@ Chassis任务
 void Chassis_Task(void)
 {
 	Variable_Information_Acquisition(&INS,&Chassis_Motor,&Body,leg_ptr,five_link_ptr);
-	Slip_Check_Calc(&Flag,&Slip_Check,&Body,leg_ptr);
+	Slip_Check_Calc(&Flag,&Slip_Check,&Body,leg_ptr,&Goal_Setting);
 	All_Theta_Err_Check(&INS,&Flag,leg_ptr,joint_m_ptr);
 	Chassis_Control(&INS,&Flag,&Rc_Ctrl,&Pc_Ctrl,&Goal_Setting,&Self_Rescue,&Controlled_State,&Body,leg_ptr);
 	Fast_Processing(&Flag,&Goal_Setting,&Controlled_State,&Body,&Speed_Fusion_Parameter);
@@ -79,6 +77,7 @@ void Chassis_Task(void)
 	Bump_Control(&Flag,&Goal_Setting,leg_ptr,joint_m_ptr);
 	Leg_Control(&INS,&Flag,&Bring_Legs,&Goal_Setting,&Self_Rescue,&Controlled_State,leg_ptr,joint_m_ptr,five_link_ptr);
 	LQR(&Flag,&Goal_Setting,&Controlled_State,&Compensation_Amount,&Body,leg_ptr,joint_m_ptr,five_link_ptr);
+	Power_Control(&Flag,&Controlled_State,joint_m_ptr,&Body);
 	Vmc(&Flag,joint_m_ptr,five_link_ptr);
 	Chassis_Can_Data_Send(&Chassis_Motor,&Controlled_State,joint_m_ptr);
 }
@@ -148,7 +147,8 @@ void Variable_Information_Acquisition(INS_t *ins,
 void Slip_Check_Calc(Flag_Bit_t *flag,
 										 Slip_Check_t *slip,
 										 Body_Current_Situation_t *body,
-								     Leg_Current_Situation_t *leg[2])
+								     Leg_Current_Situation_t *leg[2],
+								     Goal_Setting_t *goal)
 {
 	//获取加速度估计以及轮部速度估计的瞬时速度
 	slip->dt = DWT_GetDeltaT(&slip->dwt_d_slip);
@@ -161,7 +161,7 @@ void Slip_Check_Calc(Flag_Bit_t *flag,
 	if( ( fabs(body->Estimate_dyaw - body->d_yaw) >= DBY_THRESHOLD   ||
 		    fabs(leg[0]->wheel_s) - fabs(body->d_x) >= DVB_THRESHOLD   ||
 	      fabs(leg[1]->wheel_s) - fabs(body->d_x) >= DVB_THRESHOLD ) &&
-			  flag->spinning_flag == 0                                      )
+			  flag->spinning_flag == 0 &&  fabs(goal->d_yaw_t) < DYAW_EXIT_THRESHOLD                                   )
 	{
 		if(slip->dv_wheel[0] - slip->dv_acc >= DVW_THRESHOLD && flag->slip_flag[0] == 0) 
 		{ 
@@ -171,7 +171,7 @@ void Slip_Check_Calc(Flag_Bit_t *flag,
 
 		if(slip->dv_wheel[1] - slip->dv_acc >= DVW_THRESHOLD && flag->slip_flag[1] == 0) 
 		{ 
-			flag->slip_flag[1] = 1; slip->f_dv_wheel[1] = fabs(leg[1]->wheel_s);
+			flag->slip_flag[1] = 1;slip->f_dv_wheel[1] = fabs(leg[1]->wheel_s);
 		}
 		else if(fabs(leg[1]->wheel_s) <= slip->f_dv_wheel[1] && flag->slip_flag[1] == 1) flag->slip_flag[1] = 0; 
 		
@@ -243,18 +243,25 @@ void Goal_Site(Flag_Bit_t *flag,
 {
 	static float follow_theta = 0;
 	
-	if(body->Estimate_h<=DOWN_LEG_LENGTH) //根据不同腿长控制x以及yaw速度上限
-	{
-		goal->MAX_Dx = DX_DOWN_MAX; goal->MAX_Dyaw = DYAW_DOWN_MAX;
-	}
-	else if(body->Estimate_h>DOWN_LEG_LENGTH && body->Estimate_h<=MID_LEG_LENGTH)
-	{
-		goal->MAX_Dx = DX_MID_MAX;  goal->MAX_Dyaw = DYAW_MID_MAX;
-	}
-	else if(body->Estimate_h>UP_LEG_LENGTH)
-	{
-		goal->MAX_Dx = DX_UP_MAX;   goal->MAX_Dyaw = DYAW_UP_MAX;
-	}
+//	if(body->Estimate_h<=DOWN_LEG_LENGTH) //根据不同腿长控制x以及yaw速度上限
+//	{
+//			goal->MAX_Dx = DX_DOWN_MAX; goal->MAX_Dyaw = DYAW_DOWN_MAX;
+//	}
+//	else if(body->Estimate_h>DOWN_LEG_LENGTH && body->Estimate_h<=MID_LEG_LENGTH)
+//	{
+//		if(flag->super_flag){
+//			goal->MAX_Dx = DX_MAX_PRO; goal->MAX_Dyaw = DYAW_MAX_PRO;
+//		}else{
+//			goal->MAX_Dx = DX_MID_MAX;  goal->MAX_Dyaw = DYAW_MID_MAX;
+//		}
+//	}
+//	else if(body->Estimate_h>UP_LEG_LENGTH)
+//	{
+//		goal->MAX_Dx = DX_UP_MAX;  goal->MAX_Dyaw = DYAW_UP_MAX;
+//	}
+	
+	goal->MAX_Dx = PL_Goal.goal_dx;
+	goal->MAX_Dyaw = PL_Goal.goal_dyaw;
 	
 	//获取跟随角度
 	if(flag->spinning_flag)
@@ -324,13 +331,18 @@ void Goal_Site(Flag_Bit_t *flag,
 void Chassis_Control_Init(Flag_Bit_t *flag,
 												  Goal_Setting_t *goal)
 {
-	goal->d_x_t     = 0;               //初始化x轴速度
-	goal->d_yaw_t   = 0;		         	 //初始化yaw速度
-	goal->Target_L0 = DOWN_LEG_LENGTH; //初始化腿长
+	goal->d_x_t     	= 0;               //初始化x轴速度
+	goal->d_yaw_t   	= 0;		         	 //初始化yaw速度
+	goal->Target_L0 	= DOWN_LEG_LENGTH; //初始化腿长
+	goal->MAX_Dx			= DX_DOWN_MAX;		 //初始化最大目标速度
+	goal->MAX_Dyaw		= DYAW_DOWN_MAX;	 //初始化最大目标角速度
+	PL_Goal.goal_dx 	= DX_DOWN_MAX;
+	PL_Goal.goal_dyaw = DYAW_DOWN_MAX;
 	
 	flag->bump_flag     = 0; //关闭磕台阶
 	flag->change_flag   = 0; //关闭车体反转
 	flag->spinning_flag = 0; //关闭小陀螺
+	flag->super_flag		=	0; //关闭超级加速
 }
 
 /*******************************************************************************************************
@@ -340,24 +352,24 @@ void Rc_Mode(Flag_Bit_t *flag,
 						 RC_Ctrl_t *rc_ctrl,
 						 Goal_Setting_t *goal)
 {
-//	static bool first_bump_flag = 0;
+	static bool first_bump_flag = 0;
 
-//	if     (switch_is_down(rc_ctrl->rc.s[1])) { goal->Target_L0 = DOWN_LEG_LENGTH; } //腿长控制
-//	else if(switch_is_mid (rc_ctrl->rc.s[1])) { goal->Target_L0 = MID_LEG_LENGTH;  }						
+	if     (switch_is_down(rc_ctrl->rc.s[1])) { goal->Target_L0 = Ramp_Function(DOWN_LEG_LENGTH,&goal->Target_L0,LEG_RAMP_SENS); } //腿长控制
+	else if(switch_is_mid (rc_ctrl->rc.s[1])) { goal->Target_L0 = Ramp_Function(MID_LEG_LENGTH,&goal->Target_L0,LEG_RAMP_SENS);  }						
 
-//	if(switch_is_up(rc_ctrl->rc.s[1]) && first_bump_flag == 0) //磕台阶模式
-//	{
-//		flag->bump_flag = 1;
-//		first_bump_flag = 1;
-//	}
-//	else if(!switch_is_up(rc_ctrl->rc.s[1]))
-//	{
-//		flag->bump_flag = 0; //复位
-//		first_bump_flag = 0; 
-//	}
+	if(switch_is_up(rc_ctrl->rc.s[1]) && first_bump_flag == 0) //磕台阶模式
+	{
+		flag->bump_flag = 1;
+		first_bump_flag = 1;
+	}
+	else if(!switch_is_up(rc_ctrl->rc.s[1]))
+	{
+		flag->bump_flag = 0; //复位
+		first_bump_flag = 0; 
+	}
 	
-	flag->bump_flag = 0; //复位
-	goal->Target_L0 = DOWN_LEG_LENGTH;
+//	flag->bump_flag = 0; //复位
+//	goal->Target_L0 = DOWN_LEG_LENGTH;
 }
 
 /*******************************************************************************************************
@@ -365,14 +377,18 @@ void Rc_Mode(Flag_Bit_t *flag,
 ********************************************************************************************************/
 void Pc_Init(PC_Ctrl_t *pc_ctrl)
 {
-	pc_ctrl->E = 0;
-	pc_ctrl->F = 0;
-	pc_ctrl->R = 0;	
-	pc_ctrl->CTRL = 0;
+	pc_ctrl->KEY_Q = 0;
+	pc_ctrl->KEY_E = 0;
+	pc_ctrl->KEY_R = 0;
+	pc_ctrl->KEY_B = 0;
+	pc_ctrl->KEY_C = 0;
+	pc_ctrl->KEY_CTRL = 0;
 	
+	pc_ctrl->q_t = 0;
 	pc_ctrl->e_t = 0;
-	pc_ctrl->f_t = 0;
 	pc_ctrl->r_t = 0;
+	pc_ctrl->b_t = 0;
+	pc_ctrl->c_t = 0;
 	pc_ctrl->ctrl_t = 0;
 }
 
@@ -384,20 +400,21 @@ void Pc_Mode(Flag_Bit_t *flag,
 						 PC_Ctrl_t *pc_ctrl,
 						 Goal_Setting_t *goal)
 {
-	// /******Z键检测,刷新UI******/
-	// if(rc_ctrl->key.v&KEY_PRESSED_OFFSET_Z) Rest_UI_Flag = 1;
-	// else                                    Rest_UI_Flag = 0;
+	static float Dt7_pc_target_L0 = DOWN_LEG_LENGTH;
+	/******CTRL键检测,刷新UI******/
+	if(rc_ctrl->key.v&KEY_PRESSED_OFFSET_CTRL) Rest_UI_Flag = 1;
+	else                                       Rest_UI_Flag = 0;
 	
-	/******R键检测,转换正方向******/
-	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_R) && !pc_ctrl->R)
+	/******B键检测,转换正方向******/
+	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_B) && !pc_ctrl->KEY_B)
 	{
-		pc_ctrl->R = 1;
-		pc_ctrl->r_t = HAL_GetTick();
+		pc_ctrl->KEY_B = 1;
+		pc_ctrl->b_t = HAL_GetTick();
 	}
-	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_R) && pc_ctrl->R)
+	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_B) && pc_ctrl->KEY_B)
 	{
-		pc_ctrl->R = 0;
-		if(HAL_GetTick()-pc_ctrl->r_t < 500)
+		pc_ctrl->KEY_B = 0;
+		if(HAL_GetTick()-pc_ctrl->b_t < 500)
 		{
 			if(!flag->off_flag      &&
 				 !flag->bump_flag     &&
@@ -410,73 +427,74 @@ void Pc_Mode(Flag_Bit_t *flag,
 		}
 	}
 	
-	/******E键检测,小陀螺******/
-	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_E) && !pc_ctrl->E)
+	/******C键检测,小陀螺******/
+	if(rc_ctrl->key.v & KEY_PRESSED_OFFSET_C)  // 按住C
 	{
-		pc_ctrl->E = 1;
+    	pc_ctrl->KEY_C = 1;
+    	if(!flag->off_flag && !flag->bump_flag)  // 安全检查
+    	{
+        	flag->change_flag   = 0;
+        	flag->spinning_flag = 1;             // 开启小陀螺
+    	}
+	}
+	else  // 松开C
+	{
+    	pc_ctrl->KEY_C = 0;
+    	flag->spinning_flag = 0;                 // 关闭小陀螺
+	}
+	
+	/******shift键检测,加速飞坡******/
+	if(rc_ctrl->key.v & KEY_PRESSED_OFFSET_SHIFT)  // 按住SHIFT
+	{
+		pc_ctrl->KEY_SHIFT = 1;
+		flag->super_flag = 1;
+		Cap_Mode = CAP_ON;
+	}
+	else  // 松开SHIFT
+	{
+		pc_ctrl->KEY_SHIFT = 0;
+		flag->super_flag = 0;
+		Cap_Mode = CAP_OFF;
+	}
+
+	/******E键检测,切换腿长******/
+	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_E) && !pc_ctrl->KEY_E)
+	{
+		pc_ctrl->KEY_E = 1;
 		pc_ctrl->e_t = HAL_GetTick();
 	}
-	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_E) && pc_ctrl->E)
+	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_E) && pc_ctrl->KEY_E)
 	{
-		pc_ctrl->E = 0;
+		pc_ctrl->KEY_E = 0;
 		if(HAL_GetTick()-pc_ctrl->e_t < 500)
 		{
-			if(!flag->off_flag  &&
-				 !flag->bump_flag   )
-			{
-				if(flag->spinning_flag) 
-				{
-					flag->change_flag   = 0;
-					flag->spinning_flag = 0;
-				}
-				else 
-				{
-					flag->change_flag   = 0;
-					flag->spinning_flag = 1;
-				}
-			}
-			else flag->spinning_flag = 0;
+			if(Dt7_pc_target_L0 == DOWN_LEG_LENGTH) Dt7_pc_target_L0 = MID_LEG_LENGTH;
+			else                                    Dt7_pc_target_L0 = DOWN_LEG_LENGTH;
 		}
 	}
+	// else
+	// {
+	// 	if(goal->Target_L0!=DOWN_LEG_LENGTH && goal->Target_L0!=MID_LEG_LENGTH && goal->Target_L0!=UP_LEG_LENGTH) //异常腿长目标
+	// 	{
+	// 		goal->Target_L0 = DOWN_LEG_LENGTH;
+	// 	}
+	// }
 	
-	/******F键检测,切换腿长******/
-	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_F) && !pc_ctrl->F)
+	/******Q键检测,进入磕台阶模式******/
+	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_Q) && !pc_ctrl->KEY_Q)
 	{
-		pc_ctrl->F = 1;
-		pc_ctrl->f_t = HAL_GetTick();
+		pc_ctrl->KEY_Q = 1;
+		pc_ctrl->q_t = HAL_GetTick();
 	}
-	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_F) && pc_ctrl->F)
+	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_Q) && pc_ctrl->KEY_Q)
 	{
-		pc_ctrl->F = 0;
-		if(HAL_GetTick()-pc_ctrl->f_t < 500)
-		{
-			if(goal->Target_L0 == DOWN_LEG_LENGTH) goal->Target_L0 = MID_LEG_LENGTH;
-			else                                   goal->Target_L0 = DOWN_LEG_LENGTH;
-		}
-	}
-	else
-	{
-		if(goal->Target_L0!=DOWN_LEG_LENGTH && goal->Target_L0!=MID_LEG_LENGTH && goal->Target_L0!=UP_LEG_LENGTH) //异常腿长目标
-		{
-			goal->Target_L0 = DOWN_LEG_LENGTH;
-		}
-	}
-	
-	/******CTRL键检测,进入磕台阶模式******/
-	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_CTRL) && !pc_ctrl->CTRL)
-	{
-		pc_ctrl->CTRL = 1;
-		pc_ctrl->ctrl_t = HAL_GetTick();
-	}
-	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_CTRL) && pc_ctrl->CTRL)
-	{
-		pc_ctrl->CTRL = 0;
-		if(HAL_GetTick()-pc_ctrl->ctrl_t < 500)
+		pc_ctrl->KEY_Q = 0;
+		if(HAL_GetTick()-pc_ctrl->q_t < 500)
 		{
 			if(!flag->fall_flag     &&  
 			   !flag->change_flag   &&
 				 !flag->slip_flag[0]  &&
-			   !flag->slip_flag[0]  &&
+			   !flag->slip_flag[1]  &&
 				 !flag->theta_flag[0] &&
 				 !flag->theta_flag[1] &&
 	       !flag->spinning_flag   )
@@ -485,11 +503,14 @@ void Pc_Mode(Flag_Bit_t *flag,
 				else 
 				{
 					flag->bump_flag = 0;
-					goal->Target_L0 = DOWN_LEG_LENGTH;
+					Dt7_pc_target_L0 = DOWN_LEG_LENGTH;
 				}
 			}
 			else flag->bump_flag = 0;
 		}
+	}
+	if(!flag->bump_flag){
+		goal->Target_L0 = Ramp_Function(Dt7_pc_target_L0, &goal->Target_L0, LEG_RAMP_SENS);
 	}
 }
 
@@ -500,20 +521,21 @@ void Vt03_Pc_Mode(Flag_Bit_t *flag,
 									PC_Ctrl_t *pc_ctrl,
 									Goal_Setting_t *goal)
 {
-	// /******Z键检测,刷新UI******/
-	// if(VT03.key&KEY_PRESSED_OFFSET_Z) Rest_UI_Flag = 1;
-	// else                              Rest_UI_Flag = 0;
+	static float Vt03_pc_target_L0 = DOWN_LEG_LENGTH;
+	/******CTRL键检测,刷新UI******/
+	if(VT03.key&KEY_PRESSED_OFFSET_CTRL) Rest_UI_Flag = 1;
+	else                              	 Rest_UI_Flag = 0;
 	
-	/******R键检测,转换正方向******/
-	if((VT03.key&KEY_PRESSED_OFFSET_R) && !pc_ctrl->R)
+	/******B键检测,转换正方向******/
+	if((VT03.key&KEY_PRESSED_OFFSET_B) && !pc_ctrl->KEY_B)
 	{
-		pc_ctrl->R = 1;
-		pc_ctrl->r_t = HAL_GetTick();
+		pc_ctrl->KEY_B = 1;
+		pc_ctrl->b_t = HAL_GetTick();
 	}
-	else if(!(VT03.key&KEY_PRESSED_OFFSET_R) && pc_ctrl->R)
+	else if(!(VT03.key&KEY_PRESSED_OFFSET_B) && pc_ctrl->KEY_B)
 	{
-		pc_ctrl->R = 0;
-		if(HAL_GetTick()-pc_ctrl->r_t < 500)
+		pc_ctrl->KEY_B = 0;
+		if(HAL_GetTick()-pc_ctrl->b_t < 500)
 		{
 			if(!flag->off_flag      &&
 				 !flag->bump_flag     &&
@@ -526,73 +548,74 @@ void Vt03_Pc_Mode(Flag_Bit_t *flag,
 		}
 	}
 	
-	/******E键检测,小陀螺******/
-	if((VT03.key&KEY_PRESSED_OFFSET_E) && !pc_ctrl->E)
+	/******C键检测,小陀螺******/
+	if(VT03.key & KEY_PRESSED_OFFSET_C)  // 按住C
 	{
-		pc_ctrl->E = 1;
+    	pc_ctrl->KEY_C = 1;
+    	if(!flag->off_flag && !flag->bump_flag)  // 安全检查
+    	{
+    		flag->change_flag   = 0;
+        	flag->spinning_flag = 1;             // 开启小陀螺
+    	}
+	}
+	else  // 松开C
+	{
+    	pc_ctrl->KEY_C = 0;
+    	flag->spinning_flag = 0;                 // 关闭小陀螺
+	}
+	
+	/******shift键检测,加速飞坡******/
+	if(VT03.key & KEY_PRESSED_OFFSET_SHIFT)  // 按住SHIFT
+	{
+		pc_ctrl->KEY_SHIFT = 1;
+		flag->super_flag = 1;
+		Cap_Mode = CAP_ON;
+	}
+	else  // 松开SHIFT
+	{
+		pc_ctrl->KEY_SHIFT = 0;
+		flag->super_flag = 0;
+		Cap_Mode = CAP_OFF;
+	}
+
+	/******E键检测,切换腿长******/
+	if((VT03.key&KEY_PRESSED_OFFSET_E) && !pc_ctrl->KEY_E)
+	{
+		pc_ctrl->KEY_E = 1;
 		pc_ctrl->e_t = HAL_GetTick();
 	}
-	else if(!(VT03.key&KEY_PRESSED_OFFSET_E) && pc_ctrl->E)
+	else if(!(VT03.key&KEY_PRESSED_OFFSET_E) && pc_ctrl->KEY_E)
 	{
-		pc_ctrl->E = 0;
+		pc_ctrl->KEY_E = 0;
 		if(HAL_GetTick()-pc_ctrl->e_t < 500)
 		{
-			if(!flag->off_flag  &&
-				 !flag->bump_flag   )
-			{
-				if(flag->spinning_flag) 
-				{
-					flag->change_flag   = 0;
-					flag->spinning_flag = 0;
-				}
-				else 
-				{
-					flag->change_flag   = 0;
-					flag->spinning_flag = 1;
-				}
-			}
-			else flag->spinning_flag = 0;
+			if(Vt03_pc_target_L0 == DOWN_LEG_LENGTH) Vt03_pc_target_L0 = MID_LEG_LENGTH;
+			else                                   	 Vt03_pc_target_L0 = DOWN_LEG_LENGTH;
 		}
 	}
+	// else
+	// {
+	// 	if(goal->Target_L0!=DOWN_LEG_LENGTH && goal->Target_L0!=MID_LEG_LENGTH && goal->Target_L0!=UP_LEG_LENGTH) //异常腿长目标
+	// 	{
+	// 		goal->Target_L0 = DOWN_LEG_LENGTH;
+	// 	}
+	// }
 	
-	/******F键检测,切换腿长******/
-	if((VT03.key&KEY_PRESSED_OFFSET_F) && !pc_ctrl->F)
+	/******Q键检测,进入磕台阶模式******/
+	if((VT03.key&KEY_PRESSED_OFFSET_Q) && !pc_ctrl->KEY_Q)
 	{
-		pc_ctrl->F = 1;
-		pc_ctrl->f_t = HAL_GetTick();
+		pc_ctrl->KEY_Q = 1;
+		pc_ctrl->q_t = HAL_GetTick();
 	}
-	else if(!(VT03.key&KEY_PRESSED_OFFSET_F) && pc_ctrl->F)
+	else if(!(VT03.key&KEY_PRESSED_OFFSET_Q) && pc_ctrl->KEY_Q)
 	{
-		pc_ctrl->F = 0;
-		if(HAL_GetTick()-pc_ctrl->f_t < 500)
-		{
-			if(goal->Target_L0 == DOWN_LEG_LENGTH) goal->Target_L0 = MID_LEG_LENGTH;
-			else                                   goal->Target_L0 = DOWN_LEG_LENGTH;
-		}
-	}
-	else
-	{
-		if(goal->Target_L0!=DOWN_LEG_LENGTH && goal->Target_L0!=MID_LEG_LENGTH && goal->Target_L0!=UP_LEG_LENGTH) //异常腿长目标
-		{
-			goal->Target_L0 = DOWN_LEG_LENGTH;
-		}
-	}
-	
-	/******CTRL键检测,进入磕台阶模式******/
-	if((VT03.key&KEY_PRESSED_OFFSET_CTRL) && !pc_ctrl->CTRL)
-	{
-		pc_ctrl->CTRL = 1;
-		pc_ctrl->ctrl_t = HAL_GetTick();
-	}
-	else if(!(VT03.key&KEY_PRESSED_OFFSET_CTRL) && pc_ctrl->CTRL)
-	{
-		pc_ctrl->CTRL = 0;
-		if(HAL_GetTick()-pc_ctrl->ctrl_t < 500)
+		pc_ctrl->KEY_Q = 0;
+		if(HAL_GetTick()-pc_ctrl->q_t < 500)
 		{
 			if(!flag->fall_flag     &&  
 			   !flag->change_flag   &&
 				 !flag->slip_flag[0]  &&
-			   !flag->slip_flag[0]  &&
+			   !flag->slip_flag[1]  &&
 				 !flag->theta_flag[0] &&
 				 !flag->theta_flag[1] &&
 	       !flag->spinning_flag   )
@@ -601,11 +624,15 @@ void Vt03_Pc_Mode(Flag_Bit_t *flag,
 				else 
 				{
 					flag->bump_flag = 0;
-					goal->Target_L0 = DOWN_LEG_LENGTH;
+					Vt03_pc_target_L0 = DOWN_LEG_LENGTH;
 				}
 			}
 			else flag->bump_flag = 0;
 		}
+	}
+	
+	if(!flag->bump_flag){
+	goal->Target_L0 = Ramp_Function(Vt03_pc_target_L0, &goal->Target_L0, LEG_RAMP_SENS);
 	}
 }
 
@@ -833,7 +860,7 @@ void Fast_Processing(Flag_Bit_t *flag,
 		{
 			start_situate_flag = 1;
 			if(fabs(body->d_x)>0.02f){
-				body->x += body->d_x*0.005f;
+				body->x += body->d_x*0.003f;
 			}
 		}
 
@@ -987,31 +1014,31 @@ void Bump_Control(Flag_Bit_t *flag,
 			{
 				case 0:
 				{
-					if(fabs(leg[0]->abs_leg_theta)>=1.32f)
+					if(fabs(leg[0]->abs_leg_theta)>=1.4f)
 					{
-						PID_Calculate(&Leg_P_Pid[0],leg[0]->abs_leg_theta,1.22f);
+						PID_Calculate(&Leg_P_Pid[0],leg[0]->abs_leg_theta,1.35f);
 						joint_m[0]->Tp = Leg_P_Pid[0].Output;
 					}
 					else joint_m[0]->Tp = BACK_LEG_TP;
 					
-					if(fabs(leg[0]->theta)>=1.2f) bump_step[0] = 1;
+					if(fabs(leg[0]->theta)>=1.30f) bump_step[0] = 1;
 					break;
 				}
 				case 1:
 				{		
-					if(fabs(leg[0]->theta)>=1.25f)
-					{
-						PID_Calculate(&Leg_P_Pid[0],leg[0]->abs_leg_theta,1.12f);
-						joint_m[0]->Tp = Leg_P_Pid[0].Output;
-					}
-					else joint_m[0]->Tp = FRONT_LEG_TP;
-					
-					if(leg[0]->theta<=0.55f) bump_step[0] = 2;
+//					if(fabs(leg[0]->theta)>=1.65f)
+//					{
+//						PID_Calculate(&Leg_P_Pid[0],leg[0]->abs_leg_theta,1.60f);
+//						joint_m[0]->Tp = Leg_P_Pid[0].Output;
+//					}
+//					else joint_m[0]->Tp = FRONT_LEG_TP;
+					joint_m[0]->Tp = FRONT_LEG_TP;
+					if(leg[0]->theta<=0.60f) bump_step[0] = 2;
 					break;
 				}
 				case 2:
 				{
-					PID_Calculate(&Leg_P_Pid[0],leg[0]->abs_leg_theta,0.18f);
+					PID_Calculate(&Leg_P_Pid[0],leg[0]->abs_leg_theta,0.10f);
 					joint_m[0]->Tp = Leg_P_Pid[0].Output;
 					break;
 				}
@@ -1026,25 +1053,25 @@ void Bump_Control(Flag_Bit_t *flag,
 			{
 				case 0:
 				{
-					if(fabs(leg[1]->abs_leg_theta)>=1.32f)
+					if(fabs(leg[1]->abs_leg_theta)>=1.4f)
 					{
-						PID_Calculate(&Leg_P_Pid[1],leg[1]->abs_leg_theta,1.22f);
+						PID_Calculate(&Leg_P_Pid[1],leg[1]->abs_leg_theta,1.35f);
 						joint_m[1]->Tp = Leg_P_Pid[1].Output;
 					}
 					else joint_m[1]->Tp = BACK_LEG_TP;
 					
-					if(fabs(leg[1]->theta)>=1.2f) bump_step[1] = 1;
+					if(fabs(leg[1]->theta)>=1.30f) bump_step[1] = 1;
 					break;
 				}
 				case 1:
 				{	
 					joint_m[1]->Tp = FRONT_LEG_TP;	
-					if(leg[1]->theta<=0.55f) bump_step[1] = 2;
+					if(leg[1]->theta<=0.60f) bump_step[1] = 2;
 					break;
 				}
 				case 2:
 				{
-					PID_Calculate(&Leg_P_Pid[1],leg[1]->abs_leg_theta,0.18f);
+					PID_Calculate(&Leg_P_Pid[1],leg[1]->abs_leg_theta,0.10f);
 					joint_m[1]->Tp = Leg_P_Pid[1].Output;
 					break;
 				}
@@ -1063,7 +1090,7 @@ void Bump_Control(Flag_Bit_t *flag,
 		}
 		else 
 		{
-			goal->Target_L0 = UP_LEG_LENGTH; //升高腿长方便磕台阶
+			goal->Target_L0 = Ramp_Function(UP_LEG_LENGTH,&goal->Target_L0,LEG_RAMP_SENS); //升高腿长方便磕台阶	
 			
 			bump_step[0] = 0; 
 			bump_step[1] = 0;
@@ -1137,12 +1164,12 @@ void Leg_Control(INS_t *ins,
 				//目标值给小,强制收腿<*_*>
 				if(self_re->col_flag[0] == 1)
 				{
-					PID_Calculate(&Leg_L_Pid[0],five_link[0]->L0,0.16f);
+					PID_Calculate(&Leg_L_Pid[0],five_link[0]->L0,0.18f);
 					joint_m[0]->F0 = -Leg_L_Pid[0].Output - G_Comp[0].Output + SELF_RESCUE_FN_COMP;
 				}
 				if(self_re->col_flag[1] == 1)
 				{
-					PID_Calculate(&Leg_L_Pid[1],five_link[1]->L0,0.16f);
+					PID_Calculate(&Leg_L_Pid[1],five_link[1]->L0,0.18f);
 					joint_m[1]->F0 = -Leg_L_Pid[1].Output - G_Comp[1].Output + SELF_RESCUE_FN_COMP;
 				}
 			}
@@ -1163,7 +1190,7 @@ void LQR(Flag_Bit_t *flag,
 				 Vmc_Five_Link_Parameter_t *five_link[2])
 {
 	//计算平衡点偏置
-	Offset_Calc(comp,Offset_Fit_Coefficients,goal->Target_L0);
+	Offset_Calc(flag,comp,Offset_Fit_Coefficients,goal->Target_L0);
 	
 	//计算拟合K增益
 	Fitting_K_Calc(Fitting_K,P,five_link[0]->L0,five_link[1]->L0);	
@@ -1175,6 +1202,70 @@ void LQR(Flag_Bit_t *flag,
 	{
 		LQR_Calc(flag,goal,comp,body,leg,joint_m);
 	}
+}
+
+static float Limit_percent = 1;
+/*******************************************************************************************************
+功率限制
+********************************************************************************************************/
+void Power_Control(Flag_Bit_t *flag,Controlled_State_t *cs,Joint_Motor_Status_t *joint_m[2],Body_Current_Situation_t *body){
+	if(*cs!=ERO && *cs!=STOP &&!flag->fall_flag && !flag->theta_flag[2])
+	{
+		//定义Tw<0轮向前转,故取反保证机械功率的符号正确
+		float omega_l = -leg_ptr[0]->wheel_s / R_wheel;
+		float omega_r = -leg_ptr[1]->wheel_s / R_wheel;
+		
+		float max_dx;
+		float max_dyaw;
+		
+		if(body->Estimate_h<=DOWN_LEG_LENGTH) //根据不同腿长控制x以及yaw速度上限
+		{
+			max_dx = DX_DOWN_MAX; max_dyaw = DYAW_DOWN_MAX;
+		}
+		else if(body->Estimate_h>DOWN_LEG_LENGTH && body->Estimate_h<=MID_LEG_LENGTH)
+		{
+			if(flag->super_flag){
+				max_dx = DX_MAX_PRO; max_dyaw = DYAW_MAX_PRO;
+			}else{
+				max_dx = DX_MID_MAX; max_dyaw = DYAW_MID_MAX;
+			}
+		}
+		else if(body->Estimate_h>UP_LEG_LENGTH)
+		{
+			max_dx = DX_UP_MAX; max_dyaw = DYAW_UP_MAX;
+		}
+		
+		Limit_State = Power_Limit_Apply(omega_l, omega_r ,joint_m[0]->T_Wheel ,joint_m[1]->T_Wheel);
+		
+		if(Limit_State == LIMIT)
+		{
+			Limit_percent = 0.8f * Limit_percent + 0.2f * (P_max_limit/P_cmd);
+			if(flag->spinning_flag) 
+			{
+				PL_Goal.goal_dx = max_dx;
+				PL_Goal.goal_dyaw = max_dyaw * Limit_percent;
+			}
+			else 
+			{
+				PL_Goal.goal_dx = max_dx * Limit_percent;
+				PL_Goal.goal_dyaw = max_dyaw;
+			}
+		}
+		else
+		{
+			Limit_percent += 0.001f;
+		}
+		//开启超电设置最大输出
+		if(flag->super_flag)
+		{
+			PL_Goal.goal_dx = max_dx;
+			PL_Goal.goal_dyaw = max_dyaw;
+		}
+		//功率限制系数限制在0~1之间
+		Limit_percent = Max_Output(Limit_percent,1.0f);
+		if(Limit_percent < 0.0f) Limit_percent = 0.0f;
+	}
+	else Limit_percent = 1.0f;//异常状态重置功率削减系数
 }
 
 /*******************************************************************************************************
@@ -1216,7 +1307,6 @@ void Vmc(Flag_Bit_t *flag,
 	}
 }
 
-int test_cmp_I = 500;
 /*******************************************************************************************************
 向电机发送消息
 ********************************************************************************************************/

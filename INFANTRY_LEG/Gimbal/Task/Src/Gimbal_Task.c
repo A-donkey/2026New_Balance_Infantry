@@ -81,6 +81,9 @@ void Gimbal_Init(void)
 	//发射机构状态关闭
 	Shoot_Condition = Close;
 	
+	//弹丸估计量重置
+	Heat_Control.Number_Of_Bullets = 450;
+	
 	//过零检测初始化
 	dial_zero_check.Circle = 0;
 	dial_zero_check.LastValue = 0;
@@ -216,16 +219,14 @@ void Rc_Mode(RC_Ctrl_t *rc_ctrl,
 ********************************************************************************************************/
 void Pc_Init(PC_Ctrl_t *pc_ctrl)
 {
-	pc_ctrl->G = 0;
-	pc_ctrl->B = 0;
-	pc_ctrl->Q = 0;
+	pc_ctrl->KEY_F = 0;
+	pc_ctrl->KEY_G = 0;
 	pc_ctrl->KEY_Z = 0;
 	pc_ctrl->KEY_X = 0;
 	pc_ctrl->KEY_V = 0;
 	
+	pc_ctrl->f_t = 0;
 	pc_ctrl->g_t = 0;
-	pc_ctrl->b_t = 0;
-	pc_ctrl->q_t = 0;
 	pc_ctrl->z_t = 0;
 	pc_ctrl->x_t = 0;
 	pc_ctrl->v_t = 0;
@@ -238,6 +239,10 @@ void Pc_Mode(RC_Ctrl_t *rc_ctrl,
 						 PC_Ctrl_t *pc_ctrl,
 						Aim_Tx *aim_tx)
 {
+	if     (switch_is_down(rc_ctrl->rc.s[1])){Shoot_Condition = Close;} //关闭发射机构
+	else if(switch_is_mid (rc_ctrl->rc.s[1])){Shoot_Condition = Open;} //开启摩擦轮
+	else if(switch_is_up  (rc_ctrl->rc.s[1])){Shoot_Condition = Open;} //开启摩擦轮
+
 	static bool single_flag = 1; //单发标志位
 	
 	/******左键检测,允许开火******/
@@ -315,80 +320,35 @@ void Pc_Mode(RC_Ctrl_t *rc_ctrl,
 		}
 	}
 
-	/******Q键检测,摩擦轮开启******/
-	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_Q) && !pc_ctrl->Q)
+	/******G键检测,摩擦轮转速减******/
+	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_G) && !pc_ctrl->KEY_G)
 	{
-		pc_ctrl->Q = 1;
-		pc_ctrl->q_t = HAL_GetTick();
+		pc_ctrl->KEY_G = 1;
+		pc_ctrl->g_t = HAL_GetTick();
 	}
-	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_Q) && pc_ctrl->Q)
+	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_G) && pc_ctrl->KEY_G)
 	{
-		pc_ctrl->Q = 0;
-		if(HAL_GetTick()-pc_ctrl->q_t < 500)
+		pc_ctrl->KEY_G = 0;
+		if(HAL_GetTick()-pc_ctrl->g_t < 500)
 		{
-			if(Shoot_Condition != Close) Shoot_Condition = Close;
-			else Shoot_Condition = Open;
-		}
-	}
-	
-	/******B键检测,弹丸数量重置******/
-	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_B) && !pc_ctrl->B)
-	{
-		pc_ctrl->B = 1;
-		pc_ctrl->b_t = HAL_GetTick();
-	}
-	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_B) && pc_ctrl->B)
-	{
-		pc_ctrl->B = 0;
-		if(HAL_GetTick()-pc_ctrl->b_t < 500)
-		{
-			Heat_Control.Number_Of_Bullets = 450;
-		}
-	}
-	
-	/******!G+S1检测,弹丸数量加减******/
-	static bool change_flag = 0;
-	
-	if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_G))
-	{
-		if(switch_is_mid(rc_ctrl->rc.s[1]) && !change_flag)
-		{
-			change_flag = 1;
-		}
-		else if(switch_is_down(rc_ctrl->rc.s[1]) && change_flag)
-		{
-			change_flag = 0;
-			Heat_Control.Number_Of_Bullets = Positive_Number_Out(Heat_Control.Number_Of_Bullets - 1);
-		}
-		else if(switch_is_up(rc_ctrl->rc.s[1]) && change_flag)
-		{
-			change_flag = 0;
-			Heat_Control.Number_Of_Bullets += 1;
-		}
-	}
-	else change_flag = 0;
-	
-	/******G+S1检测,转速加减******/
-	static bool speed_flag = 0;
-	
-	if(rc_ctrl->key.v&KEY_PRESSED_OFFSET_G)
-	{
-		if(switch_is_mid(rc_ctrl->rc.s[1]) && !speed_flag)
-		{
-			speed_flag = 1;
-		}
-		else if(switch_is_down(rc_ctrl->rc.s[1]) && speed_flag)
-		{
-			speed_flag = 0;
 			Friction_Speed_Comp -= 20;
 		}
-		else if(switch_is_up(rc_ctrl->rc.s[1]) && speed_flag)
+	}
+	
+	/******F键检测,摩擦轮转速加******/
+	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_F) && !pc_ctrl->KEY_F)
+	{
+		pc_ctrl->KEY_F = 1;
+		pc_ctrl->f_t = HAL_GetTick();
+	}
+	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_F) && pc_ctrl->KEY_F)
+	{
+		pc_ctrl->KEY_F = 0;
+		if(HAL_GetTick()-pc_ctrl->f_t < 500)
 		{
-			speed_flag = 0;
 			Friction_Speed_Comp += 20;
 		}
 	}
-	else speed_flag = 0;
 	
 }
 
@@ -397,6 +357,11 @@ VT03的键鼠模式
 ********************************************************************************************************/
 void Vt03_Pc_Mode(PC_Ctrl_t *pc_ctrl,Aim_Tx *aim_tx)
 {
+	//挡位左右两侧均能开启摩擦轮
+	if     (VT03.mode_sw == 0){Shoot_Condition = Close;} //关闭发射机构
+	else if(VT03.mode_sw == 1){Shoot_Condition = Open;} //开启摩擦轮
+	else if(VT03.mode_sw == 2){Shoot_Condition = Open;} //开启摩擦轮
+
 	static bool single_flag = 1; //单发标志位
 	
 	/******左键检测,允许开火******/
@@ -473,82 +438,37 @@ void Vt03_Pc_Mode(PC_Ctrl_t *pc_ctrl,Aim_Tx *aim_tx)
 			aim_tx->mode_want = STD_AUTO_AIM;
 		}
 	}
+	
+	/******G键检测,摩擦轮转速减******/
 
-	/******Q键检测,摩擦轮开启******/
-	if((VT03.key&KEY_PRESSED_OFFSET_Q) && !pc_ctrl->Q)
+	if((VT03.key&KEY_PRESSED_OFFSET_G) && !pc_ctrl->KEY_G)
 	{
-		pc_ctrl->Q = 1;
-		pc_ctrl->q_t = HAL_GetTick();
+		pc_ctrl->KEY_G = 1;
+		pc_ctrl->g_t = HAL_GetTick();
 	}
-	else if(!(VT03.key&KEY_PRESSED_OFFSET_Q) && pc_ctrl->Q)
+	else if(!(VT03.key&KEY_PRESSED_OFFSET_G) && pc_ctrl->KEY_G)
 	{
-		pc_ctrl->Q = 0;
-		if(HAL_GetTick()-pc_ctrl->q_t < 500)
+		pc_ctrl->KEY_G = 0;
+		if(HAL_GetTick()-pc_ctrl->g_t < 500)
 		{
-			if(Shoot_Condition != Close) Shoot_Condition = Close;
-			else Shoot_Condition = Open;
-		}
-	}
-	
-	/******B键检测,弹丸数量重置******/
-	if((VT03.key&KEY_PRESSED_OFFSET_B) && !pc_ctrl->B)
-	{
-		pc_ctrl->B = 1;
-		pc_ctrl->b_t = HAL_GetTick();
-	}
-	else if(!(VT03.key&KEY_PRESSED_OFFSET_B) && pc_ctrl->B)
-	{
-		pc_ctrl->B = 0;
-		if(HAL_GetTick()-pc_ctrl->b_t < 500)
-		{
-			Heat_Control.Number_Of_Bullets = 450;
-		}
-	}
-	
-	/******!G+FN检测,弹丸数量加减******/
-	static bool change_flag = 0;
-	
-	if(!(VT03.key&KEY_PRESSED_OFFSET_G))
-	{
-		if(VT03.fn_1 && !change_flag)
-		{
-			change_flag = 1;
-			Heat_Control.Number_Of_Bullets = Positive_Number_Out(Heat_Control.Number_Of_Bullets - 1);
-		}
-		else if(VT03.fn_2 && !change_flag)
-		{
-			change_flag = 1;
-			Heat_Control.Number_Of_Bullets += 1;
-		}
-		else if(!VT03.fn_1 && !VT03.fn_2)
-		{
-			change_flag = 0;
-		}
-	}
-	else change_flag = 0;
-	
-	/******G+FN检测,转速加减******/
-	static bool speed_flag = 0;
-	
-	if(VT03.key&KEY_PRESSED_OFFSET_G)
-	{
-		if(VT03.fn_1 && !speed_flag)
-		{
-			speed_flag = 1;
 			Friction_Speed_Comp -= 20;
 		}
-		else if(VT03.fn_2 && !speed_flag)
+	}
+	
+	/******F键检测,摩擦轮转速加******/
+	if((VT03.key&KEY_PRESSED_OFFSET_F) && !pc_ctrl->KEY_F)
+	{
+		pc_ctrl->KEY_F = 1;
+		pc_ctrl->f_t = HAL_GetTick();
+	}
+	else if(!(VT03.key&KEY_PRESSED_OFFSET_F) && pc_ctrl->KEY_F)
+	{
+		pc_ctrl->KEY_F = 0;
+		if(HAL_GetTick()-pc_ctrl->f_t < 500)
 		{
-			speed_flag = 1;
 			Friction_Speed_Comp += 20;
 		}
-		else if(!VT03.fn_1 && !VT03.fn_2)
-		{
-			speed_flag = 0;
-		}
 	}
-	else speed_flag = 0;
-	
 }
 
 /*******************************************************************************************************
@@ -725,6 +645,7 @@ void Shoot_Control(Heat_Control_t *hc,
 	{
 		Dial_Status = 1; //拨盘就绪
 		ss->Target_Rpm = 0;
+		Friction_Speed_Comp = 0;
 	}
 	else if(*sc == Open) //单开摩擦轮
 	{

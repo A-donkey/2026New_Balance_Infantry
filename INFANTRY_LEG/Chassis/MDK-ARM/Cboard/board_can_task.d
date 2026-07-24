@@ -118,6 +118,7 @@ cboard\board_can_task.o: ../Math/Inc/QuaternionEKF.h
 cboard\board_can_task.o: ../Math/Inc/kalman_filter.h
 cboard\board_can_task.o: ../APP/Inc/Self_Rescue.h
 cboard\board_can_task.o: ../Math/Inc/wheel_kalman.h
+cboard\board_can_task.o: ../APP/Inc/Power_Limit.h
 cboard\board_can_task.o: ../Task/Inc/Ref_Task.h
 cboard\board_can_task.o: ../Inc/usart.h
 cboard\board_can_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

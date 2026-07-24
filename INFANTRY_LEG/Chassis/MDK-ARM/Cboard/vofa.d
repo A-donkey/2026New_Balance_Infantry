@@ -120,4 +120,5 @@ cboard\vofa.o: ../Math/Inc/QuaternionEKF.h
 cboard\vofa.o: ../Math/Inc/kalman_filter.h
 cboard\vofa.o: ../APP/Inc/Self_Rescue.h
 cboard\vofa.o: ../Math/Inc/wheel_kalman.h
+cboard\vofa.o: ../APP/Inc/Power_Limit.h
 cboard\vofa.o: ../Controller/Inc/LQR.h

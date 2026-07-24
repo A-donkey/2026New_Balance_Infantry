@@ -115,3 +115,4 @@ cboard\lqr.o: ../APP/Inc/Remote_Control.h
 cboard\lqr.o: ../Bsp/Inc/bsp_rc.h
 cboard\lqr.o: ../APP/Inc/Self_Rescue.h
 cboard\lqr.o: ../Math/Inc/wheel_kalman.h
+cboard\lqr.o: ../APP/Inc/Power_Limit.h

@@ -121,5 +121,6 @@ cboard\freertos.o: ../Task/Inc/Chassis_Task.h
 cboard\freertos.o: ../APP/Inc/VMC.h
 cboard\freertos.o: ../APP/Inc/Self_Rescue.h
 cboard\freertos.o: ../Math/Inc/wheel_kalman.h
+cboard\freertos.o: ../APP/Inc/Power_Limit.h
 cboard\freertos.o: ../Task/Inc/Super_Cap_Task.h
 cboard\freertos.o: ../Task/Inc/Board_Can_Task.h

@@ -28,7 +28,7 @@
 #define DIAL_REDUCTION_RATIO 36.0f
 
 //摩擦轮转速
-#define Friction_Speed   6240
+#define Friction_Speed   5800
 
 //云台俯仰角限位
 #define PITCH_UP_LIMIT_POSITION     30

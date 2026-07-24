@@ -3,7 +3,7 @@
 <title>Static Call Graph - [Cboard\Cboard.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image Cboard\Cboard.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri Jul 17 17:43:00 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Jul 23 18:15:30 2026
 <BR><P>
 <H3>Maximum Stack Usage =        344 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1311,7 +1311,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Task
 </UL>
 
-<P><STRONG><a name="[115]"></a>Gimbal_Init</STRONG> (Thumb, 778 bytes, Stack size 40 bytes, gimbal_task.o(i.Gimbal_Init))
+<P><STRONG><a name="[115]"></a>Gimbal_Init</STRONG> (Thumb, 786 bytes, Stack size 40 bytes, gimbal_task.o(i.Gimbal_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = Gimbal_Init &rArr; PID_Init &rArr; OLS_Init &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -2645,23 +2645,20 @@ Global Symbols
 <LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Init
 </UL>
 
-<P><STRONG><a name="[106]"></a>Pc_Init</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, gimbal_task.o(i.Pc_Init))
+<P><STRONG><a name="[106]"></a>Pc_Init</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, gimbal_task.o(i.Pc_Init))
 <BR><BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Control
 </UL>
 
-<P><STRONG><a name="[10c]"></a>Pc_Mode</STRONG> (Thumb, 476 bytes, Stack size 32 bytes, gimbal_task.o(i.Pc_Mode))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Pc_Mode
+<P><STRONG><a name="[10c]"></a>Pc_Mode</STRONG> (Thumb, 348 bytes, Stack size 40 bytes, gimbal_task.o(i.Pc_Mode))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = Pc_Mode
 </UL>
 <BR>[Calls]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Positive_Number_Out
 </UL>
 <BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Control
 </UL>
 
 <P><STRONG><a name="[1bd]"></a>Positive_Number_Out</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, some_functions.o(i.Positive_Number_Out))
-<BR><BR>[Called By]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Vt03_Pc_Mode
-<LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pc_Mode
-<LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Heat_Limit_Control
+<BR><BR>[Called By]<UL><LI><a href="#[1bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Heat_Limit_Control
 </UL>
 
 <P><STRONG><a name="[201]"></a>RC_Init</STRONG> (Thumb, 84 bytes, Stack size 12 bytes, bsp_rc.o(i.RC_Init))
@@ -2747,7 +2744,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[d4]"></a>Send_Message_1</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, board_can_task.o(i.Send_Message_1))
+<P><STRONG><a name="[d4]"></a>Send_Message_1</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, board_can_task.o(i.Send_Message_1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = Send_Message_1 &rArr; Can_TxMessage &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Can_TxMessage
@@ -2755,7 +2752,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Board_Can_Task
 </UL>
 
-<P><STRONG><a name="[d5]"></a>Send_Message_2</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, board_can_task.o(i.Send_Message_2))
+<P><STRONG><a name="[d5]"></a>Send_Message_2</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, board_can_task.o(i.Send_Message_2))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = Send_Message_2 &rArr; Can_TxMessage &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Can_TxMessage
@@ -2781,7 +2778,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Board_Can_Task
 </UL>
 
-<P><STRONG><a name="[121]"></a>Shoot_Control</STRONG> (Thumb, 158 bytes, Stack size 16 bytes, gimbal_task.o(i.Shoot_Control))
+<P><STRONG><a name="[121]"></a>Shoot_Control</STRONG> (Thumb, 162 bytes, Stack size 16 bytes, gimbal_task.o(i.Shoot_Control))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Shoot_Control
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Task
@@ -3585,11 +3582,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Check_Task
 </UL>
 
-<P><STRONG><a name="[10e]"></a>Vt03_Pc_Mode</STRONG> (Thumb, 468 bytes, Stack size 32 bytes, gimbal_task.o(i.Vt03_Pc_Mode))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Vt03_Pc_Mode
+<P><STRONG><a name="[10e]"></a>Vt03_Pc_Mode</STRONG> (Thumb, 352 bytes, Stack size 40 bytes, gimbal_task.o(i.Vt03_Pc_Mode))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = Vt03_Pc_Mode
 </UL>
 <BR>[Calls]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[1bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Positive_Number_Out
 </UL>
 <BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Control
 </UL>

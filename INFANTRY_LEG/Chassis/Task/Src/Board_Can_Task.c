@@ -22,7 +22,6 @@ Board_Can»ŒŒÒ
 void Board_Can_Task(void)
 {
 	Send_Message_1();
-	Send_Message_2();
 }
 
 /*******************************************************************************************************
@@ -58,7 +57,3 @@ void Send_Message_1(void)
 	Can_TxMessage(&hcan1,CHASSIS_TO_GIMBAL_CAN_ID_1,8,Data);
 }
 
-void Send_Message_2(){
-	uint8_t Data[8];
-	Can_TxMessage(&hcan1,CHASSIS_TO_GIMBAL_CAN_ID_2,8,Data);
-}

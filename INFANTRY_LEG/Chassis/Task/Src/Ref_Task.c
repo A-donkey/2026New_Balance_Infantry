@@ -98,7 +98,7 @@ void Sightglass1_static_show(void)
 
 void Sightglass2_static_show(void)
 {
-	UI_Draw_Circle  (&UI_Graph1.Graphic[0], "23", UI_Graph_Add, 0, UI_Color_Green, 2 , 960 , 430 , 34  );
+	UI_Draw_Circle  (&UI_Graph1.Graphic[0], "23", UI_Graph_Add, 0, UI_Color_Green, 2 , 960 , 350 , 10  );
 	UI_PushUp_Graphs(1,&UI_Graph1,Robot_ID_Current);
 }
 
@@ -165,17 +165,17 @@ void Sightglass_flash_show(void)
 	flow_angle = 360 - flow_angle;
 	UI_Draw_Arc(&UI_Graph7.Graphic[5],"21",UI_Graph_Change,1,UI_Color_Orange,Whole_Circle_ANGLE(flow_angle-30),Whole_Circle_ANGLE(flow_angle+30),5,960,540,100,100);
 	
-	v_cap = pm_od.v_out - 1500;
+	v_cap = pm_od.voltage - 840;
 	
 	if(v_cap<=0) v_cap = 0;
 	
-	if(v_cap>=100)
+	if(v_cap>=1176)
 	{
-		UI_Draw_Rectangle(&UI_Graph7.Graphic[6], "22", UI_Graph_Change, 1, UI_Color_Green, 30 , 750 , 800 , 1170-(int)(420*((550 - v_cap)/550.0f)) , 800);
+		UI_Draw_Rectangle(&UI_Graph7.Graphic[6], "22", UI_Graph_Change, 1, UI_Color_Green, 30 , 750 , 800 , 1170-(int)(420*((1960 - v_cap)/1960.0f)) , 800);
 	}
 	else
 	{
-		UI_Draw_Rectangle(&UI_Graph7.Graphic[6], "22", UI_Graph_Change, 1, UI_Color_Yellow, 30 , 750 , 800 , 1170-(int)(420*((550 - v_cap)/550.0f)) , 800);
+		UI_Draw_Rectangle(&UI_Graph7.Graphic[6], "22", UI_Graph_Change, 1, UI_Color_Yellow, 30 , 750 , 800 , 1170-(int)(420*((1960 - v_cap)/1960.0f)) , 800);
 	}
 	
 	

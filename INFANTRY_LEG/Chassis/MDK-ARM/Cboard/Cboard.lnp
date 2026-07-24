@@ -86,6 +86,7 @@
 "cboard\can_feedback.o"
 "cboard\remote_control.o"
 "cboard\some_functions.o"
+"cboard\power_limit.o"
 "cboard\fifo.o"
 "cboard\crcs.o"
 "cboard\referee.o"

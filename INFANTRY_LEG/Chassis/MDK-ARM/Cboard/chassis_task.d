@@ -114,6 +114,7 @@ cboard\chassis_task.o: ../APP/Inc/Remote_Control.h
 cboard\chassis_task.o: ../Bsp/Inc/bsp_rc.h
 cboard\chassis_task.o: ../APP/Inc/Self_Rescue.h
 cboard\chassis_task.o: ../Math/Inc/wheel_kalman.h
+cboard\chassis_task.o: ../APP/Inc/Power_Limit.h
 cboard\chassis_task.o: ../Controller/Inc/LQR.h
 cboard\chassis_task.o: ../Task/Inc/Ref_Task.h
 cboard\chassis_task.o: ../Judge/Inc/fifo.h

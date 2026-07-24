@@ -1035,6 +1035,16 @@
               <FileType>5</FileType>
               <FilePath>..\APP\Inc\Some_Functions.h</FilePath>
             </File>
+            <File>
+              <FileName>Power_Limit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\Src\Power_Limit.c</FilePath>
+            </File>
+            <File>
+              <FileName>Power_Limit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\APP\Inc\Power_Limit.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
