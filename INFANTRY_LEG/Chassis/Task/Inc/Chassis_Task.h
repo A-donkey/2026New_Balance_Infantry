@@ -140,7 +140,7 @@ void Leg_Control(INS_t *ins,Flag_Bit_t *flag,Bring_Legs_t *bring,Goal_Setting_t 
 void Power_Control(Flag_Bit_t *flag,Controlled_State_t *cs,Joint_Motor_Status_t *joint_m[2],Body_Current_Situation_t *body);
 
 //EXTERN²¿·Ö
-extern PID_t Roll_Pid;
+extern PID_t Roll_L_Pid;
 extern Feedforward_t G_Comp[2];
 extern bool chassis_ready_flag; 
 

@@ -24,9 +24,20 @@ Board_CanÈÎÎñ
 ********************************************************************************************************/
 void Board_Can_Task(void)
 {
-	Send_Rc_DT7();
-	Send_Message_1();
-	Send_Message_2();
+	static uint16_t board_can_tick = 0;
+	board_can_tick++;
+	if (board_can_tick >= 1000) board_can_tick = 0; 
+	
+	if (board_can_tick % 2 == 0)
+	{
+		Send_Message_1();
+	}
+
+	if (board_can_tick % 4 == 0)
+	{
+		Send_Rc_DT7();
+		Send_Message_2();
+	}
 }
 
 /*******************************************************************************************************

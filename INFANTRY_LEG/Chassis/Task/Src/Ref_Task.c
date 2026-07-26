@@ -98,7 +98,7 @@ void Sightglass1_static_show(void)
 
 void Sightglass2_static_show(void)
 {
-	UI_Draw_Circle  (&UI_Graph1.Graphic[0], "23", UI_Graph_Add, 0, UI_Color_Green, 2 , 960 , 350 , 10  );
+	UI_Draw_Circle  (&UI_Graph1.Graphic[0], "23", UI_Graph_Add, 0, UI_Color_Green, 2 , 960 , 750 , 10  );
 	UI_PushUp_Graphs(1,&UI_Graph1,Robot_ID_Current);
 }
 
@@ -198,11 +198,11 @@ void Sightglass1_flash_show(void)
 	
 	if(Up_Cboard_Info.Auto_Aim_Flag)
 	{
-		UI_Draw_Rectangle(&UI_Graph7.Graphic[5], "24", UI_Graph_Change, 1, UI_Color_Green, 6 , 660+90 , 340 , 1260-90 , 740);
+		UI_Draw_Rectangle(&UI_Graph7.Graphic[5], "24", UI_Graph_Change, 1, UI_Color_Pink, 6 , 660+90 , 340 , 1260-90 , 740);
 	}
 	else
 	{
-		UI_Draw_Rectangle(&UI_Graph7.Graphic[5], "24", UI_Graph_Change, 1,  UI_Color_Pink, 6 , 660+90 , 340 , 1260-90 , 740);
+		UI_Draw_Rectangle(&UI_Graph7.Graphic[5], "24", UI_Graph_Change, 1,  UI_Color_Green, 6 , 660+90 , 340 , 1260-90 , 740);
 	}
 	
 	UI_PushUp_Graphs(7, &UI_Graph7, Robot_ID_Current);

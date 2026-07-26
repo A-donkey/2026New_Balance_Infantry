@@ -19,7 +19,8 @@ Joint_Motor_Status_t* joint_m_ptr[2] = {&Joint_Motor_Status[0], &Joint_Motor_Sta
 Vmc_Five_Link_Parameter_t* five_link_ptr[2] = {&Five_Link_Parameter[0], &Five_Link_Parameter[1]};
 
 //建立控制器结构体
-PID_t Roll_Pid;     //Roll补偿
+PID_t Roll_L_Pid;   //Roll腿部长度补偿
+PID_t Roll_F_Pid;   //Roll腿部推力补偿
 PID_t Leg_L_Pid[2]; //腿长PD控制器
 PID_t Leg_P_Pid[2]; //腿杆绝对位置PID控制器
 
@@ -40,14 +41,15 @@ void Chassis_Init(void)
 	//速度加速度融合初始化
 	V_Kf_Init(&V_kf);
 	
-	//初始化PID                MAXP MAXI        P     I      D           dt
-	PID_Init(&Leg_L_Pid[0]   ,  180,  30, 0, 6000,    0,   130,  0,0,0,0, 0,NO_CIRCLE,NONE); //左右腿腿长串级PID
-	PID_Init(&Leg_L_Pid[1]   ,  180,  30, 0, 6000,    0,   130,  0,0,0,0, 0,NO_CIRCLE,NONE);
+	//初始化PID               MAXP MAXI       	P     I      D           dt
+	PID_Init(&Leg_L_Pid[0] ,  180,  30, 0, 	 6000,    0,   130,  0,0,0,0, 0,NO_CIRCLE,NONE); //左右腿腿长串级PID
+	PID_Init(&Leg_L_Pid[1] ,  180,  30, 0, 	 6000,    0,   130,  0,0,0,0, 0,NO_CIRCLE,NONE);
 	
-	PID_Init(&Leg_P_Pid[0]   ,   80,  60, 0,  180,    0,     7,  0,0,0,0, 0,RADIAN,NONE);    //左右腿腿杆绝对位置串级PID
-	PID_Init(&Leg_P_Pid[1]   ,   80,  60, 0,  180,    0,     7,  0,0,0,0, 0,RADIAN,NONE);
+	PID_Init(&Leg_P_Pid[0] ,   80,  60, 0,  	180,    0,     7,  0,0,0,0, 0,RADIAN,NONE);    //左右腿腿杆绝对位置串级PID
+	PID_Init(&Leg_P_Pid[1] ,   80,  60, 0,  	180,    0,     7,  0,0,0,0, 0,RADIAN,NONE);
 	
-	PID_Init(&Roll_Pid       , 0.10, 0.1, 0,  1.0,    0, 0.002,  0,0,0,0, 2,NO_CIRCLE,NONE); //ROLL轴补偿内环PID
+	PID_Init(&Roll_L_Pid   , 0.10, 0.1, 0,  	1.3,    0, 0.002,  0,0,0,0, 2,NO_CIRCLE,NONE); //ROLL腿部长度补偿PID
+	PID_Init(&Roll_F_Pid   ,200.0, 0.1, 0, 1000.0,    0, 0.000,  0,0,0,0, 2,NO_CIRCLE,NONE); //ROLL腿部推力补偿PID
 	
 	//初始化前馈(c0=静态增益 c1=速度补偿 c2=加速度补偿)
 	static float ffc_g_L[3] = {1.62f, 0.0004f, 0.0001f};
@@ -113,9 +115,9 @@ void Variable_Information_Acquisition(INS_t *ins,
 	
 	Leg_Calc(five_link[0]); Leg_Calc(five_link[1]);	
 	
-	leg[0]->theta   = Half_Circle_RADIAN(-five_link[0]->phi0 + (PI/2.0f) + body->theta); 
-	leg[1]->theta   = Half_Circle_RADIAN( five_link[1]->phi0 - (PI/2.0f) + body->theta);    
-	leg[0]->d_theta = -five_link[0]->d_phi0 + body->d_theta;  
+	leg[0]->theta   = Half_Circle_RADIAN(-five_link[0]->phi0 + (PI/2.0f) + body->theta);
+	leg[1]->theta   = Half_Circle_RADIAN( five_link[1]->phi0 - (PI/2.0f) + body->theta);
+	leg[0]->d_theta = -five_link[0]->d_phi0 + body->d_theta;
 	leg[1]->d_theta =  five_link[1]->d_phi0 + body->d_theta; 
 	
 	leg[0]->abs_leg_theta  = Half_Circle_RADIAN(-five_link[0]->phi0 + (PI/2.0f));
@@ -649,7 +651,7 @@ void DT7_Start_Selfsave(INS_t *ins,
 		//获取当前倒地状态[0车身正 1车身倒头着地 2屁股着地]
 		if(fabs(ins->Pitch) >= 90) 
 		{
-			if(ins->Roll <= 0) self_re->downed_state = 1;
+			if(ins->Roll >= 0) self_re->downed_state = 1;
 			else self_re->downed_state = 2;
 		}
 		else self_re->downed_state = 0;	
@@ -680,7 +682,7 @@ void VT04_Start_Selfsave(INS_t *ins,
 		//获取当前倒地状态[0车身正 1车身倒头着地 2屁股着地]
 		if(fabs(ins->Pitch) >= 90) 
 		{
-			if(ins->Roll <= 0) self_re->downed_state = 1;
+			if(ins->Roll >= 0) self_re->downed_state = 1;
 			else self_re->downed_state = 2;
 		}
 		else self_re->downed_state = 0;	
@@ -1125,21 +1127,26 @@ void Leg_Control(INS_t *ins,
 		 !flag->fall_flag     && 
 		 !flag->theta_flag[2]    )
 	{
-		PID_Calculate(&Roll_Pid,ins->Pitch*Ang_PI,0);
+		PID_Calculate(&Roll_L_Pid,ins->Pitch*Ang_PI,0);
+		PID_Calculate(&Roll_F_Pid,ins->Pitch*Ang_PI,0);
 	}
-	else Roll_Pid.Output = 0;
+	else 
+	{
+		Roll_L_Pid.Output = 0;
+		Roll_F_Pid.Output = 0;
+	}
 	
 	if(*cs!=ERO && *cs!=STOP)
 	{
 		if(!flag->fall_flag)
 		{
-			PID_Calculate(&Leg_L_Pid[0],five_link[0]->L0,Min_Output(goal->Target_L0 - bring->Comp_Length[0],0.19f) + Roll_Pid.Output);
-			PID_Calculate(&Leg_L_Pid[1],five_link[1]->L0,Min_Output(goal->Target_L0 - bring->Comp_Length[1],0.19f) - Roll_Pid.Output);
+			PID_Calculate(&Leg_L_Pid[0],five_link[0]->L0,Min_Output(goal->Target_L0 - bring->Comp_Length[0],0.19f) + Roll_L_Pid.Output);
+			PID_Calculate(&Leg_L_Pid[1],five_link[1]->L0,Min_Output(goal->Target_L0 - bring->Comp_Length[1],0.19f) - Roll_L_Pid.Output);
 			
 			if(!flag->off_flag) //着地
 			{
-				joint_m[0]->F0 = -Leg_L_Pid[0].Output - G_Comp[0].Output + bring->Comp_Fn[0];
-				joint_m[1]->F0 = -Leg_L_Pid[1].Output - G_Comp[1].Output + bring->Comp_Fn[1];	
+				joint_m[0]->F0 = -Leg_L_Pid[0].Output - G_Comp[0].Output + bring->Comp_Fn[0] - Roll_F_Pid.Output;
+				joint_m[1]->F0 = -Leg_L_Pid[1].Output - G_Comp[1].Output + bring->Comp_Fn[1] + Roll_F_Pid.Output;	
 			}
 			else //离地
 			{
@@ -1240,6 +1247,24 @@ void Power_Control(Flag_Bit_t *flag,Controlled_State_t *cs,Joint_Motor_Status_t 
 		if(Limit_State == LIMIT)
 		{
 			Limit_percent = 0.8f * Limit_percent + 0.2f * (P_max_limit/P_cmd);
+		}
+		else
+		{
+			Limit_percent += 0.0001f;
+		}
+
+		//功率限制系数限制在0~1之间
+		Limit_percent = Max_Output(Limit_percent,1.0f);
+		if(Limit_percent < 0.0f) Limit_percent = 0.0f;
+		
+		//开启超电设置最大输出
+		if(flag->super_flag)
+		{
+			PL_Goal.goal_dx = max_dx;
+			PL_Goal.goal_dyaw = max_dyaw;
+		}
+		else
+		{
 			if(flag->spinning_flag) 
 			{
 				PL_Goal.goal_dx = max_dx;
@@ -1251,19 +1276,6 @@ void Power_Control(Flag_Bit_t *flag,Controlled_State_t *cs,Joint_Motor_Status_t 
 				PL_Goal.goal_dyaw = max_dyaw;
 			}
 		}
-		else
-		{
-			Limit_percent += 0.001f;
-		}
-		//开启超电设置最大输出
-		if(flag->super_flag)
-		{
-			PL_Goal.goal_dx = max_dx;
-			PL_Goal.goal_dyaw = max_dyaw;
-		}
-		//功率限制系数限制在0~1之间
-		Limit_percent = Max_Output(Limit_percent,1.0f);
-		if(Limit_percent < 0.0f) Limit_percent = 0.0f;
 	}
 	else Limit_percent = 1.0f;//异常状态重置功率削减系数
 }
@@ -1313,14 +1325,14 @@ void Vmc(Flag_Bit_t *flag,
 void Chassis_Can_Data_Send(Chassis_Motor_t *cm,
 													 Controlled_State_t *cs,
 													 Joint_Motor_Status_t *joint_m[2])
-{                                             
+{                        	
 	if(*cs == ERO) //停止所有电机
 	{
-		Disable_Motor_Mode(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID); Disable_Motor_Mode(&hcan1,LEFT_BACK_MOTOR_CTRL_ID);
-		Disable_Motor_Mode(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID); Disable_Motor_Mode(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID);
-		osDelay(1);
-		Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左右轮均失能
-		Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);
+			Disable_Motor_Mode(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID); Disable_Motor_Mode(&hcan1,LEFT_BACK_MOTOR_CTRL_ID);
+			Disable_Motor_Mode(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID); Disable_Motor_Mode(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID);
+			osDelay(1);
+			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左右轮均失能
+			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);
 	}
 	else
 	{
@@ -1334,19 +1346,19 @@ void Chassis_Can_Data_Send(Chassis_Motor_t *cm,
 			   cm->DM_8009[2].state==0 ||
 			   cm->DM_8009[3].state==0   ) //8009失能后重新使能
 			{
-				Enable_Motor_Mode(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID); Enable_Motor_Mode(&hcan1,LEFT_BACK_MOTOR_CTRL_ID);
-				Enable_Motor_Mode(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID); Enable_Motor_Mode(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID);
-				osDelay(1);
-				Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左右轮均失能
-				Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);
+					Enable_Motor_Mode(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID); Enable_Motor_Mode(&hcan1,LEFT_BACK_MOTOR_CTRL_ID);
+					Enable_Motor_Mode(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID); Enable_Motor_Mode(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID);
+					osDelay(1);
+					Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左右轮均失能
+					Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);
 			}
 			else //清除8009异常
 			{
-				Clear_Err(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID); Clear_Err(&hcan1,LEFT_BACK_MOTOR_CTRL_ID);
-				Clear_Err(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID); Clear_Err(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID);
-				osDelay(1);
-				Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左右轮均失能
-				Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);
+					Clear_Err(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID); Clear_Err(&hcan1,LEFT_BACK_MOTOR_CTRL_ID);
+					Clear_Err(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID); Clear_Err(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID);
+					osDelay(1);
+					Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左右轮均失能
+					Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);
 			}
 		}
 		else if(*cs == STOP)
@@ -1356,13 +1368,14 @@ void Chassis_Can_Data_Send(Chassis_Motor_t *cm,
 //			Save_Pos_Zero(&hcan1, LEFT_BACK_MOTOR_CTRL_ID);
 //			Save_Pos_Zero(&hcan2, RIGHT_FRONT_MOTOR_CTRL_ID);
 //			Save_Pos_Zero(&hcan2, RIGHT_BACK_MOTOR_CTRL_ID);
-			Mit_Ctrl(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID,0,0,0,0,0,DM8009); 
-			Mit_Ctrl(&hcan1,LEFT_BACK_MOTOR_CTRL_ID,0,0,0,0,0,DM8009);
-			Mit_Ctrl(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID,0,0,0,0,0,DM8009); 
-			Mit_Ctrl(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID,0,0,0,0,0,DM8009);
-			osDelay(1);
-			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左右轮均失能
-			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);
+			
+				Mit_Ctrl(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID,0,0,0,0,0,DM8009); 
+				Mit_Ctrl(&hcan1,LEFT_BACK_MOTOR_CTRL_ID,0,0,0,0,0,DM8009);
+				Mit_Ctrl(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID,0,0,0,0,0,DM8009); 
+				Mit_Ctrl(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID,0,0,0,0,0,DM8009);
+				osDelay(1);
+				Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左右轮均失能
+				Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);
 		}
 		else
 		{
@@ -1372,8 +1385,6 @@ void Chassis_Can_Data_Send(Chassis_Motor_t *cm,
 //			osDelay(1);
 //			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//左边202
 //			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//右边201
-//			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,Max_Output(2000,16000),0,0);//左边202
-//			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,Max_Output(1700,16000),0,0,0);//右边201
 			
 			//正常控制<*_*>
 			Mit_Ctrl(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[0]->T_E,40),DM8009);

@@ -238,122 +238,97 @@
         <Ww>
           <count>16</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Input_Power</ItemText>
+          <ItemText>ref_ready_flag</ItemText>
         </Ww>
         <Ww>
           <count>17</count>
           <WinNumber>1</WinNumber>
-          <ItemText>ref_ready_flag</ItemText>
+          <ItemText>board_ready_flag</ItemText>
         </Ww>
         <Ww>
           <count>18</count>
           <WinNumber>1</WinNumber>
-          <ItemText>board_ready_flag</ItemText>
+          <ItemText>Goal_Setting</ItemText>
         </Ww>
         <Ww>
           <count>19</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Goal_Setting</ItemText>
+          <ItemText>Up_Cboard_Info,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>20</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Up_Cboard_Info,0x0A</ItemText>
+          <ItemText>Power_Heat_Data,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>21</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Power_Heat_Data,0x0A</ItemText>
+          <ItemText>Shoot,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>22</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Shoot,0x0A</ItemText>
+          <ItemText>VT03,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>23</count>
           <WinNumber>1</WinNumber>
-          <ItemText>VT03,0x0A</ItemText>
+          <ItemText>Flag</ItemText>
         </Ww>
         <Ww>
           <count>24</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Flag</ItemText>
+          <ItemText>Goal_Setting</ItemText>
         </Ww>
         <Ww>
           <count>25</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Goal_Setting</ItemText>
+          <ItemText>Remote_Select</ItemText>
         </Ww>
         <Ww>
           <count>26</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Remote_Select</ItemText>
+          <ItemText>Fitting_K</ItemText>
         </Ww>
         <Ww>
           <count>27</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Fitting_K</ItemText>
+          <ItemText>Pc_Ctrl</ItemText>
         </Ww>
         <Ww>
           <count>28</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Pc_Ctrl</ItemText>
+          <ItemText>Rest_UI_Flag</ItemText>
         </Ww>
         <Ww>
           <count>29</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Rest_UI_Flag</ItemText>
+          <ItemText>P_cmd</ItemText>
         </Ww>
         <Ww>
           <count>30</count>
           <WinNumber>1</WinNumber>
-          <ItemText>P_max</ItemText>
+          <ItemText>joint_m_ptr[0]-&gt;T_Wheel</ItemText>
         </Ww>
         <Ww>
           <count>31</count>
           <WinNumber>1</WinNumber>
-          <ItemText>P_cmd</ItemText>
+          <ItemText>joint_m_ptr[1]-&gt;T_Wheel</ItemText>
         </Ww>
         <Ww>
           <count>32</count>
           <WinNumber>1</WinNumber>
-          <ItemText>k_speed</ItemText>
+          <ItemText>Roll_F_Pid</ItemText>
         </Ww>
         <Ww>
           <count>33</count>
           <WinNumber>1</WinNumber>
-          <ItemText>k_yaw</ItemText>
+          <ItemText>Roll_L_Pid</ItemText>
         </Ww>
         <Ww>
           <count>34</count>
           <WinNumber>1</WinNumber>
-          <ItemText>omega_l</ItemText>
-        </Ww>
-        <Ww>
-          <count>35</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>omega_r</ItemText>
-        </Ww>
-        <Ww>
-          <count>36</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>joint_m_ptr[0]-&gt;T_Wheel</ItemText>
-        </Ww>
-        <Ww>
-          <count>37</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>joint_m_ptr[1]-&gt;T_Wheel</ItemText>
-        </Ww>
-        <Ww>
-          <count>38</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>fuck_k_speed</ItemText>
-        </Ww>
-        <Ww>
-          <count>39</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>fuck_k_yaw</ItemText>
+          <ItemText>Bring_Legs,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>

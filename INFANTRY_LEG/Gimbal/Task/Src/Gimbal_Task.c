@@ -653,7 +653,7 @@ void Shoot_Control(Heat_Control_t *hc,
 		
 		if(Aim_Permission && Fire_Permission) //自瞄情况下需手动确认判断开火
 		{
-			if(aim_rx.detect_number==1 && aim_rx.shoot_flag && Dial_Status && !hc->dial_flag && hc->Perm_Bullets_Num >= 1.05f) //允许开火
+			if(aim_rx.detect_number==1 && aim_rx.shoot_flag && Dial_Status && !hc->dial_flag && hc->Perm_Bullets_Num >= 2.05f) //允许开火
 			{
 				Dial_Status = 0; //拨盘运行
 				ss->Target_Pos = ss->Target_Pos + PI/4.0f*DIAL_REDUCTION_RATIO;
@@ -661,7 +661,7 @@ void Shoot_Control(Heat_Control_t *hc,
 		}
 		else //手动控制下判断开火
 		{
-			if(Fire_Permission && Dial_Status && !hc->dial_flag && hc->Perm_Bullets_Num >= 1.05f) //允许开火
+			if(Fire_Permission && Dial_Status && !hc->dial_flag && hc->Perm_Bullets_Num >= 2.05f) //允许开火
 			{
 				Dial_Status = 0; //拨盘运行
 				ss->Target_Pos = ss->Target_Pos + PI/4.0f*DIAL_REDUCTION_RATIO;
@@ -679,7 +679,7 @@ void Gimbal_Pitch_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
 	TD_Calculate(&Pos_Pitch_TD, gs->pitch_ref);
 
 	// 2. 前馈（惯量 + 阻尼）自瞄模式下使用上位机目标值
-	if(Aim_Permission && aim->detect_number != 0 && aim->pitch_setpoint != 0 && aim->pitch_omega_setpoint != 0){
+	if(Aim_Permission && aim->detect_number != 0){
 		pitch_alpha = aim->pitch_acc_setpoint * Ang_PI;
 		pitch_omega = aim->pitch_omega_setpoint * Ang_PI;
 	}
@@ -700,7 +700,7 @@ void Gimbal_Pitch_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
                    + Gravity_Param.C * sign_dpitch;
 
 	// 4. PID反馈
-	if(Aim_Permission && aim->detect_number != 0 && aim->pitch_setpoint != 0 && aim->pitch_omega_setpoint != 0){
+	if(Aim_Permission && aim->detect_number != 0){
 		PID_Calculate(&Pitch_P_Pid, gs->pitch * Ang_PI, aim->pitch_setpoint * Ang_PI);
 		PID_Calculate(&Pitch_S_Pid, gs->d_pitch, aim->pitch_omega_setpoint * Ang_PI);
 	}
@@ -724,7 +724,7 @@ void Gimbal_Yaw_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
 
 	// 2. 物理模型前馈（单位需要统一）
 	//    TD输出是度、°/s、°/s?，需要转换为电机电流单位
-	if(Aim_Permission && aim->detect_number != 0 && aim->yaw_setpoint != 0 && aim->yaw_omega_setpoint != 0){
+	if(Aim_Permission && aim->detect_number != 0){
 		yaw_alpha = aim->yaw_acc_setpoint * Ang_PI;  // °/s? → rad/s?
 		yaw_omega = aim->yaw_omega_setpoint * Ang_PI;   // °/s → rad/s
 	}
@@ -737,7 +737,7 @@ void Gimbal_Yaw_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
               + Yaw_FF_Param.C * sign(yaw_omega);     // 库伦摩擦
 
 	// 3. PID反馈（TD滤波后的值作为参考）
-	if(Aim_Permission && aim->detect_number != 0 && aim->yaw_setpoint != 0 && aim->yaw_omega_setpoint != 0){
+	if(Aim_Permission && aim->detect_number != 0){
 		PID_Calculate(&Yaw_P_Pid,   gs->yaw*Ang_PI,   aim->yaw_setpoint * Ang_PI);
 		PID_Calculate(&Yaw_S_Pid,   gs->d_yaw,         aim->yaw_omega_setpoint * Ang_PI);
 	}

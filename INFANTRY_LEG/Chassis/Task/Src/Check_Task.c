@@ -62,7 +62,7 @@ void Ground_Clearance_Detection(INS_t *ins,
 																Joint_Motor_Status_t *joint_m[2],
 																Vmc_Five_Link_Parameter_t *five_link[2])
 {
-	off->Roll_Cut = Roll_Pid.Output*600.0f;
+	off->Roll_Cut = Roll_L_Pid.Output*600.0f;
 	
 	off->dt_off = DWT_GetDeltaT(&off->dwt_d_off);
 	

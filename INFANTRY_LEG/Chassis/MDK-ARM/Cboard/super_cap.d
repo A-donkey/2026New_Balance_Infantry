@@ -86,3 +86,5 @@ cboard\super_cap.o: C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\
 cboard\super_cap.o: C:\Users\13805\AppData\Local\Arm\Packs\ARM\CMSIS-DSP\1.16.2\Include\dsp/window_functions.h
 cboard\super_cap.o: ../Bsp/Inc/bsp_can.h
 cboard\super_cap.o: ../Inc/can.h
+cboard\super_cap.o: ../APP/Inc/Power_Limit.h
+cboard\super_cap.o: D:\keil\ARM\ARMCC\Bin\..\include\stdbool.h

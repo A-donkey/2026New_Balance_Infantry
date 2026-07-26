@@ -5,7 +5,6 @@
 
 /********************CHASSIS_CAN1&GIMBAL_CAN1*************************/
 #define CHASSIS_TO_GIMBAL_CAN_ID_1        0x105
-#define CHASSIS_TO_GIMBAL_CAN_ID_2        0x115
 #define GIMBAL_TO_CHASSIS_CAN_ID_1        0x100
 #define GIMBAL_TO_CHASSIS_CAN_ID_2        0x120
 #define LEFT_FRONT_MOTOR_CTRL_ID        	0x03
@@ -18,6 +17,7 @@
 #define YAW_MOTOR_CTRL_ID                 0x0A
 #define YAW_MOTOR_FEEDBACK_ID             0x0B
 #define TOGGLE_MOTOR_FEEDBACK_ID         	0x206
+#define TOGGLE_MOTOR_CTRL_ID							0x1FF
 
 /*********************CHASSIS_CAN2************************/
 #define RIGHT_FRONT_MOTOR_CTRL_ID       	0x05

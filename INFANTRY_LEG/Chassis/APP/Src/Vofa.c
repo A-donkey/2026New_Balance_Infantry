@@ -26,24 +26,24 @@ VOFA·¢ËÍº¯Êý
 ********************************************************************************************************/
 void Vofa_Send_Message(void)
 {
-//	Send_Array[0].v_f = joint_m_ptr[0]->Tp;        
-//	Send_Array[1].v_f = joint_m_ptr[1]->Tp;
-//	Send_Array[2].v_f = Joint_Motor_Status[0].T_Wheel;
-//	Send_Array[3].v_f = Joint_Motor_Status[1].T_Wheel;
-// 	Send_Array[4].v_f =	joint_m_ptr[0]->T_Wheel;
-//	Send_Array[5].v_f = joint_m_ptr[1]->T_Wheel;
+	Send_Array[0].v_f = joint_m_ptr[0]->A;        
+	Send_Array[1].v_f = Leg[0].theta;
+	Send_Array[2].v_f = Leg[0].d_theta;
+	Send_Array[3].v_f = five_link_ptr[0]->d_phi0;
+ 	Send_Array[4].v_f =	Body.d_theta;
+	Send_Array[5].v_f = joint_m_ptr[1]->A;
 	
-	Send_Array[0].v_f = pm_od.chassis_power/100.0;
-	Send_Array[1].v_f = joint_m_ptr[0]->T_Wheel;
-	Send_Array[2].v_f = joint_m_ptr[1]->T_Wheel;
-	Send_Array[3].v_f = joint_m_ptr[0]->Tp;
- 	Send_Array[4].v_f =	joint_m_ptr[1]->Tp;
-	Send_Array[5].v_f = pm_od.referee_power/100.0;
+//	Send_Array[0].v_f = pm_od.chassis_power/100.0;
+//	Send_Array[1].v_f = joint_m_ptr[0]->T_Wheel;
+//	Send_Array[2].v_f = joint_m_ptr[1]->T_Wheel;
+//	Send_Array[3].v_f = joint_m_ptr[0]->Tp;
+// 	Send_Array[4].v_f =	joint_m_ptr[1]->Tp;
+//	Send_Array[5].v_f = pm_od.referee_power/100.0;
 	
 //	Send_Array[0].v_f = INS.Roll;        
 //	Send_Array[1].v_f = INS.Pitch;
 //	Send_Array[2].v_f = INS.Yaw;
-//	Send_Array[3].v_f = Roll_Pid.Output;
+//	Send_Array[3].v_f = Roll_L_Pid.Output;
 // 	Send_Array[4].v_f =	Leg[0].abs_leg_theta;
 //	Send_Array[5].v_f = Leg[1].abs_leg_theta;
 

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [Cboard\Cboard.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image Cboard\Cboard.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Jul 23 18:15:30 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Jul 26 20:45:39 2026
 <BR><P>
 <H3>Maximum Stack Usage =        344 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -909,12 +909,12 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_Board_Can_Task
 </UL>
 
-<P><STRONG><a name="[d2]"></a>Board_Can_Task</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, board_can_task.o(i.Board_Can_Task))
+<P><STRONG><a name="[d2]"></a>Board_Can_Task</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, board_can_task.o(i.Board_Can_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = Board_Can_Task &rArr; Send_Rc_DT7 &rArr; Can_TxMessage &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Rc_DT7
+<BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Rc_DT7
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Message_2
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Message_1
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Message_1
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_Board_Can_Task
 </UL>
@@ -999,9 +999,9 @@ Global Symbols
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_GetTxMailboxesFreeLevel
 <LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_AddTxMessage
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Rc_DT7
+<BR>[Called By]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Rc_DT7
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Message_2
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Message_1
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Send_Message_1
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mit_Ctrl
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Enable_Motor_Mode
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dji_Motor_Ctrl
@@ -1272,7 +1272,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gimbal_Task
 </UL>
 
-<P><STRONG><a name="[104]"></a>Gimbal_Control</STRONG> (Thumb, 588 bytes, Stack size 72 bytes, gimbal_task.o(i.Gimbal_Control))
+<P><STRONG><a name="[104]"></a>Gimbal_Control</STRONG> (Thumb, 592 bytes, Stack size 72 bytes, gimbal_task.o(i.Gimbal_Control))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = Gimbal_Control &rArr; Gimbal_Control_Init &rArr; PID_Clear &rArr; DWT_GetDeltaT &rArr; DWT_CNT_Update
 </UL>
 <BR>[Calls]<UL><LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Limit_Min
@@ -1324,7 +1324,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_Gimbal_Task
 </UL>
 
-<P><STRONG><a name="[113]"></a>Gimbal_Pitch_Calculate</STRONG> (Thumb, 464 bytes, Stack size 56 bytes, gimbal_task.o(i.Gimbal_Pitch_Calculate))
+<P><STRONG><a name="[113]"></a>Gimbal_Pitch_Calculate</STRONG> (Thumb, 398 bytes, Stack size 56 bytes, gimbal_task.o(i.Gimbal_Pitch_Calculate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = Gimbal_Pitch_Calculate &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sign
@@ -1359,7 +1359,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_Gimbal_Task
 </UL>
 
-<P><STRONG><a name="[114]"></a>Gimbal_Yaw_Calculate</STRONG> (Thumb, 308 bytes, Stack size 40 bytes, gimbal_task.o(i.Gimbal_Yaw_Calculate))
+<P><STRONG><a name="[114]"></a>Gimbal_Yaw_Calculate</STRONG> (Thumb, 242 bytes, Stack size 40 bytes, gimbal_task.o(i.Gimbal_Yaw_Calculate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = Gimbal_Yaw_Calculate &rArr; TD_Calculate &rArr; __hardfp_sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sign
@@ -2744,7 +2744,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[d4]"></a>Send_Message_1</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, board_can_task.o(i.Send_Message_1))
+<P><STRONG><a name="[d3]"></a>Send_Message_1</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, board_can_task.o(i.Send_Message_1))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = Send_Message_1 &rArr; Can_TxMessage &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Can_TxMessage
@@ -2770,7 +2770,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Aim_Task
 </UL>
 
-<P><STRONG><a name="[d3]"></a>Send_Rc_DT7</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, board_can_task.o(i.Send_Rc_DT7))
+<P><STRONG><a name="[d4]"></a>Send_Rc_DT7</STRONG> (Thumb, 66 bytes, Stack size 16 bytes, board_can_task.o(i.Send_Rc_DT7))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = Send_Rc_DT7 &rArr; Can_TxMessage &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Can_TxMessage

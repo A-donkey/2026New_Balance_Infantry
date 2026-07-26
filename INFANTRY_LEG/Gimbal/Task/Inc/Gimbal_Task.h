@@ -44,7 +44,7 @@
 #define RC_DEADBAND                 5
 
 #define PC_PITCH_SENSITIVITY        0.0016
-#define PC_YAW_SENSITIVITY          0.0016
+#define PC_YAW_SENSITIVITY          0.0020
 #define PC_DEADBAND                 1
 
 typedef enum
