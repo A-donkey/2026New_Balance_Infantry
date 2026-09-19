@@ -28,7 +28,7 @@
 #define DIAL_REDUCTION_RATIO 36.0f
 
 //摩擦轮转速
-#define Friction_Speed   5800
+#define Friction_Speed   6000
 
 //云台俯仰角限位
 #define PITCH_UP_LIMIT_POSITION     30
@@ -46,6 +46,9 @@
 #define PC_PITCH_SENSITIVITY        0.0016
 #define PC_YAW_SENSITIVITY          0.0020
 #define PC_DEADBAND                 1
+
+//拨盘过零检测阈值
+#define DIR_THRESHOLD 0.7f
 
 typedef enum
 {

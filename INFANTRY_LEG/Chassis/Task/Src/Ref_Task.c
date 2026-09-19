@@ -98,14 +98,14 @@ void Sightglass1_static_show(void)
 
 void Sightglass2_static_show(void)
 {
-	UI_Draw_Circle  (&UI_Graph1.Graphic[0], "23", UI_Graph_Add, 0, UI_Color_Green, 2 , 960 , 750 , 10  );
+	UI_Draw_Circle  (&UI_Graph1.Graphic[0], "23", UI_Graph_Add, 0, UI_Color_Green, 2 , 960 , 500 , 10  );
 	UI_PushUp_Graphs(1,&UI_Graph1,Robot_ID_Current);
 }
 
 void Show_ZERO_static(void)
 {
 	memset(UI_String.String.stringdata,' ',30);
-	UI_Draw_String(&UI_String.String, "000" , UI_Graph_Add, 2, UI_Color_Cyan, 100,4,5,50,750,"ZERO");
+	UI_Draw_String(&UI_String.String, "000" , UI_Graph_Add, 2, UI_Color_Cyan, 100,4,5,50,750,"FRIC");
 	UI_PushUp_String(&UI_String, Robot_ID_Current);
 }
 

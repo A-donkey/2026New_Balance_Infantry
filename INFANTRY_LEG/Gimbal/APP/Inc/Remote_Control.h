@@ -73,12 +73,14 @@ typedef struct
 	bool KEY_Z;
 	bool KEY_X;
 	bool KEY_V;
+	bool KEY_CTRL;
 	
 	int f_t;
 	int g_t;
 	int z_t;
 	int x_t;
 	int v_t;
+	int ctrl_t;
 }PC_Ctrl_t;
 
 void SBUS_TO_RC(void);

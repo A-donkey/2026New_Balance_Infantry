@@ -66,7 +66,8 @@ float u[10];
 float Fitting_K[4][10];
 
 void Offset_Calc(Flag_Bit_t *flag,Compensation_Amount_t *comp,float (*Fit_Coefficients),float TL){
- float theta_offset = Fit_Coefficients[0]*TL*TL*TL + Fit_Coefficients[1]*TL*TL +	 Fit_Coefficients[2]*TL	+	Fit_Coefficients[3];
+// float theta_offset = Fit_Coefficients[0]*TL*TL*TL + Fit_Coefficients[1]*TL*TL +	 Fit_Coefficients[2]*TL	+	Fit_Coefficients[3];
+ float theta_offset = -0.5492*TL	+	0.2731;
  comp->Gravity_Comp_Theta_l = 	theta_offset;
  comp->Gravity_Comp_Theta_r = 	theta_offset;
  //theta_b定义正方向与开源不同
@@ -110,7 +111,7 @@ void LQR_Calc(Flag_Bit_t *flag,
 	u[8] = Max_Output(	 comp->Spin_Comp_Theta_b  -  	 body->theta,Theta_B_MAX); u[9] =             0 -   body->d_theta;
 	
 //	u[0] = Max_Output(										   	 0  -        body->x,      X_MAX); u[1] = 	goal->d_x_t -       body->d_x;
-//	u[2] = Max_Output(	Find_Min_RADIAN(body->abs_yaw,goal->yaw_t-test_yaw * Ang_PI),    Yaw_MAX); u[3] = goal->d_yaw_t -     body->d_yaw;
+//	u[2] = Max_Output(	Find_Min_RADIAN(body->abs_yaw,goal->yaw_t),    Yaw_MAX); u[3] = goal->d_yaw_t -     body->d_yaw;
 //	u[4] = Max_Output(								test_theta  -  leg[0]->theta,Theta_L_MAX); u[5] =             0 - leg[0]->d_theta;
 //	u[6] = Max_Output(								test_theta  -  leg[1]->theta,Theta_R_MAX); u[7] =             0 - leg[1]->d_theta;
 //	u[8] = Max_Output(	 comp->Spin_Comp_Theta_b  -  	 body->theta,Theta_B_MAX); u[9] =             0 -   body->d_theta;

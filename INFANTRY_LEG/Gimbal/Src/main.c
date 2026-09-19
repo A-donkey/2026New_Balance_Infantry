@@ -119,7 +119,7 @@ int main(void)
 
 	//BMI088
 	DWT_Init(168);
-	while(BMI088_init(&hspi1, 1) != BMI088_NO_ERROR){;}
+	while(BMI088_init(&hspi1, 0) != BMI088_NO_ERROR){;}
 		
 	//BUZZER
 	HAL_TIM_Base_Start(&htim4);

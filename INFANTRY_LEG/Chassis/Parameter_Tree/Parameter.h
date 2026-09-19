@@ -19,14 +19,14 @@
 //目标参数
 
 #define DX_UP_MAX       1.00f     //高腿杆最大X速度(m/s)
-#define DX_MID_MAX      1.7f     //中腿杆最大X速度
+#define DX_MID_MAX      1.70f     //中腿杆最大X速度
 #define DX_DOWN_MAX     2.10f     //低腿杆最大X速度  
-#define DX_MAX_PRO 			2.00f     //最大X速度(m/s)(中腿超电)
+#define DX_MAX_PRO 			2.30f     //最大X速度(m/s)(超电)
 
 #define DYAW_UP_MAX     6.0f     //高腿杆最大YAW速度(rad/s)
 #define DYAW_MID_MAX    9.0f     //中腿杆最大YAW速度  
-#define DYAW_DOWN_MAX   11.0f     //低腿杆最大YAW速度  
-#define DYAW_MAX_PRO 		12.0f   //最大YAW速度(rad/s)(中腿超电)
+#define DYAW_DOWN_MAX   11.0f    //低腿杆最大YAW速度  
+#define DYAW_MAX_PRO 		12.0f    //最大YAW速度(rad/s)(超电)
 
 //为了克服静态误差把腿长调小
 #define UP_LEG_LENGTH   0.34f    //高腿杆腿长(m)

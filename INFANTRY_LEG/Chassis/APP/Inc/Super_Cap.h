@@ -18,5 +18,6 @@ typedef struct mb_reg_type
 void Pm_Power_Set(CAN_HandleTypeDef *hcan,uint16_t power,uint16_t buffer_energy);
 
 extern volatile pm_od_t pm_od;
+extern int super_link[3];
 
 #endif

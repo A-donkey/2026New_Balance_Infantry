@@ -27,8 +27,9 @@ TD_t Pos_Pitch_TD;
 TD_t Pos_Yaw_TD;
 
 // 前馈参数（需要实测/辨识）
-Feedforward_Param_t Yaw_FF_Param  = {0.0115128597,  0.0286347487f,  0.23262085f};//{J_yaw,  B_yaw,  C_yaw};
-Feedforward_Param_t Pitch_FF_Param = {0.0324, 0, 0};//{J_pitch, Cb_pitch, C_pitch}// Pitch用Cb代替B
+//Feedforward_Param_t Yaw_FF_Param  = {0.0115128597,  0.0286347487f,  0.23262085f};//{J_yaw,  B_yaw,  C_yaw};
+Feedforward_Param_t Yaw_FF_Param  = {0.000115128597,  0.286347487f,  0.0f};//{J_yaw,  B_yaw,  C_yaw};
+Feedforward_Param_t Pitch_FF_Param = {0.0064, 0, 0};//{J_pitch, Cb_pitch, C_pitch}// Pitch用Cb代替B
 
 // 重力补偿参数
 Gravity_Comp_Param_t Gravity_Param = {-0.2899f, 3.00 , 1.543f};//{A, B_g, C}//C用不上
@@ -57,9 +58,9 @@ void Gimbal_Init(void)
 {
 	//初始化PID
 	//更改云台PID以适配新电机
-	PID_Init(&Pitch_P_Pid   ,    10,   	5, 0,    70,    10,     0,  0,0,0,0, 4,RADIAN,NONE); //云台
-	PID_Init(&Pitch_S_Pid   , 		9, 		5, 0,  		8,     0,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
-	PID_Init(&Yaw_P_Pid     ,    10,   	5, 0,   	1,     0,     0,  0,0,0,0, 4,RADIAN,NONE);
+	PID_Init(&Pitch_P_Pid   ,    10,   	5, 0,    50,     5,     0,  0,0,0,0, 4,RADIAN,Integral_Limit); //云台
+	PID_Init(&Pitch_S_Pid   , 		9, 		5, 0,  		6,     0,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
+	PID_Init(&Yaw_P_Pid     ,    10,   	5, 0,    30,     0,     0,  0,0,0,0, 4,RADIAN,Integral_Limit);
 	PID_Init(&Yaw_S_Pid     , 		9, 		3, 0,  		1,     0,     0,  0,0,0,0, 0,NO_CIRCLE,Integral_Limit);
 	
 	PID_Init(&Abs_Yaw_P_Pid , 	 10, 		5, 0,  		1,     0,   	0,  0,0,0,0, 0,RADIAN,NONE);
@@ -96,7 +97,7 @@ void Gimbal_Init(void)
 	{
 		Gimbal_Status.yaw_ref   = INS.YawTotalAngle; //云台目标重置
 		Gimbal_Status.pitch_ref = INS.Pitch;
-		Shoot_Status.Target_Pos = ZeroCheck(&dial_zero_check, Gimbal_Motor.Dji_2006.ecd / 8191.0f * 2 * PI , 2*PI,DIR_BOTH);  // 累计后的绝对角度
+		Shoot_Status.Target_Pos = ZeroCheck(&dial_zero_check, Gimbal_Motor.Dji_2006.ecd / 8191.0f * 2 * PI , 2*PI,DIR_THRESHOLD ,Shoot_Status.D_Spd);  // 累计后的绝对角度
 		osDelay(1);
 	}
 	TD_Clear(&Pos_Yaw_TD,   Gimbal_Status.yaw_ref);
@@ -131,9 +132,9 @@ void Variable_Information_Acquisition(INS_t *ins,
 	ss->R_Rpm = gm->Dji_3508[1].speed_rpm;
 	
 	//获取拨盘POS
-	ss->D_Pos = ZeroCheck(&dial_zero_check, Gimbal_Motor.Dji_2006.ecd / 8191.0f * 2 * PI , 2*PI,DIR_BOTH);  // 累计后的绝对角度
+	ss->D_Pos = ZeroCheck(&dial_zero_check, Gimbal_Motor.Dji_2006.ecd / 8191.0f * 2 * PI , 2*PI,DIR_THRESHOLD ,Shoot_Status.D_Spd);  // 累计后的绝对角度
 	ss->D_Spd = gm->Dji_2006.speed_rpm*2*PI/60.0f;
-	
+	 
 	//计算获取云台电机绝对位置
 	gs->abs_yaw = gm->DM_4310[0].pos;
 	
@@ -168,7 +169,8 @@ void Gimbal_Control_Init(Shoot_Status_t *ss,
 	gs->yaw_ref   = gs->yaw; //云台目标重置
 	gs->pitch_ref = gs->pitch;
 	TD_Clear(&Pos_Yaw_TD,   gs->yaw_ref);
-	TD_Clear(&Pos_Pitch_TD, PITCH_DOWN_LIMIT_POSITION);
+	// TD_Clear(&Pos_Pitch_TD, PITCH_DOWN_LIMIT_POSITION);
+	TD_Clear(&Pos_Pitch_TD, gs->pitch_ref);
 	
 	Yaw_FF_Output = 0;
 	Pitch_FF_Output = 0;
@@ -235,6 +237,8 @@ void Pc_Init(PC_Ctrl_t *pc_ctrl)
 /*******************************************************************************************************
 键鼠模式
 ********************************************************************************************************/
+uint16_t Dial_block_Count = 0; //拨盘卡死计数
+
 void Pc_Mode(RC_Ctrl_t *rc_ctrl,
 						 PC_Ctrl_t *pc_ctrl,
 						Aim_Tx *aim_tx)
@@ -274,6 +278,22 @@ void Pc_Mode(RC_Ctrl_t *rc_ctrl,
 	/******右键检测,开启自瞄******/
 	if(rc_ctrl->mouse.press_r) Aim_Permission = 1;
 	else Aim_Permission = 0;
+
+	/******ctrl键检测,拨盘复原******/
+	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_CTRL) && !pc_ctrl->KEY_CTRL)
+	{
+		pc_ctrl->KEY_CTRL = 1;
+		pc_ctrl->ctrl_t = HAL_GetTick();
+	}
+	else if(!(rc_ctrl->key.v&KEY_PRESSED_OFFSET_CTRL) && pc_ctrl->KEY_CTRL)
+	{
+		pc_ctrl->KEY_CTRL = 0;
+		if(HAL_GetTick()-pc_ctrl->ctrl_t < 500)
+		{
+			Shoot_Status.Target_Pos = Shoot_Status.D_Pos; //拨盘目标重置
+			Dial_block_Count = 0; //拨盘卡死计数清零
+		}
+	}
 	
 	/******Z键检测,切换大符自瞄******/
 	if((rc_ctrl->key.v&KEY_PRESSED_OFFSET_Z) && !pc_ctrl->KEY_Z)
@@ -393,6 +413,22 @@ void Vt03_Pc_Mode(PC_Ctrl_t *pc_ctrl,Aim_Tx *aim_tx)
 	/******右键检测,开启自瞄******/
 	if(VT03.mouse_right) Aim_Permission = 1;
 	else                 Aim_Permission = 0;
+
+	/******ctrl键检测,拨盘复原******/
+	if((VT03.key&KEY_PRESSED_OFFSET_CTRL) && !pc_ctrl->KEY_CTRL)
+	{
+		pc_ctrl->KEY_CTRL = 1;
+		pc_ctrl->ctrl_t = HAL_GetTick();
+	}
+	else if(!(VT03.key&KEY_PRESSED_OFFSET_CTRL) && pc_ctrl->KEY_CTRL)
+	{
+		pc_ctrl->KEY_CTRL = 0;
+		if(HAL_GetTick()-pc_ctrl->ctrl_t < 500)
+		{
+			Shoot_Status.Target_Pos = Shoot_Status.D_Pos; //拨盘目标重置
+			Dial_block_Count = 0; //拨盘卡死计数清零
+		}
+	}
 
 	/******Z键检测,切换大符自瞄******/
 	if((VT03.key&KEY_PRESSED_OFFSET_Z) && !pc_ctrl->KEY_Z)
@@ -640,6 +676,19 @@ void Shoot_Control(Heat_Control_t *hc,
 		Dial_Status = 1;
 		hc->dial_flag = 1;
 	}
+
+	if(fabs(ss->Target_Pos-ss->D_Pos)>2.0f) //拨盘未就绪
+	{
+		Dial_block_Count++;
+		if(Dial_block_Count >= 150) //拨盘卡死
+		{
+			ss->Target_Pos = ss->D_Pos; //拨盘目标重置
+		}
+	}
+	else
+	{
+		Dial_block_Count = 0;
+	}
 	
 	if(*sc == Close) //关闭
 	{
@@ -701,7 +750,7 @@ void Gimbal_Pitch_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
 
 	// 4. PID反馈
 	if(Aim_Permission && aim->detect_number != 0){
-		PID_Calculate(&Pitch_P_Pid, gs->pitch * Ang_PI, aim->pitch_setpoint * Ang_PI);
+		PID_Calculate(&Pitch_P_Pid, gs->pitch * Ang_PI, gs->pitch_ref * Ang_PI);
 		PID_Calculate(&Pitch_S_Pid, gs->d_pitch, aim->pitch_omega_setpoint * Ang_PI);
 	}
 	else{
@@ -738,7 +787,7 @@ void Gimbal_Yaw_Calculate(Gimbal_Status_t *gs,Aim_Rx *aim){
 
 	// 3. PID反馈（TD滤波后的值作为参考）
 	if(Aim_Permission && aim->detect_number != 0){
-		PID_Calculate(&Yaw_P_Pid,   gs->yaw*Ang_PI,   aim->yaw_setpoint * Ang_PI);
+		PID_Calculate(&Yaw_P_Pid,   gs->yaw*Ang_PI,   gs->yaw_ref * Ang_PI);
 		PID_Calculate(&Yaw_S_Pid,   gs->d_yaw,         aim->yaw_omega_setpoint * Ang_PI);
 	}
 	else{
@@ -784,8 +833,14 @@ void Gimbal_Controllor(Shoot_Status_t *ss,
 			if (!gimbal_sysid.yaw.sysid_done)
 			{
 				GimbalSystemID_Run();
+				gs->Yaw_Motor_Out = PID_Calculate(&Yaw_S_Pid,gs->d_yaw,gs->sys_yaw_speed_ref* Ang_PI);
 			 }
-			gs->Yaw_Motor_Out = PID_Calculate(&Yaw_S_Pid,gs->d_yaw,gs->sys_yaw_speed_ref* Ang_PI);
+			else
+			{
+				gs->Yaw_Motor_Out = PID_Calculate(&Yaw_S_Pid,gs->d_yaw,0.0f);				
+			}
+
+			Gimbal_Pitch_Calculate(gs,aim);
 		#elif GIMBAL_SYSID == GIMBAL_PITCH_SYSID
 			if(!gimbal_sysid.pitch.sysid_done)	
 			{

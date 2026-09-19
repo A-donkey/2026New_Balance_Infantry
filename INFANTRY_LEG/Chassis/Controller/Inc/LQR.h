@@ -10,7 +10,8 @@
 #include "Power_Limit.h"
 
 #define X_MAX       6.00f
-#define Yaw_MAX     1.25f
+//#define Yaw_MAX     1.25f
+#define Yaw_MAX     0.5f//不同地面光滑程度不同
 #define Theta_L_MAX 0.45f
 #define Theta_R_MAX 0.45f
 #define Theta_B_MAX 0.25f

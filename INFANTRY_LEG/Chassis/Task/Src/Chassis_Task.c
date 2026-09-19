@@ -450,13 +450,11 @@ void Pc_Mode(Flag_Bit_t *flag,
 	{
 		pc_ctrl->KEY_SHIFT = 1;
 		flag->super_flag = 1;
-		Cap_Mode = CAP_ON;
 	}
 	else  // 松开SHIFT
 	{
 		pc_ctrl->KEY_SHIFT = 0;
 		flag->super_flag = 0;
-		Cap_Mode = CAP_OFF;
 	}
 
 	/******E键检测,切换腿长******/
@@ -571,13 +569,11 @@ void Vt03_Pc_Mode(Flag_Bit_t *flag,
 	{
 		pc_ctrl->KEY_SHIFT = 1;
 		flag->super_flag = 1;
-		Cap_Mode = CAP_ON;
 	}
 	else  // 松开SHIFT
 	{
 		pc_ctrl->KEY_SHIFT = 0;
 		flag->super_flag = 0;
-		Cap_Mode = CAP_OFF;
 	}
 
 	/******E键检测,切换腿长******/
@@ -1227,9 +1223,14 @@ void Power_Control(Flag_Bit_t *flag,Controlled_State_t *cs,Joint_Motor_Status_t 
 		
 		if(body->Estimate_h<=DOWN_LEG_LENGTH) //根据不同腿长控制x以及yaw速度上限
 		{
-			max_dx = DX_DOWN_MAX; max_dyaw = DYAW_DOWN_MAX;
+			if(flag->super_flag){
+				max_dx = DX_MAX_PRO; max_dyaw = DYAW_MAX_PRO;
+			}
+			else{
+				max_dx = DX_DOWN_MAX; max_dyaw = DYAW_DOWN_MAX;
+			}
 		}
-		else if(body->Estimate_h>DOWN_LEG_LENGTH && body->Estimate_h<=MID_LEG_LENGTH)
+		else if(body->Estimate_h>DOWN_LEG_LENGTH && body->Estimate_h<=UP_LEG_LENGTH)
 		{
 			if(flag->super_flag){
 				max_dx = DX_MAX_PRO; max_dyaw = DYAW_MAX_PRO;
@@ -1252,13 +1253,13 @@ void Power_Control(Flag_Bit_t *flag,Controlled_State_t *cs,Joint_Motor_Status_t 
 		{
 			Limit_percent += 0.0001f;
 		}
-
+		
 		//功率限制系数限制在0~1之间
 		Limit_percent = Max_Output(Limit_percent,1.0f);
 		if(Limit_percent < 0.0f) Limit_percent = 0.0f;
 		
-		//开启超电设置最大输出
-		if(flag->super_flag)
+		//开启超电或超电掉线设置最大输出
+		if(flag->super_flag && !Link_Sit.super)
 		{
 			PL_Goal.goal_dx = max_dx;
 			PL_Goal.goal_dyaw = max_dyaw;
@@ -1277,7 +1278,11 @@ void Power_Control(Flag_Bit_t *flag,Controlled_State_t *cs,Joint_Motor_Status_t 
 			}
 		}
 	}
-	else Limit_percent = 1.0f;//异常状态重置功率削减系数
+	else
+	{
+		Limit_percent = 1.0f;//异常状态重置功率削减系数
+	}
+	
 }
 
 /*******************************************************************************************************
@@ -1387,13 +1392,13 @@ void Chassis_Can_Data_Send(Chassis_Motor_t *cm,
 //			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,0,0,0,0);//右边201
 			
 			//正常控制<*_*>
-			Mit_Ctrl(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[0]->T_E,40),DM8009);
-			Mit_Ctrl(&hcan1,LEFT_BACK_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[0]->T_A,40),DM8009);
 			Mit_Ctrl(&hcan2,RIGHT_FRONT_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[1]->T_A,40),DM8009);
 			Mit_Ctrl(&hcan2,RIGHT_BACK_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[1]->T_E,40),DM8009);
+			Mit_Ctrl(&hcan1,LEFT_FRONT_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[0]->T_E,40),DM8009);
+			Mit_Ctrl(&hcan1,LEFT_BACK_MOTOR_CTRL_ID,0,0,0,0,Max_Output(joint_m[0]->T_A,40),DM8009);
 			osDelay(1);
-			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,Max_Output(joint_m[0]->A,16000),0,0);//左边202
 			Dji_Motor_Ctrl(&hcan2,RIGHT_WHEEL_MOTOR_CTRL_ID,Max_Output(joint_m[1]->A,16000),0,0,0);//右边201
+			Dji_Motor_Ctrl(&hcan1,LEFT_WHEEL_MOTOR_CTRL_ID,0,Max_Output(joint_m[0]->A,16000),0,0);//左边202
 		}
 	}
 }

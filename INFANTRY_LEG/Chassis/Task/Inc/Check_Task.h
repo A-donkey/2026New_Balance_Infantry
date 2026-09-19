@@ -15,7 +15,7 @@
 #define rc_unlink_t            20
 #define dm_unlink_t            40//改大超时时间<*_*>
 #define dji_unlink_t           40
-#define cubermars_unlink_t     20
+#define super_unlink_t     		 40
 
 typedef enum
 {
@@ -34,6 +34,8 @@ typedef struct
 	
 	bool shoot[3];  //发射机构
 	bool gimbal[2]; //云台
+	
+	bool super;//超级电容
 	
 	uint16_t err_num; //报错码(4位16进制数)
 }Link_Sit_t; //车体各部分外设连接情况结构体(0为在线 1为离线)

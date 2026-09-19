@@ -170,6 +170,8 @@ void Check_Control(Link_Sit_t *link,Controlled_State_t *cs)
 
 void Check_Peripheral_Link(Link_Sit_t *link,Chassis_Motor_t *cm)
 {
+	link->super = Check_If_Unchange(super_link,super_unlink_t);
+	
 	static int i;
 
 	for(i=0;i<=3;i++)
@@ -183,7 +185,8 @@ void Check_Peripheral_Link(Link_Sit_t *link,Chassis_Motor_t *cm)
 	
 	link->err_num = ( (link->wheel[0]<<2) + (link->wheel[1]<<3)
 	                + (link->joint[0]<<4) + (link->joint[1]<<5) 
-	                + (link->joint[2]<<6) + (link->joint[3]<<7) ) | Up_Cboard_Info.up_err_num;						
+	                + (link->joint[2]<<6) + (link->joint[3]<<7) ) 
+									+ (link->super	 <<8) | Up_Cboard_Info.up_err_num;						
 }
 
 

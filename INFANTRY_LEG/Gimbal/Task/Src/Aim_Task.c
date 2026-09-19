@@ -42,8 +42,8 @@ void Send_Packet(void)
 
   aim_tx.pitch_now 						= Gimbal_Status.pitch;
   aim_tx.yaw_now 							= Gimbal_Status.yaw;
-  aim_tx.pitch_omega 					= Pos_Pitch_TD.dx;
-  aim_tx.yaw_omega 						= Pos_Yaw_TD.dx;
+  aim_tx.pitch_omega 					= INS.Gyro[1] * PI_Ang;
+  aim_tx.yaw_omega 						= INS.Gyro[2] * PI_Ang;
   aim_tx.pitch_tff 						= Gimbal_Motor.DM_4310[1].tor;
   aim_tx.yaw_tff 							= Gimbal_Motor.DM_4310[0].tor;
   aim_tx.actual_bullet_speed 	= 23.0f; //暂时写为硬编码,后期更改

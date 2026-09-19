@@ -10,22 +10,15 @@
 #define PL_K1     0.10f	 	 // 转速项系数
 #define PL_K2     1.38f	 	 // 扭矩平方项系数
 #define PL_K3     3.5f     // 单电机基底损耗(W)
-#define MAX_PREDICT_POWER 200.0f//最大预测功率(W)
+#define MAX_PREDICT_POWER 250.0f//最大预测功率(W)
 
 // 能量环参数
 #define CAP_TOTAL_ENERGY   2800.0f  // 超级电容总容量(电压V*100)，根据实际标定
-#define CAP_E_ON_RATIO     0.4f     // 开电容：目标剩余 40%
-#define CAP_E_OFF_RATIO    0.8f     // 关电容：目标剩余 80%
+#define CAP_E_RATIO     	 0.6f     // 目标剩余 60%
 #define CAP_E_MIN_RATIO    0.3f     // 最低保留 30%
-#define ENERGY_KP          0.03f    // 能量环 P 增益
+#define ENERGY_KP          0.05f    // 能量环 P 增益
 #define ENERGY_KD          0.0f     // 能量环 D 增益
 #define POWER_FLOOR        35.0f    // 最低功率限制(W)
-
-// 电容开关模式
-typedef enum {
-    CAP_OFF = 0,   // 关电容（E_target = 80%）
-    CAP_ON  = 1    // 开电容（E_target = 40%）
-} Cap_Mode_t;
 
 // 功率限制状态
 typedef enum {
@@ -46,7 +39,6 @@ Limit_State_t Power_Limit_Apply(float omega_l, float omega_r ,float T_wl ,float 
 extern PID_t Energy_Pid;
 extern float P_max_limit;
 extern float P_cmd;
-extern Cap_Mode_t Cap_Mode;
 extern Limit_State_t Limit_State;
 extern Power_Limit_Goal_t PL_Goal;
 

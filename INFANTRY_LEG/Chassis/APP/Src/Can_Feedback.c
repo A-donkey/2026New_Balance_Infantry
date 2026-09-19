@@ -103,6 +103,10 @@ void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan)
 			pm_od.chassis_power = ( int16_t)(Rx_Data2[3] << 8 | Rx_Data2[2]);
 			pm_od.referee_power = (uint16_t)(Rx_Data2[5] << 8 | Rx_Data2[4]);
 			pm_od.reserve				=	(uint16_t)(Rx_Data2[7] << 8 | Rx_Data2[6]);
+			//判断超级电容是否离线
+			if(super_link[0]>=1000) super_link[0]=0;
+			else              	 		super_link[0]++;
+			
 			break;
 		}
 		//DM_8009数据

@@ -9,7 +9,6 @@
 PID_t Energy_Pid;
 float P_max_limit = 100.0f;
 float P_cmd = 0.0f;
-Cap_Mode_t Cap_Mode = CAP_OFF;
 Limit_State_t Limit_State = UNLIMIT;
 Power_Limit_Goal_t PL_Goal;
 
@@ -20,17 +19,13 @@ void Power_Limit_Init(void)
 
 /*******************************************************************************
  能量环：PD控制器计算 P_max
- P_max = P_r + Kp*(E_target - E_c) + Kd*de/dt
+ P_max = P_r - Kp*(E_target - E_c)
  限制 P_max >= POWER_FLOOR
 *******************************************************************************/
 void Energy_Ring_Calc(float P_r, float E_c)
 {
     float E_target;
-    if (Cap_Mode == CAP_ON) {
-        E_target = CAP_TOTAL_ENERGY * CAP_E_ON_RATIO;
-    } else {
-        E_target = CAP_TOTAL_ENERGY * CAP_E_OFF_RATIO;
-    }
+    E_target = CAP_TOTAL_ENERGY * CAP_E_RATIO;
     
     float adjustment = PID_Calculate(&Energy_Pid, E_c, E_target);
 		
